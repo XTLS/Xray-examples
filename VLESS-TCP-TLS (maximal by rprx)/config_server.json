@@ -1,0 +1,53 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "", // 填写你的 UUID
+                        "level": 0,
+                        "email": "love@example.com"
+                    }
+                ],
+                "decryption": "none",
+                "fallbacks": [
+                    {
+                        "dest": "/dev/shm/default.sock",
+                        "xver": 1
+                    },
+                    {
+                        "alpn": "h2",
+                        "dest": "/dev/shm/h2c.sock",
+                        "xver": 1
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "alpn": [
+                        "h2",
+                        "http/1.1"
+                    ],
+                    "certificates": [
+                        {
+                            "certificateFile": "/path/to/fullchain.crt", // 换成你的证书，绝对路径
+                            "keyFile": "/path/to/private.key" // 换成你的私钥，绝对路径
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom"
+        }
+    ]
+}

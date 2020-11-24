@@ -1,0 +1,10 @@
+xx.com {
+    root * /var/www
+    file_server
+    
+    reverse_proxy /path 127.0.0.1:2001 {
+        transport http {
+            versions h2c
+        }
+    }
+}

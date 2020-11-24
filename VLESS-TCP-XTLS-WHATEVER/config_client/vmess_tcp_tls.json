@@ -1,0 +1,52 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 10800,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vmess",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "example.com", // 换成你的域名或服务器 IP（发起请求时无需解析域名了）
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "", // 填写你的 UUID
+                                "security": "none",
+                                "level": 0
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "example.com" // 换成你的域名
+                },
+                "tcpSettings": {
+                    "header": {
+                        "type": "http",
+                        "request": {
+                            "path": [
+                                "/vmesstcp" // 必须换成自定义的 PATH，需要和服务端的一致
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

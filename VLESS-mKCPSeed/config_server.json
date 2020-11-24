@@ -1,0 +1,26 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "protocol": "vless",
+            "port": "{{ port }}",
+            "settings": {
+                "decryption":"none",
+                "clients": [
+                    {"id": "{{  }}"}
+                ]
+            },
+            "streamSettings": {
+                "network": "kcp",
+                "kcpSettings": {
+                    "seed": "{{ seed }}"
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {"protocol": "freedom"}
+    ]
+}
