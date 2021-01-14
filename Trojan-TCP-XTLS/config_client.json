@@ -30,7 +30,7 @@
                 "servers": [
                     {
                         "address": "example.com",  //你的域名或服务器IP
-                        "flow": "xtls-rprx-direct",  //Linux或安卓可改为"xtls-rprx-splice"
+                        "flow": "xtls-rprx-direct",  //Linux或安卓可改为 "xtls-rprx-splice"
                         "port": 443,
                         "password": "your_password"  //你的密码
                     }
