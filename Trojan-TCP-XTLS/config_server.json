@@ -9,7 +9,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password":"your_password",  //密码
+                        "password":"your_password",  // 密码
                         "flow": "xtls-rprx-direct"
                     }
                 ],
@@ -35,12 +35,12 @@
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/path/to/cert",  //证书文件绝对目录
-                            "keyFile": "/path/to/key"  //密钥文件绝对目录
+                            "certificateFile": "/path/to/cert",  // 证书文件绝对目录
+                            "keyFile": "/path/to/key"  // 密钥文件绝对目录
                         }
                     ],
-                    "minVersion": "1.2",  //如果是ecc证书则最低使用TLSv1.2，如果你不清楚证书类型或者不是ecc证书，删掉这行
-                    "ocspStapling": 3600  //验证周期3600秒
+                    "minVersion": "1.2",  // 如果是ecc证书则最低使用 TLSv1.2 ，如果你不清楚证书类型或者不是 ecc 证书，删掉这行
+                    "ocspStapling": 3600  // 验证周期 3600 秒
                 }
             }
         }
