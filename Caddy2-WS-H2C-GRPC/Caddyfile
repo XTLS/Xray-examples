@@ -1,6 +1,6 @@
 xx.com {
    @ws {
-        path /f4aa1b2d-94e3-42a8-ae24-ba53a1af4815
+        path /ws
         header Connection *Upgrade*
         header Upgrade websocket
    }
