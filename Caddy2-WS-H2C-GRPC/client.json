@@ -1,0 +1,117 @@
+{
+	"log": {},
+	"inbounds": [
+		{
+			"port": "1080",
+			"protocol": "socks",
+			"settings": {
+				"auth": "noauth",
+				"udp": true
+			}
+		},
+		{
+			"port": "1081",
+			"protocol": "http",
+			"settings": {}
+		}
+	],
+	"outbounds": [
+		{
+			"protocol": "vless",
+			"settings": {
+				"vnext": [
+					{
+						"address": "xx.com",
+						"port": 443,
+						"users": [
+							{
+								"id": "",
+								"encryption": "none"
+							}
+						]
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "h2",
+				"security": "tls",
+				"httpSettings": {
+					"host": [
+						"xx.com"
+					],
+					"path": "/h2"
+				}
+			}
+		},
+		{
+			"protocol": "vless",
+			"settings": {
+				"vnext": [
+					{
+						"address": "xx.com",
+						"port": 443,
+						"users": [
+							{
+								"id": "",
+								"encryption": "none"
+							}
+						]
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "ws",
+				"security": "tls",
+				"wsSettings": {
+					"path": "/ws?ed=2048"
+				}
+			}
+		},
+		{
+			"protocol": "vless",
+			"settings": {
+				"vnext": [
+					{
+						"address": "xx.com",
+						"port": 443,
+						"users": [
+							{
+								"id": "",
+								"encryption": "none"
+							}
+						]
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "grpc",
+				"security": "tls",
+				"grpcSettings": {
+					"serviceName": "grpc"
+				}
+			}
+		},
+		{
+			"tag": "direct",
+			"protocol": "freedom",
+			"settings": {}
+		},
+		{
+			"tag": "blocked",
+			"protocol": "blackhole",
+			"settings": {}
+		}
+	],
+	"routing": {
+		"domainStrategy": "IPOnDemand",
+		"rules": [
+			{
+				"type": "field",
+				"ip": [
+					"geoip:private"
+				],
+				"outboundTag": "direct"
+			}
+		]
+	}
+}
