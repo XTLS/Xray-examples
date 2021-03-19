@@ -6,16 +6,8 @@ xx.com {
     }
     @grpc protocol grpc
     reverse_proxy @ws http://127.0.0.1:2001
-    reverse_proxy @grpc h2c://127.0.0.1:2002 {
-        transport http {
-            versions h2c
-        }
-    }
-    reverse_proxy /h2 h2c://127.0.0.1:2003 {
-        transport http {
-            versions h2c
-        }
-    }
+    reverse_proxy @grpc h2c://127.0.0.1:2002
+    reverse_proxy /h2 h2c://127.0.0.1:2003
     root * /var/www
     file_server
 }
