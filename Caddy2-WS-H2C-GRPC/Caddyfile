@@ -1,27 +1,21 @@
 xx.com {
-   @ws {
+    @ws {
         path /ws
         header Connection *Upgrade*
         header Upgrade websocket
-   }
-	@grpc {
-	    protocol grpc
-	}
-    reverse_proxy @ws {
-	    to http://127.0.0.1:2001
-	}
-	reverse_proxy @grpc {
-	    to h2c://127.0.0.1:2002
+    }
+    @grpc protocol grpc
+    reverse_proxy @ws http://127.0.0.1:2001
+    reverse_proxy @grpc h2c://127.0.0.1:2002 {
         transport http {
-            versions h2c 2
+            versions h2c
         }
-	}
-	reverse_proxy /h2 {
-	    to h2c://127.0.0.1:2003
+    }
+    reverse_proxy /h2 h2c://127.0.0.1:2003 {
         transport http {
-            versions h2c 2
+            versions h2c
         }
-  }
-  root * /var/www
-  file_server
+    }
+    root * /var/www
+    file_server
 }
