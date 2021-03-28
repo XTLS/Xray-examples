@@ -7,8 +7,8 @@ Xray client <--- gRPC(TLS) ---> Caddy2 <--- gRPC(cleartext) ---> Xray server
 
 同时，您也可以选择使用 Nginx。示例配置片段如下（来自 @xiaoQzhuren）：
 ```conf
-# 填写你的 ServiceName
-location / {
+# 在 location 后填写 /{你的 ServiceName}
+location {
     if ($request_method != "POST") {
         return 404;
     }
