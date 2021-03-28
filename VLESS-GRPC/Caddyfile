@@ -1,7 +1,7 @@
 xx.com {
     @grpc {
         protocol grpc
-        path  # 填写你的 ServiceName
+        path  # 填写 /{你的 ServiceName}/*
     }
     reverse_proxy @grpc h2c://127.0.0.1:2002
     root * /var/www
