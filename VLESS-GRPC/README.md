@@ -9,7 +9,7 @@ Xray client <--- gRPC(TLS) ---> Caddy2 <--- gRPC(cleartext) ---> Xray server
 ```conf
 server {
     listen 443 ssl http2;
-    server_name example.com
+    server_name example.com;
 
     index index.html;
     root /var/www/html;
