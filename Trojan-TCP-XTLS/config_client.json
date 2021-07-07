@@ -1,0 +1,48 @@
+{
+    "log": {
+        "loglevel": "debug"
+    },
+    "inbounds": [
+        {
+            "port": 1080,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            }
+        },
+        {
+            "port": 1081,
+            "protocol": "http",
+            "sniffing": {
+              "enabled": true,
+              "destOverride": ["http", "tls"]
+            },
+            "settings": {
+              "auth": "noauth"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "trojan",
+            "settings": {
+                "servers": [
+                    {
+                        "address": "example.com",  // 你的域名或服务器 IP
+                        "flow": "xtls-rprx-direct",  // Linux 或安卓可改为 "xtls-rprx-splice"
+                        "port": 443,
+                        "password": "your_password"  // 你的密码
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "xtls",
+                "xtlsSettings": {
+                    "serverName": "example.com"  // 你的域名
+                }
+            }
+        }
+    ]
+}
