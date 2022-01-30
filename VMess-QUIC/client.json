@@ -1,0 +1,25 @@
+{
+ "protocol": "vmess",
+ "settings": {
+  "vnext": [
+   {
+    "address": "",
+    "port": 443,
+    "users": [
+     {
+      "id": "",
+      "security": "zero"
+     }
+    ]
+   }
+  ]
+ },
+ "streamSettings": {
+  "network": "quic",
+  "quicSettings": {},
+  "security": "tls",
+  "tlsSettings": {
+   "servername": "*"
+  }
+ }
+}
