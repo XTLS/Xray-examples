@@ -1,0 +1,26 @@
+```json
+{
+ "port": 443,
+ "protocol": "vmess",
+ "settings": {
+  "clients": [
+   {
+    "id": ""
+   }
+  ]
+ },
+ "streamSettings": {
+  "network": "quic",
+  "quicSettings": {},
+  "security": "tls",
+  "tlsSettings": {
+   "certificates": [
+    {
+     "certificateFile": "fullchain.crt",
+     "keyFile": "private.key"
+    }
+   ]
+  }
+ }
+}
+```
