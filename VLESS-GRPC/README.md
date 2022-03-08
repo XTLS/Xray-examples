@@ -24,6 +24,7 @@ server {
 			return 404;
 		}
 		client_max_body_size 0;
+		client_body_buffer_size 512k;
 		grpc_set_header X-Real-IP $remote_addr;
 		client_body_timeout 52w;
 		grpc_read_timeout 52w;
