@@ -18,6 +18,7 @@ server {
 	
 	client_header_timeout 1071906480m;
         keepalive_timeout 1071906480m;
+	proxy_socket_keepalive on;
 	# 在 location 后填写 /你的 ServiceName
 	location /你的 ServiceName {
 		if ($content_type !~ "application/grpc") {
