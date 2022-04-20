@@ -1,0 +1,25 @@
+{
+ "protocol": "vmess",
+ "settings": {
+  "vnext": [
+   {
+    "address": "",
+    "port": 443, // 也可以用 8443 nginx 的默认 http3 端口 https://quic.nginx.org/readme.html
+    "users": [
+     {
+      "id": "",
+      "security": "zero"
+     }
+    ]
+   }
+  ]
+ },
+ "streamSettings": {
+  "network": "quic",
+  "quicSettings": {}, // 不使用伪装头和额外加密 原生 quic 流量特征
+  "security": "tls",
+  "tlsSettings": {
+   "servername": "*" //servername 必填 因为 quic 会验证 sni 否则不发包
+  }
+ }
+}
