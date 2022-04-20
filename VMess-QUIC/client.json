@@ -4,7 +4,7 @@
   "vnext": [
    {
     "address": "",
-    "port": 443,
+    "port": 443, // 也可以用 8443 nginx 的默认 http3 端口 https://quic.nginx.org/readme.html
     "users": [
      {
       "id": "",
