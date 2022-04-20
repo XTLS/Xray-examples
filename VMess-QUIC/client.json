@@ -16,7 +16,7 @@
  },
  "streamSettings": {
   "network": "quic",
-  "quicSettings": {},
+  "quicSettings": {}, // 不使用伪装头和额外加密 原生 quic 流量特征
   "security": "tls",
   "tlsSettings": {
    "servername": "*"
