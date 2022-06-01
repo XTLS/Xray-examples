@@ -87,6 +87,42 @@
 }
 ```
 
+客户端 JSON (UDP over TCP)
+
+```json
+{
+  "inbounds": [
+    {
+      "port": 10801,
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
+    },
+    {
+      "port": 10802,
+      "protocol": "http"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "{{ host }}",
+            "port": 1234,
+            "method": "2022-blake3-aes-128-gcm",
+            "password": "{{ psk }}",
+            "uot": true
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
 客户端 JSON (多用户)
 
 ```json
