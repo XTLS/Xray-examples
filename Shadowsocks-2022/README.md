@@ -52,6 +52,37 @@
 }
 ```
 
+服务端 JSON (中转)
+
+```json
+{
+  "inbounds": [
+    {
+      "port": 1234,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "2022-blake3-aes-128-gcm",
+        "password": "{{ relay psk }}",
+        "clients": [
+          {
+            "address": "server",
+            "port": 1234,
+            "password": "{{ server/user psk }}",
+            "email": "my server"
+          }
+        ],
+        "network": "tcp,udp"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom"
+    }
+  ]
+}
+```
+
 客户端 JSON
 
 ```json
@@ -150,6 +181,41 @@
             "port": 1234,
             "method": "2022-blake3-aes-128-gcm",
             "password": "{{ server psk }}:{{ user psk }}"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+客户端 JSON (中转)
+
+```json
+{
+  "inbounds": [
+    {
+      "port": 10801,
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
+    },
+    {
+      "port": 10802,
+      "protocol": "http"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "{{ host }}",
+            "port": 1234,
+            "method": "2022-blake3-aes-128-gcm",
+            "password": "{{ relay psk }}:{{ user psk }}"
           }
         ]
       }
