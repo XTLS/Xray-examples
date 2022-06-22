@@ -7,7 +7,6 @@
             "protocol": "vmess",
             "port": "{{ port }}",
             "settings": {
-                "decryption":"none",
                 "clients": [
                     {"id": "{{  }}"}
                 ]
