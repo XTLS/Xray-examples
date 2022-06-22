@@ -22,8 +22,7 @@
                         "port": "{{ port }}",
                         "users": [
                             {
-                                "id": "{{ uuid }}",
-                                "encryption": "none"
+                                "id": "{{ uuid }}"
                             }
                         ]
                     }
