@@ -1,0 +1,64 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "reverse": {
+    "portals": [
+      {
+        "tag": "portal",
+        "domain": "reverse.proxy"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "tag": "external",
+      "port": 65511,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "{{ uuid }}"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      }
+    },
+    {
+      "tag": "interconn",
+      "port": 65510,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "{{ uuid }}"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      }
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "external"
+        ],
+        "outboundTag": "portal"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "interconn"
+        ],
+        "domain": [],
+        "outboundTag": "portal"
+      }
+    ]
+  }
+}
