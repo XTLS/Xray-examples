@@ -1,0 +1,58 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "reverse": {
+    "bridges": [
+      {
+        "tag": "bridge",
+        "domain": "reverse.proxy"
+      }
+    ]
+  },
+  "outbounds": [
+    {
+      "tag": "interconn",
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "{{ protal.address }}",
+            "port": 65510,
+            "method": "2022-blake3-aes-256-gcm",
+            "password": "{{ psk interconn }}"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      }
+    },
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "out"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "bridge"
+        ],
+        "domain": [
+          "full:reverse.proxy"
+        ],
+        "outboundTag": "interconn"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "bridge"
+        ],
+        "outboundTag": "out"
+      }
+    ]
+  }
+}

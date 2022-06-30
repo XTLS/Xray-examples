@@ -1,0 +1,49 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "domainMatcher": "mph",
+    "rules": [
+      {
+        "type": "field",
+        "port": "0-65535",
+        "outboundTag": "proxy",
+        "enabled": true
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": "2080",
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "ip": "127.0.0.1"
+      }
+    },
+    {
+      "listen": "127.0.0.1",
+      "port": "2081",
+      "protocol": "http"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "{{ protal.address }}",
+            "port": 65511,
+            "method": "2022-blake3-aes-256-gcm",
+            "password": "{{ psk external }}"
+          }
+        ]
+      }
+    }
+  ]
+}
