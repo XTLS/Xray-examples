@@ -10,6 +10,12 @@ portal 设置默认回落到 80 端口的 Web 服务器（也可以换成数据�
 如果你的 portal 在境外，可以使用路由分流来同时实现科学上网 + 访问内网设备。
 
 ## 路由分流 
-根据配置内提示，在 `Portal` 配置中的路由设置为：
-匹配 `"external","externalws"` 标签，且访问的目标 ip 为`私有 ip`时，才将流量转发至 bridge，其余流量走 direct。
+根据配置内提示，在 `Portal` 配置中, 取消注释第一项路由中的：
+```       
+// "ip": [
+//   "geoip:private"
+// ],
+```
+
+此时流量匹配 `"external"` 或 `"externalws"` 标签，且访问的目标 ip 为`私有 ip 地址`时，才会将流量转发至 bridge，其余流量走 direct。
 

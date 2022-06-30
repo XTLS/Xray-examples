@@ -122,9 +122,9 @@
         ],
         // 默认将所有来自 external 的流量转发至bridge
         // 如果仅转发内网设备流量，则取消注释下面三行
-        "ip": [
-          "geoip:private"
-        ],
+        // "ip": [
+        //   "geoip:private"
+        // ],
         "outboundTag": "portal"
       },
       {

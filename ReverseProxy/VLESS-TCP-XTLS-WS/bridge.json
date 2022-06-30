@@ -33,7 +33,6 @@
         "network": "ws",
         "security": "tls",
         "tlsSettings": {
-          "allowInsecure": true,
           "serverName": "reverse.example" // 换成你的域名
         },
         "wsSettings": {

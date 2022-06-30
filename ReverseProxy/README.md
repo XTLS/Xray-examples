@@ -1,10 +1,10 @@
 # 反向代理
 # 原理
-Xray Client <--- VMESS/SS ---> Xray Protal(需要公网 IP) <--- VMESS/SS ---> Xray Bridge
+Xray Client <--- VMESS/SS ---> Xray Portal(需要公网 IP) <--- VMESS/SS ---> Xray Bridge
 # 说明
-配置中，内网设备使用的配置为 `bridge.json`，有公网 ip 的设备使用 `protal.json`，通过`protal`连接到内网的设备使用`client.json`。
+配置中，内网设备使用的配置为 `bridge.json`，有公网 ip 的设备使用 `portal.json`，通过`portal`连接到内网的设备使用`client.json`。
 
-实际应用中，可以使用`VMESS-TCP、Shadowsocks-2022`等作为Xray Client 到 Xray Protal、Xray Bridge 到 Xray Protal 的传输协议。
+实际应用中，可以使用`VMESS-TCP、Shadowsocks-2022`等作为Xray Client 到 Xray Portal、Xray Bridge 到 Xray Portal 的传输协议。
 
 ## psk
 

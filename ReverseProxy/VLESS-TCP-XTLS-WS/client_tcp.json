@@ -53,7 +53,6 @@
         "network": "tcp",
         "security": "xtls",
         "xtlsSettings": {
-          "allowInsecure": true,
           "serverName": "reverse.example" // 换成你的域名
         }
       }
