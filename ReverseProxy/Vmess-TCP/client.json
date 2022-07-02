@@ -4,13 +4,11 @@
     },
     "routing": {
         "domainStrategy": "IPIfNonMatch",
-        "domainMatcher": "mph",
         "rules": [
             {
                 "type": "field",
                 "port": "0-65535",
-                "outboundTag": "proxy",
-                "enabled": true
+                "outboundTag": "proxy"
             }
         ]
     },

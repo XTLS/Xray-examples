@@ -1,0 +1,146 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "reverse": {
+    "portals": [
+      {
+        "tag": "portal",
+        "domain": "reverse.proxy"
+      }
+    ]
+  },
+  "inbounds": [
+    {
+      "tag": "external",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "", //填写你的 UUID
+            "flow": "xtls-rprx-direct",
+            "level": 0,
+            "email": "@external"
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": [
+          {
+            "dest": 80
+          },
+          {
+            "path": "/interconn", // 对应下面的 interconn 中的 PATH
+            "dest": 65510,
+            "xver": 1
+          },
+          {
+            "path": "/externalws", // 对应下面的 externalws 中的 PATH
+            "dest": 65511,
+            "xver": 1
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "xtls",
+        "xtlsSettings": {
+          "alpn": [
+            "http/1.1"
+          ],
+          "certificates": [
+            {
+              "certificateFile": "./fullchain.crt", // 换成你的证书，绝对路径
+              "keyFile": "./private.key" // 换成你的私钥，绝对路径
+            }
+          ]
+        }
+      }
+    },
+    {
+      "tag": "externalws",
+      "port": 65511,
+      "listen": "127.0.0.1",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "", // 填写你的 UUID
+            "level": 0,
+            "email": "@externalws"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
+          "path": "/externalws"
+        }
+      }
+    },
+    {
+      "tag": "interconn",
+      "port": 65510,
+      "listen": "127.0.0.1",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "", // 填写你的 UUID
+            "level": 0,
+            "email": "@interconn"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": true,
+          "path": "/interconn"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "external",
+          "externalws"
+        ],
+        // 默认将所有来自 external 的流量转发至bridge
+        // 如果仅转发内网设备流量，则取消注释下面三行
+        // "ip": [
+        //   "geoip:private"
+        // ],
+        "outboundTag": "portal"
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "interconn"
+        ],
+        "domain": [],
+        "outboundTag": "portal"
+      },
+      // 以下路由只会在第一条路由没被匹配到的情况下使用，因此无需额外处理
+      {
+        "type": "field",
+        "port": "0-65535",
+        "outboundTag": "direct"
+      }
+    ]
+  }
+}
