@@ -4,8 +4,7 @@
   },
   "inbounds": [
     {
-      "port": 2002,
-      "listen": "127.0.0.1",
+      "listen": "/dev/shm/Xray-VLESS-gRPC.socket,0666",
       "protocol": "vless",
       "settings": {
         "clients": [

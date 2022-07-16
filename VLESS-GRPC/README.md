@@ -28,7 +28,7 @@ server {
 		grpc_set_header X-Real-IP $remote_addr;
 		client_body_timeout 52w;
 		grpc_read_timeout 52w;
-		grpc_pass grpc://127.0.0.1:2002;
+		grpc_pass unix:/dev/shm/Xray-VLESS-gRPC.socket;
 	}
 }
 ```
