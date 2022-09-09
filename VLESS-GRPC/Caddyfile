@@ -3,7 +3,7 @@ xx.com {
         protocol grpc
         path  # 填写 /你的 ServiceName/*
     }
-    reverse_proxy @grpc h2c://127.0.0.1:2002
+    reverse_proxy @grpc unix//dev/shm/Xray-VLESS-gRPC.socket
     root * /var/www
     file_server
 }
