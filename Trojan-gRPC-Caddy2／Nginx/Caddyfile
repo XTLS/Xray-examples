@@ -1,0 +1,9 @@
+example.com {
+    @grpc {
+        protocol grpc
+        path  # 填写 /你的 ServiceName/*
+    }
+    reverse_proxy @grpc unix//dev/shm/Xray-Trojan-gRPC.socket
+    root * /var/www
+    file_server
+}

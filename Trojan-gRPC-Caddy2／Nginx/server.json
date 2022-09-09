@@ -1,0 +1,48 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "listen": "/dev/shm/Xray-Trojan-gRPC.socket,0666",
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "" // 填写你的 password
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": {
+          "serviceName": "" // 填写你的 ServiceName
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
+}

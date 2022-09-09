@@ -1,0 +1,62 @@
+{
+  "log": {},
+  "inbounds": [
+    {
+      "port": "1080",
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
+      }
+    },
+    {
+      "port": "1081",
+      "protocol": "http",
+      "settings": {}
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "trojan",
+      "settings": {
+        "servers": [
+          {
+            "address": "example.com",
+            "port": 443,
+            "password": "" //填写你的 password
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "security": "tls",
+        "grpcSettings": {
+          "serviceName": "", //填写你的 ServiceName
+          //"initial_windows_size": 524288 //通过 Cloudflare CDN 时，防止 Cloudflare CDN 发送意外的 h2 GOAWAY 帧以关闭现有连接。
+        }
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "direct"
+      }
+    ]
+  }
+}
