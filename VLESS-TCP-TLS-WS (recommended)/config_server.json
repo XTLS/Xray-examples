@@ -30,6 +30,7 @@
                 "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
+                    "serverName": "example.com", // 换成你的域名
                     "alpn": [
                         "http/1.1"
                     ],
