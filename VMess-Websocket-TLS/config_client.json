@@ -50,7 +50,10 @@
             },
             "streamSettings": {
                 "network": "ws",
-                "security": "tls"
+                "security": "tls",
+                "tlsSettings": {
+                    "fingerprint": "chrome" // uTLS fingerprint as traffic camouflage, can be either "chrome" or "firefox" or deleted entirely to disable uTLS
+                }
             },
             "tag": "proxy"
         },
