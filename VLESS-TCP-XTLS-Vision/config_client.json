@@ -8,8 +8,8 @@
             {
                 "type": "field",
                 "domain": [
-                    "geosite:tld-cn",
-                    "geosite:cn"
+                    "geosite:cn",
+                    "geosite:private"
                 ],
                 "outboundTag": "direct"
             },
