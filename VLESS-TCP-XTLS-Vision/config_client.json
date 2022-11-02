@@ -1,0 +1,88 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "routing": {
+        "domainStrategy": "IPIfNonMatch",
+        "rules": [
+            {
+                "type": "field",
+                "domain": [
+                    "geosite:tld-cn",
+                    "geosite:cn"
+                ],
+                "outboundTag": "direct"
+            },
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:cn",
+                    "geoip:private"
+                ],
+                "outboundTag": "direct"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1",
+            "port": 10808,
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        },
+        {
+            "listen": "127.0.0.1",
+            "port": 10809,
+            "protocol": "http",
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "", // VPS的IP
+                        "port": 16387, // 端口
+                        "users": [
+                            {
+                                "id": "", // 用户ID
+                                "encryption": "none",
+                                "flow": "xtls-rprx-vision"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "tls",
+                "tlsSettings": {
+                    "serverName": "", // 证书中包含的域名
+                    "allowInsecure": false
+                }
+            },
+            "tag": "proxy"
+        },
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        }
+    ]
+}
