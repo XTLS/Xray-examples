@@ -17,9 +17,16 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "" // 填写你的 path
+          "path": "/Path2WS" // 填写你的 path
         }
-      }
+      },
+			"sniffing": {
+				"enabled": true,
+				"destOverride": [
+					"http",
+					"tls"
+				]
+			}
     }
   ],
   "outbounds": [
@@ -35,14 +42,15 @@
     }
   ],
   "routing": {
-    "domainStrategy": "AsIs",
+    "domainStrategy": "IPIfNonMatch",
     "rules": [
       {
         "type": "field",
         "ip": [
+          "geoip:cn",
           "geoip:private"
         ],
-        "outboundTag": "blocked"
+        "outboundTag": "block"
       }
     ]
   }
