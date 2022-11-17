@@ -50,7 +50,7 @@
           "geoip:cn",
           "geoip:private"
         ],
-        "outboundTag": "block"
+        "outboundTag": "blocked"
       }
     ]
   }
