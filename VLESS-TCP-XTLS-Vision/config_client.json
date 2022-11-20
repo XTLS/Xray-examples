@@ -26,7 +26,7 @@
     "inbounds": [
         {
             "listen": "127.0.0.1",
-            "port": 10808,
+            "port": 10808, // v2rayN 本地监听端口
             "protocol": "socks",
             "settings": {
                 "udp": true
@@ -41,7 +41,7 @@
         },
         {
             "listen": "127.0.0.1",
-            "port": 10809,
+            "port": 10809, // v2rayN 本地监听端口
             "protocol": "http",
             "sniffing": {
                 "enabled": true,
@@ -59,7 +59,7 @@
                 "vnext": [
                     {
                         "address": "", // VPS的IP
-                        "port": 16387, // 端口
+                        "port": 16387, // VPS的端口
                         "users": [
                             {
                                 "id": "", // 用户ID
