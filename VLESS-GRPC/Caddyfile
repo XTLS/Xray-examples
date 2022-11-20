@@ -3,7 +3,7 @@ xx.com {
 		protocol grpc
 		path  # 填写 /你的 ServiceName/*
 	}
-	reverse_proxy @grpc unix//dev/shm/Xray-Trojan-gRPC.socket {
+	reverse_proxy @grpc unix//dev/shm/Xray-VLESS-gRPC.socket {
 		transport http {
 			versions h2c
 		}
