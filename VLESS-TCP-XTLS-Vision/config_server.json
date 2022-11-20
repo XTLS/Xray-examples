@@ -8,8 +8,7 @@
             {
                 "type": "field",
                 "ip": [
-                    "geoip:cn",
-                    "geoip:private"
+                    "geoip:cn"
                 ],
                 "outboundTag": "block"
             }
@@ -33,7 +32,6 @@
                 "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
-                    "rejectUnknownSni": true,
                     "certificates": [
                         {
                             "certificateFile": "/etc/ssl/private/fullchain.cer", // 证书
