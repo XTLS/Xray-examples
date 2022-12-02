@@ -32,6 +32,9 @@
                 "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
+                    "minVersion": "1.2",
+                    "maxVersion": "1.2",
+                    "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256",
                     "certificates": [
                         {
                             "certificateFile": "/etc/ssl/private/fullchain.cer", // 证书
