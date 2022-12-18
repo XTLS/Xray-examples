@@ -5,17 +5,24 @@
     "inbounds": [
         {
             "protocol": "vless",
-            "port": "{{ port }}",
+            "port": , //import desired port number
             "settings": {
                 "decryption":"none",
                 "clients": [
-                    {"id": "{{  }}"}
+                    {"id": ""} //enter generated UUID
                 ]
             },
             "streamSettings": {
                 "network": "kcp",
+                "mtu": 1360,
+                "uplinkCapacity":5,
+                "downlinkCapacity":12,
+                "congestion":false,
+                "header":{
+                    "type":"dtls" //most secure protocol in kcp
+                },
                 "kcpSettings": {
-                    "seed": "{{ seed }}"
+                    "seed": "" //kcp seed or stream password, it is optional
                 }
             }
         }
