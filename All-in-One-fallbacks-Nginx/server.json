@@ -341,7 +341,7 @@
         "enabled": true,
         "destOverride": ["http", "tls"]
       }
-    },
+    }//,
     // {
     //   "port": 80, // this is http entrypoint
     //   "protocol": "vless",
