@@ -4,6 +4,7 @@
   },
   "inbounds": [
     {
+      "tag": "Vless-TCP-XTLS",
       "port": 443, // This is TLS entrypoint. This entrypoint does the SSL Termination then routes the request based on the Path or ALPN type.
       "protocol": "vless",
       "settings": {
@@ -17,25 +18,25 @@
         "fallbacks": [
           // H2
           {
-            // if the SNI was `trh2o.EXAMPLE.COM`, pass it to trojan-h2 listener
+            // if the SNI was `trh2o.EXAMPLE.COM` and `alpn=h2`, pass it to trojan-h2 listener
             "name": "trh2o.example.com",
             "alpn": "h2",
             "dest": "@trojan-h2"
           },
           {
-            // if the SNI was `vlh2o.EXAMPLE.COM`, pass it to vless-h2 listener
+            // if the SNI was `vlh2o.EXAMPLE.COM` and `alpn=h2`, pass it to vless-h2 listener
             "name": "vlh2o.example.com",
             "alpn": "h2",
             "dest": "@vless-h2"
           },
           {
-            // if the SNI was `vmh2o.EXAMPLE.COM`, pass it to vmess-h2 listener
+            // if the SNI was `vmh2o.EXAMPLE.COM` and `alpn=h2`, pass it to vmess-h2 listener
             "name": "vmh2o.example.com",
             "alpn": "h2",
             "dest": "@vmess-h2"
           },
           {
-            // if the SNI was `ssh2o.EXAMPLE.COM`, pass it to shadowsocks-h2 listener
+            // if the SNI was `ssh2o.EXAMPLE.COM` and `alpn=h2`, pass it to shadowsocks-h2 listener
             "name": "ssh2o.example.com",
             "alpn": "h2",
             "dest": 4003
