@@ -11,7 +11,8 @@
         "clients": [
           {
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
-            "flow": "xtls-rprx-direct" //To enable XTLS Direct, this configuration must be added; otherwise, delete it. V2Ray has deleted the XTLS application since version v4.33.0. If you want to use this application, it is recommended to choose Xray.
+            "flow": "xtls-rprx-vision"
+            // "flow": "xtls-rprx-direct"
           }
         ],
         "decryption": "none",
@@ -98,9 +99,11 @@
       },
       "streamSettings": {
         "network": "tcp",
-        "security": "xtls", //If XTLS Direct is enabled, tls must be changed to xtls; otherwise, tls will be restored.
-        "xtlsSettings": {
-          //If XTLS Direct is enabled, tlsSettings must be changed to xtlsSettings; otherwise, restore tlsSettings.
+        // If XTLS Vision is enabled, "security" must be "tls"
+        // If XTLS Direct is enabled, "security" must be "xtls"
+        "security": "tls",
+        // If XTLS Direct is enabled, "tlsSettings" should also be changed to "xtlsSettings"
+        "tlsSettings": {
           "certificates": [
             {
               "ocspStapling": 3600, //The Xray version is not less than v1.3.0 to support configuring the time interval between OCSP stapling update and certificate hot reload. Currently V2Ray does not support it. If you use V2Ray as the server, you must delete this configuration.
@@ -595,17 +598,17 @@
     "settings": {
       "rules": [
         // {
-        //   "type": "field",
-        //   "outboundTag": "blackhole",
-        //   "ip": ["geoip:private"]
-        // },
-        // {
         //   // DNS Cache rule
         //   "type": "field",
         //   "port": 53,
         //   "network": "tcp,udp",
         //   "outboundTag": "DNS-Internal"
         // },
+        {
+          "type": "field",
+          "outboundTag": "blackhole",
+          "ip": ["geoip:private"]
+        },
         {
           "type": "field", // Block BitTorrent protocol
           "outboundTag": "blackhole",
