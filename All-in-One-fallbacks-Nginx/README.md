@@ -6,7 +6,7 @@ The configuration uses xray's `fallbacks` feature to enable these **Protocol-Tra
     * Trojan-WS-TLS
     * Trojan-gRPC-TLS
     * Trojan-H2-TLS
-    * Vless-TCP-XTLS(flow: xtls-rprx-direct)
+    * Vless-TCP-XTLS(flow: xtls-rprx-vision)
     * Vless-TCP-TLS
     * Vless-WS-TLS
     * Vless-gRPC-TLS
@@ -54,7 +54,7 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
     * [HTTP2 Transport does not support fallback based on `path`](https://xtls.github.io/config/transports/h2.html#http-2). That's why SNI is used instead.
     * It's possible to create a CNAME dns record for all the H2 SNIs and use that as the address of the client config without setting custom SNI on client but it's optinal.
 
-    * It is assumed that the **example.com** domain has a **wildcard certificate**. If it's not a wildcard certificate or it it's a self-signed certificate, **allowInsecure** must be **ture** on client configuration.
+    * It is assumed that the **example.com** domain has a **wildcard certificate**. If it's **not** a wildcard certificate or if it's a self-signed certificate, then `streamSettings.tlsSettings.allowInsecure` in the **client configuration** must be `true`. 
 
 
 ## Client link examples
