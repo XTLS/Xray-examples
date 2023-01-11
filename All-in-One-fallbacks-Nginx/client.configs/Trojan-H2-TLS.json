@@ -1,0 +1,42 @@
+{
+  "log": {
+    "loglevel": "debug"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": "1080",
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "trojan",
+      "settings": {
+        "servers": [
+          {
+            "address": "example.com",
+            "port": 443,
+            "password": "desdemona99"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "http",
+        "httpSettings": {
+          "path": "/trh2"
+        },
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "chrome",
+          "alpn": ["h2"],
+          "serverName": "trh2o.example.com" // Change to ssh2o.yourdomain.tld
+        }
+      }
+    }
+  ]
+}

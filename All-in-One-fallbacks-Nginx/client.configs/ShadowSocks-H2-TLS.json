@@ -1,0 +1,43 @@
+{
+  "log": {
+    "loglevel": "debug"
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": "1080",
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "example.com", // Change to you own domain
+            "port": 443,
+            "method": "chacha20-ietf-poly1305",
+            "password": "desdemona99" // Change to you own password
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "http",
+        "httpSettings": {
+          "path": "/ssh2"
+        },
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": false,
+          "fingerprint": "chrome",
+          "alpn": ["h2"],
+          "serverName": "ssh2o.example.com" // Change to ssh2o.yourdomain.tld
+        }
+      }
+    }
+  ]
+}

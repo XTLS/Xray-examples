@@ -4,26 +4,54 @@
   },
   "inbounds": [
     {
+      "tag": "Vless-TCP-XTLS",
       "port": 443, // This is TLS entrypoint. This entrypoint does the SSL Termination then routes the request based on the Path or ALPN type.
-      "protocol": "trojan",
+      "protocol": "vless",
       "settings": {
         "clients": [
           {
-            "password": "desdemona99",
-            "flow": "xtls-rprx-direct" //To enable XTLS Direct, this configuration must be added; otherwise, delete it. V2Ray has deleted the XTLS application since version v4.33.0. If you want to use this application, it is recommended to choose Xray.
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
+            "flow": "xtls-rprx-vision"
+            // "flow": "xtls-rprx-direct"
           }
         ],
         "decryption": "none",
         "fallbacks": [
+          // H2
           {
-            // if the path was `/vlessws`, pass it to vless-ws listener
-            "path": "/vlessws",
+            // if the SNI was `trh2o.EXAMPLE.COM` and `alpn=h2`, pass it to trojan-h2 listener
+            "name": "trh2o.example.com",
+            "alpn": "h2",
+            "dest": "@trojan-h2"
+          },
+          {
+            // if the SNI was `vlh2o.EXAMPLE.COM` and `alpn=h2`, pass it to vless-h2 listener
+            "name": "vlh2o.example.com",
+            "alpn": "h2",
+            "dest": "@vless-h2"
+          },
+          {
+            // if the SNI was `vmh2o.EXAMPLE.COM` and `alpn=h2`, pass it to vmess-h2 listener
+            "name": "vmh2o.example.com",
+            "alpn": "h2",
+            "dest": "@vmess-h2"
+          },
+          {
+            // if the SNI was `ssh2o.EXAMPLE.COM` and `alpn=h2`, pass it to shadowsocks-h2 listener
+            "name": "ssh2o.example.com",
+            "alpn": "h2",
+            "dest": 4003
+          },
+          // Websocket
+          {
+            // if the path was `/vlws`, pass it to vless-ws listener
+            "path": "/vlws",
             "dest": "@vless-ws",
             "xver": 2 //Enable the sending of the PROXY protocol, and send the real source IP and port to the following vmess+ws application. 1 or 2 indicates the PROXY protocol version. Consistent with the following, it is recommended to configure 2.
           },
           {
-            // if the path was `/vmessws`, pass it to vmess-ws listener
-            "path": "/vmessws",
+            // if the path was `/vmws`, pass it to vmess-ws listener
+            "path": "/vmws",
             "dest": "@vmess-ws",
             "xver": 2
           },
@@ -33,6 +61,12 @@
             "dest": "@trojan-ws",
             "xver": 2
           },
+          {
+            // if the path was `/ssws`, pass it to port 4001 (shadowsocks-ws listener)
+            "path": "/ssws",
+            "dest": 4001
+          },
+          // TCP + http obfs
           {
             // if the path was `/vltc`, pass it to vless-tcp listener
             "path": "/vltc",
@@ -44,6 +78,11 @@
             "path": "/vmtc",
             "dest": "@vmess-tcp",
             "xver": 2
+          },
+          {
+            // if the path was `/sstc`, pass it to port 4002 (shadowsocks-tcp listener)
+            "path": "/sstc",
+            "dest": 4002
           },
           {
             // if the request's ALPN was HTTP2, pass it to trojan-tcp. (Also from trojan-tcp fallback to Nginx HTTP2)
@@ -60,9 +99,11 @@
       },
       "streamSettings": {
         "network": "tcp",
-        "security": "xtls", //If XTLS Direct is enabled, tls must be changed to xtls; otherwise, tls will be restored.
-        "xtlsSettings": {
-          //If XTLS Direct is enabled, tlsSettings must be changed to xtlsSettings; otherwise, restore tlsSettings.
+        // If XTLS Vision is enabled, "security" must be "tls"
+        // If XTLS Direct is enabled, "security" must be "xtls"
+        "security": "tls",
+        // If XTLS Direct is enabled, "tlsSettings" should also be changed to "xtlsSettings"
+        "tlsSettings": {
           "certificates": [
             {
               "ocspStapling": 3600, //The Xray version is not less than v1.3.0 to support configuring the time interval between OCSP stapling update and certificate hot reload. Currently V2Ray does not support it. If you use V2Ray as the server, you must delete this configuration.
@@ -90,7 +131,7 @@
       }
     },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                         WebSocket (VLESS - VMESS - TROJAN)                                         //
+    //                                  WebSocket (VLESS - VMESS - TROJAN - ShadowSocks)                                  //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     {
       "listen": "@vless-ws",
@@ -108,7 +149,7 @@
         "security": "none",
         "wsSettings": {
           "acceptProxyProtocol": true,
-          "path": "/vlessws"
+          "path": "/vlws"
         }
       },
       "sniffing": {
@@ -132,7 +173,7 @@
         "security": "none",
         "wsSettings": {
           "acceptProxyProtocol": true,
-          "path": "/vmessws"
+          "path": "/vmws"
         }
       },
       "sniffing": {
@@ -146,7 +187,7 @@
       "settings": {
         "clients": [
           {
-            "password": "desdemona99" //Change to your own password
+            "password": "desdemona99"
           }
         ]
       },
@@ -163,8 +204,29 @@
         "destOverride": ["http", "tls"]
       }
     },
+    {
+      "tag": "shadowsocks-ws",
+      "listen": "127.0.0.1",
+      "port": 4001,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "desdemona99"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "path": "/ssws"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //                                     TCP + http obfs (VLESS - VMESS - TROJAN)                                       //
+    //                               TCP + http obfs (VLESS - VMESS - TROJAN - ShadowSocks)                               //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     {
       "listen": "@trojan-tcp", //trojan+tcp listening process
@@ -172,7 +234,7 @@
       "settings": {
         "clients": [
           {
-            "password": "desdemona99" //Change to your own password
+            "password": "desdemona99"
           }
         ],
         "fallbacks": [
@@ -247,6 +309,32 @@
               // "headers": {
               //   "Host": ["www.varzesh3.com"]
               // }
+            }
+          }
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    },
+    {
+      "tag": "shadowsocks-tcp",
+      "listen": "127.0.0.1",
+      "port": 4002,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "desdemona99"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "none",
+        "tcpSettings": {
+          "header": {
+            "type": "http",
+            "request": {
+              "path": ["/sstc"]
             }
           }
         }
@@ -341,9 +429,98 @@
         "enabled": true,
         "destOverride": ["http", "tls"]
       }
-    }//,
+    },
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                     H2 (VLESS - VMESS - TROJAN - SHADOWSOCKS)                                   //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    {
+      "listen": "@trojan-h2",
+      "protocol": "trojan",
+      "settings": {
+        "clients": [
+          {
+            "password": "desdemona99"
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "h2",
+        "security": "none",
+        "httpSettings": {
+          "path": "/trh2"
+        }
+      }
+    },
+    {
+      "listen": "@vless-h2",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797" //Change to your own UUID
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "h2",
+        "security": "none",
+        "httpSettings": {
+          "path": "/vlh2"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    },
+    {
+      "listen": "@vmess-h2",
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
+            "level": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "h2",
+        "security": "none",
+        "httpSettings": {
+          "path": "/vmh2"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    },
+    {
+      "tag": "shadowsocks-h2",
+      "listen": "127.0.0.1",
+      "port": 4003,
+      "protocol": "shadowsocks",
+      "settings": {
+        "method": "chacha20-ietf-poly1305",
+        "password": "desdemona99", //Change to your own password
+        "email": "2011@gmail.com"
+      },
+      "streamSettings": {
+        "network": "h2",
+        "security": "none",
+        "httpSettings": {
+          "path": "/ssh2"
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    } //,
     // {
-    //   "port": 80, // this is http entrypoint
+    //   "port": 80, // this is http entrypoint, uncomment to enable vless-ws, vless-tcp, vmess-ws, v,ess-tcp, shadowwsocks-ws and shadowsocks-tcp on HTTP
     //   "protocol": "vless",
     //   "settings": {
     //     "clients": [
@@ -353,12 +530,12 @@
     //     ],
     //     "fallbacks": [
     //       {
-    //         "path": "/vlessws",
+    //         "path": "/vlws",
     //         "dest": "@vless-ws",
     //         "xver": 2
     //       },
     //       {
-    //         "path": "/vmessws",
+    //         "path": "/vmws",
     //         "dest": "@vmess-ws", // the same vmess-ws used in 443 TLS entrypint is used here as well
     //         "xver": 2
     //       },
@@ -375,6 +552,14 @@
     //       {
     //         "dest": "/dev/shm/h1.sock", // defaults to Nginx HTTP1.1 listener
     //         "xver": 2
+    //       },
+    //       {
+    //         "path": "/ssws",
+    //         "dest": 4001
+    //       },
+    //       {
+    //         "path": "/sstc",
+    //         "dest": 4002
     //       }
     //     ],
     //     "decryption": "none"
@@ -413,16 +598,17 @@
     "settings": {
       "rules": [
         // {
-        //   "type": "field",
-        //   "outboundTag": "blackhole",
-        //   "ip": ["geoip:private"]
-        // },
-        // { DNS Cache rule
+        //   // DNS Cache rule
         //   "type": "field",
         //   "port": 53,
         //   "network": "tcp,udp",
         //   "outboundTag": "DNS-Internal"
         // },
+        {
+          "type": "field",
+          "outboundTag": "blackhole",
+          "ip": ["geoip:private"]
+        },
         {
           "type": "field", // Block BitTorrent protocol
           "outboundTag": "blackhole",
