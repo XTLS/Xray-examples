@@ -4,7 +4,8 @@
   },
   "inbounds": [
     {
-      "listen": "/dev/shm/Xray-VLESS-WSS-Nginx.socket,0666",
+      "listen": "127.0.0.1",
+      "port": 1234 ,
       "protocol": "vless",
       "settings": {
         "clients": [
