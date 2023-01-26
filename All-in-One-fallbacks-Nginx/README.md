@@ -47,7 +47,7 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
     * **(Optional)** If gRPC serviceNames are changed in server.json, they **should** also be changed in Nginx config
 
 ## Notes:
-* Tested with **Xray 1.7.0** (Xray, Penetrates Everything.) Custom (go1.19.4 linux/amd64)
+* Tested with **Xray 1.7.2** (Xray, Penetrates Everything.) Custom (go1.19.4 linux/amd64)
 * For a little better performance, a DNS Cache could be setup (on 127.0.0.53 in this case) and used for resolving DNS queries. To enable xray to use it uncomment the corresponding rule from the `routing.settings.rules` in server.json.
 * Multiple domains could be used at the same time, including domains behind cloudflare CDN. (For cloudflare, make sure websocket and gRPC are enabled in Network section). In this configuration these domains are **example.com** and **behindcdn.com**
 * HTTP2 inbounds (Trojan-H2, Vless-H2, VMESS-H2 and ShadowSocks-H2)
@@ -55,21 +55,26 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
     * It's possible to create a CNAME dns record for all the H2 SNIs and use that as the address of the client config without setting custom SNI on client but it's optinal.
 
     * It is assumed that the **example.com** domain has a **wildcard certificate**. If it's **not** a wildcard certificate or if it's a self-signed certificate, then `streamSettings.tlsSettings.allowInsecure` in the **client configuration** must be `true`. 
-
+* Put `nginx.conf` to your `/etc/nginx/conf.d/` then `sudo service restart nginx`
+* You might need to remove socket files if restarting nginx failed `rm /dev/shm/{h1.sock,h2c.sock} && nginx -t && systemctl restart nginx` 
 
 ## Client link examples
 
 | Combination | Link |
 | ----------- | ---- |
 | Trojan-TCP | `trojan://desdemona99@example.com:443?security=tls&type=tcp#Trojan-TCP` |
-| Trojan-WS | `trojan://desdemona99@example.com:443?security=tls&type=ws&path=/trojanws#Trojna-WS` |
+| Trojan-WS | `trojan://desdemona99@example.com:443?security=tls&type=ws&path=/trojanws?ed=2048#Trojna-WS` |
 | Trojan-gRPC | `trojan://desdemona99@example.com:443?security=tls&type=grpc&serviceName=trgrpc#Trojan-gRPC` |
 | Trojan-H2 | `trojan://desdemona99@example.com:443?sni=trh2o.example.com&security=tls&type=http&path=/trh2#Trojan-H2` |
 | Vless-TCP | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=tcp#Vless-TCP` |
-| Vless-WS | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=ws&path=/vlws#Vless-WS` |
+| Vless-WS | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=ws?ed=2048&path=/vlws#Vless-WS` |
 | Vless-gRPC | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=grpc&serviceName=vlgrpc#Vless-gRPC` |
 | Vless-H2 | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?sni=vlh2o.example.com&security=tls&type=http&path=/vlh2#Vless-H2` |
 | VMESS-TCP | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJ0Y3AiLAogICAgInBhdGgiOiAiL3ZtdGMiLAogICAgInBvcnQiOiAiNDQzIiwKICAgICJwcyI6ICJWTUVTUy1UQ1AiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAiIiwKICAgICJ0bHMiOiAidGxzIiwKICAgICJ0eXBlIjogImh0dHAiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-WS | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvdm13cyIsCiAgICAicG9ydCI6ICI0NDMiLAogICAgInBzIjogIlZNRVNTLVdTIiwKICAgICJzY3kiOiAibm9uZSIsCiAgICAic25pIjogIiIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICIiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-gRPC | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJncnBjIiwKICAgICJwYXRoIjogInZtZ3JwYyIsCiAgICAicG9ydCI6ICI0NDMiLAogICAgInBzIjogIlZNRVNTLWdSUEMiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAiIiwKICAgICJ0bHMiOiAidGxzIiwKICAgICJ0eXBlIjogImh0dHAiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-H2 | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJodHRwIiwKICAgICJwYXRoIjogIi92bWgyIiwKICAgICJwb3J0IjogIjQ0MyIsCiAgICAicHMiOiAiVk1FU1MtSDIiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAidm1oMm8uZXhhbXBsZS5jb20iLAogICAgInRscyI6ICJ0bHMiLAogICAgInR5cGUiOiAiaHR0cCIsCiAgICAidiI6ICIyIgp9Cg==` |
+| Shadowsocks-gRPC | `ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpkZXNkZW1vbmE5OQ==@example.com:443#ShadowSocks-gRPC`
+| Shadowsocks-H2 | `ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpkZXNkZW1vbmE5OQ==@example.com:443#ShadowSocks-H2-TLS`
+| Shadowsocks-TCP | `ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpkZXNkZW1vbmE5OQ==@example.com:443#ShadowSocks-TCP`
+| Shadowsocks-WS | `ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpkZXNkZW1vbmE5OQ==@example.com:443#ShadowSocks-WS`

@@ -28,7 +28,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/ssws"
+          "path": "/ssws?ed=2048"
         },
         "security": "tls",
         "tlsSettings": {
