@@ -55,8 +55,8 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
     * It's possible to create a CNAME dns record for all the H2 SNIs and use that as the address of the client config without setting custom SNI on client but it's optinal.
 
     * It is assumed that the **example.com** domain has a **wildcard certificate**. If it's **not** a wildcard certificate or if it's a self-signed certificate, then `streamSettings.tlsSettings.allowInsecure` in the **client configuration** must be `true`. 
-* Put `nginx.conf` to your `/etc/nginx/conf.d/` then `sudo service restart nginx`
-* You might need to remove socket files if restarting nginx failed `rm /dev/shm/{h1.sock,h2c.sock} && nginx -t && systemctl restart nginx` 
+* Put `nginx.conf` to your `/etc/nginx/conf.d/` then `systemctl restart nginx`
+* If restarting nginx failed, you might have to remove socket files first `rm /dev/shm/{h1.sock,h2c.sock} && nginx -t && systemctl restart nginx` 
 
 ## Client link examples
 
