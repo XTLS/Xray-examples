@@ -26,7 +26,7 @@ Nginx is used to serve a decoy website to avoid active probing. It's also used t
 
 ## How it works?
 The Vless-TCP-XTLS is the HTTPS entrypoint. For every incoming request after doing TLS-Termination, based on the **Path**, **SNI** or **ALPN type**, the request is passed to another inbound(sub-config). For example:
-* If the **Path=/vlessws**, the request is passed to **@vless-ws** inbound.
+* If the **Path=/vlws**, the request is passed to **@vless-ws** inbound.
 * If the **Path=/vmtc**, the request is passed to **@vmess-tcp**.
 
 * If **ALPN=HTTP2** and at the same time the **SNI=trh2o.example.com** then the request is passed to **@trojan-h2**.
