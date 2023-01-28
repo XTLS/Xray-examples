@@ -2,16 +2,50 @@
   "log": {
     "loglevel": "info"
   },
+  "api": {
+    "services": [
+      "HandlerService",
+      "LoggerService",
+      "StatsService"
+    ],
+    "tag": "api"
+  },
+  "stats": {},
+  "policy": {
+    "levels": {
+      "0": {
+        "statsUserUplink": true,
+        "statsUserDownlink": true
+      }
+    },
+    "system": {
+      "statsInboundUplink": true,
+      "statsInboundDownlink": true,
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
+    }
+  },
   "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 62789,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "127.0.0.1"
+      },
+      "tag": "api",
+      "sniffing": null
+    },
     {
       "tag": "Vless-TCP-XTLS",
       "port": 443, // This is TLS entrypoint. This entrypoint does the SSL Termination then routes the request based on the Path or ALPN type.
       "protocol": "vless",
       "settings": {
         "clients": [
-          {
-            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
-            "flow": "xtls-rprx-vision"
+          {  "email": "general@vless-tcp-xtls", //Change to your own email
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own email
+            "flow": "xtls-rprx-vision",
+            "level": 0
             // "flow": "xtls-rprx-direct"
           }
         ],
@@ -127,7 +161,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,8 +175,10 @@
       "protocol": "vless",
       "settings": {
         "clients": [
-          {
-            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797" //Change to your own UUID
+          { "email":"general@vless-ws", //Change to your own email
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own UUID
+            "level": 0
+
           }
         ],
         "decryption": "none"
@@ -154,7 +193,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -163,6 +205,7 @@
       "settings": {
         "clients": [
           {
+            "email": "general@vmess-ws", 
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
             "level": 0
           }
@@ -178,7 +221,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -187,7 +233,9 @@
       "settings": {
         "clients": [
           {
-            "password": "desdemona99"
+            "email":"general@trojan-ws",
+            "password": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
+            "level": 0
           }
         ]
       },
@@ -201,7 +249,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -210,8 +261,10 @@
       "port": 4001,
       "protocol": "shadowsocks",
       "settings": {
+        "email":"general@shadowsocks-ws",
         "method": "chacha20-ietf-poly1305",
-        "password": "desdemona99"
+        "password": "desdemona99",
+        "level": 0
       },
       "streamSettings": {
         "network": "ws",
@@ -222,7 +275,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -234,7 +290,9 @@
       "settings": {
         "clients": [
           {
-            "password": "desdemona99"
+            "email":"general@trojan-tcp",
+            "password": "desdemona99",
+            "level": 0
           }
         ],
         "fallbacks": [
@@ -254,7 +312,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -263,7 +324,9 @@
       "settings": {
         "clients": [
           {
-            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797"
+            "email":"general@vless-tcp",
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
+            "level": 0 
           }
         ],
         "decryption": "none"
@@ -276,14 +339,19 @@
           "header": {
             "type": "http",
             "request": {
-              "path": ["/vltc"]
+              "path": [
+                "/vltc"
+              ]
             }
           }
         }
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -292,6 +360,7 @@
       "settings": {
         "clients": [
           {
+            "email":"general@vmess-tcp",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
             "level": 0
           }
@@ -305,7 +374,9 @@
           "header": {
             "type": "http",
             "request": {
-              "path": ["/vmtc"] //,
+              "path": [
+                "/vmtc"
+              ] //,
               // "headers": {
               //   "Host": ["www.varzesh3.com"]
               // }
@@ -315,7 +386,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -325,7 +399,9 @@
       "protocol": "shadowsocks",
       "settings": {
         "method": "chacha20-ietf-poly1305",
-        "password": "desdemona99"
+        "password": "desdemona99",
+        "email": "general@shadowsocks-tcp",
+        "level":0
       },
       "streamSettings": {
         "network": "tcp",
@@ -334,14 +410,19 @@
           "header": {
             "type": "http",
             "request": {
-              "path": ["/sstc"]
+              "path": [
+                "/sstc"
+              ]
             }
           }
         }
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -354,8 +435,10 @@
       "protocol": "trojan",
       "settings": {
         "clients": [
-          {
-            "password": "desdemona99"
+          {            
+            "email": "general@trojan-grpc",
+            "password": "desdemona99",
+            "level":0
           }
         ]
       },
@@ -375,7 +458,9 @@
       "settings": {
         "clients": [
           {
-            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797"
+            "email":"general@vless-grpc",
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
+            "level": 0
           }
         ],
         "decryption": "none"
@@ -396,6 +481,7 @@
       "settings": {
         "clients": [
           {
+            "email":"general@vmess-grpc",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own UUID
             "level": 0
           }
@@ -427,7 +513,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -438,8 +527,10 @@
       "protocol": "trojan",
       "settings": {
         "clients": [
-          {
-            "password": "desdemona99"
+          {             
+            "email":"general@trojan-h2",
+            "password": "desdemona99",
+            "level": 0
           }
         ]
       },
@@ -457,7 +548,9 @@
       "settings": {
         "clients": [
           {
-            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797" //Change to your own UUID
+            "email":"general@vless-h2",  //Change to your own email
+            "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own UUID
+            "level": 0
           }
         ],
         "decryption": "none"
@@ -471,7 +564,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -479,7 +575,8 @@
       "protocol": "vmess",
       "settings": {
         "clients": [
-          {
+          { 
+            "email":"general@vmess-h2",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
             "level": 0
           }
@@ -494,7 +591,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     },
     {
@@ -505,7 +605,8 @@
       "settings": {
         "method": "chacha20-ietf-poly1305",
         "password": "desdemona99", //Change to your own password
-        "email": "2011@gmail.com"
+        "email": "general@shadowsocks-h2",
+        "level": 0
       },
       "streamSettings": {
         "network": "h2",
@@ -516,7 +617,10 @@
       },
       "sniffing": {
         "enabled": true,
-        "destOverride": ["http", "tls"]
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     } //,
     // {
@@ -581,7 +685,7 @@
     },
     {
       "protocol": "blackhole",
-      "tag": "blackhole"
+      "tag": "blocked"
     },
     {
       // A DNS Cache can be setup and added here to imporve performance (the corresponding rule should be uncommented)
@@ -595,26 +699,35 @@
   ],
   "routing": {
     "domainStrategy": "AsIs",
-    "settings": {
-      "rules": [
-        // {
-        //   // DNS Cache rule
-        //   "type": "field",
-        //   "port": 53,
-        //   "network": "tcp,udp",
-        //   "outboundTag": "DNS-Internal"
-        // },
-        {
-          "type": "field",
-          "outboundTag": "blackhole",
-          "ip": ["geoip:private"]
-        },
-        {
-          "type": "field", // Block BitTorrent protocol
-          "outboundTag": "blackhole",
-          "protocol": ["bittorrent"]
-        }
-      ]
-    }
+    "rules": [
+      {
+        "inboundTag": [
+          "api"
+        ],
+        "outboundTag": "api",
+        "type": "field"
+      },
+      // {
+      //   // DNS Cache rule
+      //   "type": "field",
+      //   "port": 53,
+      //   "network": "tcp,udp",
+      //   "outboundTag": "DNS-Internal"
+      // },
+      {
+        "type": "field",
+        "outboundTag": "blocked",
+        "ip": [
+          "geoip:private"
+        ]
+      },
+      {
+        "type": "field", // Block BitTorrent protocol
+        "outboundTag": "blocked",
+        "protocol": [
+          "bittorrent"
+        ]
+      }
+    ]
   }
 }
