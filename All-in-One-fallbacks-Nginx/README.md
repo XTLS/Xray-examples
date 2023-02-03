@@ -36,9 +36,6 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
 
 ## What to change before use?
 * Xray server.json
-    * **Your Domain** in both and server and client configs.
-      * `sed -i 's/example.com/YOUR_DOMAIN/g' *`  
-      * `sed -i 's/behindcdn.com/YOUR_CDN_DOMAIN/g' *` (if you don't have one, remove the config for cdn domain from inbounds[0].streamSettings.tlsSettings.certificates in server.json)
     * **SSL Certificates and keys** absolute paths in Vless-TCP-XTLS (`inbounds[0].streamSettings.xtlsSettings.certificates`)
       * For the main domain: 
          * `sed -i 's/\/etc\/ssl\/example.com\/domain.pem/PATH_TO_YOUR_FULLCHAIN/g' *`
@@ -46,6 +43,9 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
       * For the domain behind cdn:
          * `sed -i 's/\/etc\/ssl\/behindcdn.com\/domain.pem/PATH_TO_YOUR_FULLCHAIN/g' *`
          * `sed -i 's/\/etc\/ssl\/behindcdn.com\/domain-key.pem/PATH_TO_THE_FULLCHAINS_CERT/g' *`
+    * **Your Domain** in both and server (for fallbacks section) and client configs.
+      * `sed -i 's/example.com/YOUR_DOMAIN/g' *`  
+      * `sed -i 's/behindcdn.com/YOUR_CDN_DOMAIN/g' *` (if you don't have one, remove the config for cdn domain from inbounds[0].streamSettings.tlsSettings.certificates in server.json)
     * **Password** of Trojan and ShadowSocks configs
       * `sed -i 's/desdemona99/YOUR_PASSWORD/g' *` 
     * **UUID** of Vless and VMESS configs
@@ -55,6 +55,8 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
 
 * Nginx nginx.conf
     * Domain names
+      * `sed -i 's/example.com/YOUR_DOMAIN/g' *`
+      * `sed -i 's/behindcdn.com/YOUR_CDN_DOMAIN/g' *` (if you don't have one, leave YOUR_CDN_DOMAIN blank.)
     * **(Optional)** If gRPC serviceNames are changed in server.json, they **should** also be changed in Nginx config
 
 ## Notes:
