@@ -3,12 +3,13 @@
         "loglevel": "warning"
     },
     "routing": {
-        "domainStrategy": "IPIfNonMatch",
+        "domainStrategy": "IPOnDemand",
         "rules": [
             {
                 "type": "field",
                 "ip": [
-                    "geoip:cn"
+                    "geoip:cn",
+                    "geoip:private"
                 ],
                 "outboundTag": "block"
             }
@@ -16,7 +17,6 @@
     },
     "inbounds": [
         {
-            "listen": "0.0.0.0",
             "port": 16387, // 端口
             "protocol": "vless",
             "settings": {
@@ -39,13 +39,6 @@
                         }
                     ]
                 }
-            },
-            "sniffing": {
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
             }
         }
     ],
