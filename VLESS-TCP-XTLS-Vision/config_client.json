@@ -25,8 +25,8 @@
     },
     "inbounds": [
         {
-            "listen": "127.0.0.1",
-            "port": 10808, // v2rayN 本地监听端口
+            "listen": "127.0.0.1", // 填 0.0.0.0 表示允许来自局域网的连接
+            "port": 10808, // v2rayN 本地socks监听端口
             "protocol": "socks",
             "settings": {
                 "udp": true
@@ -40,8 +40,8 @@
             }
         },
         {
-            "listen": "127.0.0.1",
-            "port": 10809, // v2rayN 本地监听端口
+            "listen": "127.0.0.1", // 填 "0.0.0.0" 表示允许来自局域网的连接
+            "port": 10809, // v2rayN 本地http监听端口
             "protocol": "http",
             "sniffing": {
                 "enabled": true,
@@ -58,11 +58,11 @@
             "settings": {
                 "vnext": [
                     {
-                        "address": "", // VPS的IP
-                        "port": 16387, // VPS的端口
+                        "address": "", // 地址，服务端的域名或IP
+                        "port": 443, // 端口，与服务端一致
                         "users": [
                             {
-                                "id": "", // 用户ID
+                                "id": "", // 用户ID，与服务端一致
                                 "encryption": "none",
                                 "flow": "xtls-rprx-vision"
                             }
@@ -74,9 +74,9 @@
                 "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
-                    "serverName": "", // 证书中包含的域名
+                    "serverName": "", // SNI，如果"address"填的是服务端的域名，可留空，如果"address"填的是服务端的IP，此处填服务端的证书中包含的域名
                     "allowInsecure": false,
-                    "fingerprint": "chrome" // 通过 uTLS 库 模拟 Chrome / Firefox / Safari 或随机生成的指纹
+                    "fingerprint": "chrome" // 用于配置指定 TLS Client Hello 的指纹，Xray 将通过 uTLS 库 模拟 TLS 指纹，或随机生成
                 }
             },
             "tag": "proxy"
@@ -84,6 +84,10 @@
         {
             "protocol": "freedom",
             "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
         }
     ]
 }
