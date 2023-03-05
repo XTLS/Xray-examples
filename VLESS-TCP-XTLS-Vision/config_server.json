@@ -48,7 +48,7 @@
                     "certificates": [
                         {
                             "ocspStapling": 3600,
-                            "certificateFile": "/etc/ssl/private/fullchain.cer", // 证书文件，建议用fullchain（全SSL证书链），若只有网站证书，会出现v2rayN中能使用，v2rayNG不能使用的情况，通常不区分扩展名
+                            "certificateFile": "/etc/ssl/private/fullchain.cer", // 证书文件，建议用fullchain（全SSL证书链），若只有网站证书，会出现v2rayN能使用，v2rayNG不能使用的情况，通常不区分扩展名
                             "keyFile": "/etc/ssl/private/private.key" // 私钥文件
                         }
                     ]
