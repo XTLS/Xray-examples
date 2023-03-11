@@ -1,5 +1,7 @@
 :+1:**XTLS Vision [简介](https://github.com/XTLS/Xray-core/discussions/1295)**
 
+[ENGLISH](README.ENG.md)
+
 **使用提醒：** 
 
 :exclamation:相对于 XTLS Vision 的使用基数，目前几乎没有收到 **配置正确** 的 Vision 被封端口的报告，**配置正确** 指的是：
