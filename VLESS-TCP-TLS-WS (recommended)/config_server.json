@@ -9,7 +9,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "", // 填写你的 UUID
+                        "id": "", // fill in your UUID
                         "level": 0,
                         "email": "love@example.com"
                     }
@@ -20,7 +20,7 @@
                         "dest": 80
                     },
                     {
-                        "path": "/websocket", // 必须换成自定义的 PATH
+                        "path": "/websocket", // must be replaced with a custom PATH
                         "dest": 1234,
                         "xver": 1
                     }
@@ -35,8 +35,8 @@
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/path/to/fullchain.crt", // 换成你的证书，绝对路径
-                            "keyFile": "/path/to/private.key" // 换成你的私钥，绝对路径
+                            "certificateFile": "/path/to/fullchain.crt", // Replace with your certificate, absolute path
+                            "keyFile": "/path/to/private.key" // Replace it with your private key, absolute path
                         }
                     ]
                 }
@@ -49,7 +49,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "", // 填写你的 UUID
+                        "id": "", // fill in your UUID
                         "level": 0,
                         "email": "love@example.com"
                     }
@@ -60,8 +60,8 @@
                 "network": "ws",
                 "security": "none",
                 "wsSettings": {
-                    "acceptProxyProtocol": true, // 提醒：若你用 Nginx/Caddy 等反代 WS，需要删掉这行
-                    "path": "/websocket" // 必须换成自定义的 PATH，需要和上面的一致
+                    "acceptProxyProtocol": true, // Reminder: If you use Nginx/Caddy to reverse generation WS, you need to delete this line
+                    "path": "/websocket" // It must be replaced with a custom PATH, which needs to be consistent with the above
                 }
             }
         }
