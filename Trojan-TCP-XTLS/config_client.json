@@ -29,10 +29,10 @@
             "settings": {
                 "servers": [
                     {
-                        "address": "example.com",  // 你的域名或服务器 IP
-                        "flow": "xtls-rprx-direct",  // Linux 或安卓可改为 "xtls-rprx-splice"
+                        "address": "example.com",  // your domain name or server IP
+                        "flow": "xtls-rprx-direct",  // Linux or android can be changed to "xtls-rprx-splice"
                         "port": 443,
-                        "password": "your_password"  // 你的密码
+                        "password": "your_password"  // your password
                     }
                 ]
             },
@@ -40,7 +40,7 @@
                 "network": "tcp",
                 "security": "xtls",
                 "xtlsSettings": {
-                    "serverName": "example.com"  // 你的域名
+                    "serverName": "example.com"  // your domain name
                 }
             }
         }

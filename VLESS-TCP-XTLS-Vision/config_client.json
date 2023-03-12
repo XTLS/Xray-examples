@@ -25,8 +25,8 @@
     },
     "inbounds": [
         {
-            "listen": "127.0.0.1", // 填 0.0.0.0 表示允许来自局域网的连接
-            "port": 10808, // v2rayN 本地socks监听端口
+            "listen": "127.0.0.1", // Fill in 0.0.0.0 to allow connections from LAN
+            "port": 10808, // local socks listening port
             "protocol": "socks",
             "settings": {
                 "udp": true
@@ -40,8 +40,8 @@
             }
         },
         {
-            "listen": "127.0.0.1", // 填 "0.0.0.0" 表示允许来自局域网的连接
-            "port": 10809, // v2rayN 本地http监听端口
+            "listen": "127.0.0.1", // Fill in "0.0.0.0" to allow connections from LAN
+            "port": 10809, // Local http listening port
             "protocol": "http",
             "sniffing": {
                 "enabled": true,
@@ -58,11 +58,11 @@
             "settings": {
                 "vnext": [
                     {
-                        "address": "", // 地址，服务端的域名或IP
-                        "port": 443, // 端口，与服务端一致
+                        "address": "", // Address, domain name or IP of the server
+                        "port": 443, // Port, consistent with the server
                         "users": [
                             {
-                                "id": "", // 用户ID，与服务端一致
+                                "id": "", // User ID, consistent with the server
                                 "encryption": "none",
                                 "flow": "xtls-rprx-vision"
                             }
@@ -74,9 +74,9 @@
                 "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
-                    "serverName": "", // SNI，如果"address"填的是服务端的域名，可留空，如果"address"填的是服务端的IP，此处填服务端的证书中包含的域名
+                    "serverName": "", // SNI, if "address" is filled with the domain name of the server, it can be left blank. If "address" is filled with the IP of the server, fill in the domain name contained in the certificate of the server here
                     "allowInsecure": false,
-                    "fingerprint": "chrome" // 用于配置指定 TLS Client Hello 的指纹，Xray 将通过 uTLS 库 模拟 TLS 指纹，或随机生成
+                    "fingerprint": "chrome" // Used to configure the fingerprint of the specified TLS Client Hello, Xray will simulate the TLS fingerprint through the uTLS library, or generate it randomly
                 }
             },
             "tag": "proxy"
