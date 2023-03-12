@@ -18,11 +18,11 @@
             "settings": {
                 "vnext": [
                     {
-                        "address": "example.com", // 换成你的域名
+                        "address": "example.com", // Change to your domain name
                         "port": 443,
                         "users": [
                             {
-                                "id": "", // 填写你的 UUID
+                                "id": "", // fill in your UUID
                                 "encryption": "none",
                                 "level": 0
                             }
