@@ -1,7 +1,7 @@
 xx.com {
 	@grpc {
 		protocol grpc
-		path /ServiceName/* # 修改为你自己的 ServiceName，且仅能存在两个斜杠。（如：/MyService/ServiceName/*会导致错误）
+		path /ServiceName/* # Change it to your own ServiceName, and only two slashes are allowed. (eg: /MyService/ServiceName/* will cause an error)
 	}
 	reverse_proxy @grpc unix//dev/shm/Xray-VLESS-gRPC.socket {
 		transport http {
