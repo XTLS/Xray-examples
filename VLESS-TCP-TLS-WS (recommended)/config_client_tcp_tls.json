@@ -18,11 +18,11 @@
             "settings": {
                 "vnext": [
                     {
-                        "address": "example.com", // 换成你的域名或服务器 IP（发起请求时无需解析域名了）
+                        "address": "example.com", // Replace it with your domain name or server IP (there is no need to resolve the domain name when making a request)
                         "port": 443,
                         "users": [
                             {
-                                "id": "", // 填写你的 UUID
+                                "id": "", // fill in your UUID
                                 "encryption": "none",
                                 "level": 0
                             }
@@ -34,7 +34,7 @@
                 "network": "tcp",
                 "security": "tls",
                 "tlsSettings": {
-                    "serverName": "example.com" // 换成你的域名
+                    "serverName": "example.com" // Change to your domain name
                 }
             }
         }
