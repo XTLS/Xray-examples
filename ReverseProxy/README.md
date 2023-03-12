@@ -1,5 +1,8 @@
+[ENGLISH](README.ENG.md)
+
 # 反向代理
 # 原理
+
 Xray Client <--- VMESS/SS ---> Xray Portal(需要公网 IP) <--- VMESS/SS ---> Xray Bridge
 # 说明
 配置中，内网设备使用的配置为 `bridge.json`，有公网 ip 的设备使用 `portal.json`，通过`portal`连接到内网的设备使用`client.json`。
