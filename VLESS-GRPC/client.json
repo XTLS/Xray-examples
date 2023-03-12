@@ -25,7 +25,7 @@
             "port": 443,
             "users": [
               {
-                "id": "", //填写你的 UUID
+                "id": "", //fill in your UUID
                 "encryption": "none"
               }
             ]
@@ -36,10 +36,10 @@
         "network": "grpc",
         "security": "tls",
         "grpcSettings": {
-          "serviceName": "", //填写你的 ServiceName，不带任何斜杠
+          "serviceName": "", //Fill in your ServiceName without any slashes
           "multiMode": false,
-          //"idle_timeout": 60, //当这段时间内没有数据传输时，将会进行健康检查。可能会解决一些“断流”问题。
-          //"initial_windows_size": 35536 //通过 Cloudflare CDN 时，防止 Cloudflare CDN 发送意外的 h2 GOAWAY 帧以关闭现有连接。
+          //"idle_timeout": 60, //When there is no data transfer for this period of time, a health check will be performed. Might solve some "cut-off" issues。
+          //"initial_windows_size": 35536 //Prevent Cloudflare CDN from sending unexpected h2 GOAWAY frames to close existing connections when going through Cloudflare CDN.
         }
       }
     },
