@@ -10,7 +10,7 @@
       "settings": {
         "clients": [
           {
-            "id": "" // 填写你的 UUID
+            "id": "" // fill in your UUID
           }
         ],
         "decryption": "none"
@@ -18,7 +18,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/Path2WS" // 填写你的 path
+          "path": "/Path2WS" // fill in your path
         }
       },
 			"sniffing": {
