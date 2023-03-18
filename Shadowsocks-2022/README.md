@@ -1,6 +1,6 @@
 # Shadowsocks 2022
 
-[ENGLISH]README.ENG.md
+[ENGLISH](README.ENG.md)
 
 服务端 JSON
 
