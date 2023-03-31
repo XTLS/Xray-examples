@@ -43,7 +43,7 @@
           "serverName": "xx.com",  //Equal to "SNI"
           "fingerprint": "chrome" //"chrome" or "firefox"
       }
-    },
+    }},
     {
       "tag": "direct",
       "protocol": "freedom",
