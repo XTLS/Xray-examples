@@ -1,6 +1,6 @@
 # VLESS over TCP with XTLS + fallback & split to WHATEVER (ultimate configuration)
 
-This is a superset of [Advanced Configuration](<../VLESS-TCP-TLS-WS%20(recommended)>), using the powerful fallback and shunt features of VLESS, it realizes as many protocols and configurations as possible on port 443. Perfect coexistence, including [XTLS Direct Mode](https://github.com/rprx/v2fly-github-io/blob/master/docs/config/protocols/vless.md#xtls-%E9%BB%91%E7 %A7%91%E6%8A%80)
+This is a superset of [Advanced Configuration](<../VLESS-TCP-TLS-WS%20(recommended)>), using the powerful fallback and shunt features of VLESS, it realizes as many protocols and configurations as possible on port 443. Perfect coexistence, including [XTLS Direct Mode](https://github.com/rprx/v2fly-github-io/blob/master/docs/config/protocols/vless.md#xtls-%E9%BB%91%E7%A7%91%E6%8A%80)
 
 The client can connect to the server through the following methods at the same time, and WS can pass through the CDN
 

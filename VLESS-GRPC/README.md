@@ -1,4 +1,6 @@
 # VLESS-GRPC
+[ENGLISH](README.ENG.md)
+
 ## 原理图 (Caddy) ：
 Xray client <--- gRPC(TLS) ---> Caddy2 <--- gRPC(cleartext) ---> Xray server
 ## Nginx：
