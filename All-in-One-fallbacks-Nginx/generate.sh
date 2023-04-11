@@ -99,18 +99,18 @@ Make()
     #################################
     rm result.txt
     touch result.txt
-    grep "| Trojan-TCP |"  README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakepass/$mypass/g" >> result.txt
+    #grep "| Trojan-TCP |"  README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakepass/$mypass/g" >> result.txt
     grep "| Trojan-WS |"   README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakepass/$mypass/g" >> result.txt
     grep "| Trojan-gRPC |" README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakepass/$mypass/g" >> result.txt
-    grep "| Trojan-H2 |"   README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakepass/$mypass/g" >> result.txt
-    grep "| Vless-TCP |"   README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" >> result.txt
+    #grep "| Trojan-H2 |"   README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakepass/$mypass/g" >> result.txt
+    #grep "| Vless-TCP |"   README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" >> result.txt
     grep "| Vless-WS |"    README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" >> result.txt
     grep "| Vless-gRPC |"  README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" >> result.txt
-    grep "| Vless-H2 |"    README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" >> result.txt
-    grep "| VMESS-TCP |"   README.md | cut -f2 -d"\`" | cut -c 9- | base64 -d | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" | base64 -w 0 | sed "s/^/vmess:\/\//" >> result.txt
+    #grep "| Vless-H2 |"    README.md | cut -f2 -d"\`" | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" >> result.txt
+    #grep "| VMESS-TCP |"   README.md | cut -f2 -d"\`" | cut -c 9- | base64 -d | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" | base64 -w 0 | sed "s/^/vmess:\/\//" >> result.txt
     grep "| VMESS-WS |"    README.md | cut -f2 -d"\`" | cut -c 9- | base64 -d | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" | base64 -w 0 | sed "s/^/\nvmess:\/\//" >> result.txt
     grep "| VMESS-gRPC |"  README.md | cut -f2 -d"\`" | cut -c 9- | base64 -d | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" | base64 -w 0 | sed "s/^/\nvmess:\/\//" >> result.txt
-    grep "| VMESS-H2 |"    README.md | cut -f2 -d"\`" | cut -c 9- | base64 -d | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" | base64 -w 0 | sed "s/^/\nvmess:\/\//" >> result.txt
+    #grep "| VMESS-H2 |"    README.md | cut -f2 -d"\`" | cut -c 9- | base64 -d | sed "s/$fake_domain/$main_domain/g" | sed "s/$fakeid/$myid/g" | base64 -w 0 | sed "s/^/\nvmess:\/\//" >> result.txt
     echo >> result.txt
 
 }
