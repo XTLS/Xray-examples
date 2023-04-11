@@ -93,6 +93,7 @@ To make all the necessary changes to all the files in this folder a simple scrip
 ### Steps
 * Open `generate.sh` and change the top lines to your correct values.
 * Run `bash generate.sh -m` inside this folder.
+* All the files are changed and your config links are stored in `result.txt`
 * Run `bash generate.sh -b` to get one base64 string for all of your configs.
 * Run `bash generate.sh -q` to get separate qr codes for all your configs.
 * Run `bash generate.sh -r` to revert all the changes. This is necessary for generating configs with new values.
