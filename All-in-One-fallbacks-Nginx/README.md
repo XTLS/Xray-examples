@@ -87,3 +87,15 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
 | VMESS-WS | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvdm13cyIsCiAgICAicG9ydCI6ICI0NDMiLAogICAgInBzIjogIlZNRVNTLVdTIiwKICAgICJzY3kiOiAibm9uZSIsCiAgICAic25pIjogIiIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICIiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-gRPC | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJncnBjIiwKICAgICJwYXRoIjogInZtZ3JwYyIsCiAgICAicG9ydCI6ICI0NDMiLAogICAgInBzIjogIlZNRVNTLWdSUEMiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAiIiwKICAgICJ0bHMiOiAidGxzIiwKICAgICJ0eXBlIjogImh0dHAiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-H2 | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJodHRwIiwKICAgICJwYXRoIjogIi92bWgyIiwKICAgICJwb3J0IjogIjQ0MyIsCiAgICAicHMiOiAiVk1FU1MtSDIiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAidm1oMm8uZXhhbXBsZS5jb20iLAogICAgInRscyI6ICJ0bHMiLAogICAgInR5cGUiOiAiaHR0cCIsCiAgICAidiI6ICIyIgp9Cg==` |
+
+## Config generation script
+To make all the necessary changes to all the files in this folder a simple script is provided.
+### Steps
+* Open `generate.sh` and change the top lines to your correct values.
+* Run `bash generate.sh -m` inside this folder.
+* Run `bash generate.sh -b` to get one base64 string for all of your configs.
+* Run `bash generate.sh -q` to get separate qr codes for all your configs.
+* Run `bash generate.sh -r` to revert all the changes. This is necessary for generating configs with new values.
+
+### Important note
+Run `-b` and `-q` only after running `-m`. The script should run inside this folder.
