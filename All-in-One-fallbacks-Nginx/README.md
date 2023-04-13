@@ -76,14 +76,27 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
 | Combination | Link |
 | ----------- | ---- |
 | Trojan-TCP | `trojan://desdemona99@example.com:443?security=tls&type=tcp#Trojan-TCP` |
-| Trojan-WS | `trojan://desdemona99@example.com:443?security=tls&type=ws&path=/trojanws?ed=2048#Trojna-WS` |
+| Trojan-WS | `trojan://desdemona99@example.com:443?security=tls&type=ws&path=/trojanws#Trojna-WS` |
 | Trojan-gRPC | `trojan://desdemona99@example.com:443?security=tls&type=grpc&serviceName=trgrpc#Trojan-gRPC` |
 | Trojan-H2 | `trojan://desdemona99@example.com:443?sni=trh2o.example.com&security=tls&type=http&path=/trh2#Trojan-H2` |
 | Vless-TCP | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=tcp#Vless-TCP` |
-| Vless-WS | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=ws?ed=2048&path=/vlws#Vless-WS` |
+| Vless-WS | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=ws&path=/vlws#Vless-WS` |
 | Vless-gRPC | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?security=tls&type=grpc&serviceName=vlgrpc#Vless-gRPC` |
 | Vless-H2 | `vless://90e4903e-66a4-45f7-abda-fd5d5ed7f797@example.com:443?sni=vlh2o.example.com&security=tls&type=http&path=/vlh2#Vless-H2` |
 | VMESS-TCP | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJ0Y3AiLAogICAgInBhdGgiOiAiL3ZtdGMiLAogICAgInBvcnQiOiAiNDQzIiwKICAgICJwcyI6ICJWTUVTUy1UQ1AiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAiIiwKICAgICJ0bHMiOiAidGxzIiwKICAgICJ0eXBlIjogImh0dHAiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-WS | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJ3cyIsCiAgICAicGF0aCI6ICIvdm13cyIsCiAgICAicG9ydCI6ICI0NDMiLAogICAgInBzIjogIlZNRVNTLVdTIiwKICAgICJzY3kiOiAibm9uZSIsCiAgICAic25pIjogIiIsCiAgICAidGxzIjogInRscyIsCiAgICAidHlwZSI6ICIiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-gRPC | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJncnBjIiwKICAgICJwYXRoIjogInZtZ3JwYyIsCiAgICAicG9ydCI6ICI0NDMiLAogICAgInBzIjogIlZNRVNTLWdSUEMiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAiIiwKICAgICJ0bHMiOiAidGxzIiwKICAgICJ0eXBlIjogImh0dHAiLAogICAgInYiOiAiMiIKfQo=` |
 | VMESS-H2 | `vmess://ewogICAgImFkZCI6ICJleGFtcGxlLmNvbSIsCiAgICAiYWlkIjogIjAiLAogICAgImhvc3QiOiAiIiwKICAgICJpZCI6ICI5MGU0OTAzZS02NmE0LTQ1ZjctYWJkYS1mZDVkNWVkN2Y3OTciLAogICAgIm5ldCI6ICJodHRwIiwKICAgICJwYXRoIjogIi92bWgyIiwKICAgICJwb3J0IjogIjQ0MyIsCiAgICAicHMiOiAiVk1FU1MtSDIiLAogICAgInNjeSI6ICJub25lIiwKICAgICJzbmkiOiAidm1oMm8uZXhhbXBsZS5jb20iLAogICAgInRscyI6ICJ0bHMiLAogICAgInR5cGUiOiAiaHR0cCIsCiAgICAidiI6ICIyIgp9Cg==` |
+
+## Config generation script
+To make all the necessary changes to all the files in this folder a simple script is provided.
+### Steps
+* Open `generate.sh` and change the top lines to your correct values.
+* Run `bash generate.sh -m` inside this folder.
+* All the files are changed and your config links are stored in `result.txt`
+* Run `bash generate.sh -b` to get one base64 string for all of your configs.
+* Run `bash generate.sh -q` to get separate qr codes for all your configs.
+* Run `bash generate.sh -r` to revert all the changes. This is necessary for generating configs with new values.
+
+### Important note
+Run `-b` and `-q` only after running `-m`. The script should run inside this folder.
