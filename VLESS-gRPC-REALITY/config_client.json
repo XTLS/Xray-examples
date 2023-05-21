@@ -1,0 +1,128 @@
+{
+    "log": {
+        "access": "",
+        "error": "",
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "tag": "socks",
+            "port": 800,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "sniffing": {
+                "enabled": true,
+                "destOverride": ["http", "tls"],
+                "routeOnly": false
+            },
+            "settings": {
+                "auth": "noauth",
+                "udp": true,
+                "allowTransparent": false
+            }
+        },
+        {
+            "tag": "http",
+            "port": 801,
+            "listen": "127.0.0.1",
+            "protocol": "http",
+            "sniffing": {
+                "enabled": true,
+                "destOverride": ["http", "tls"],
+                "routeOnly": false
+            },
+            "settings": {
+                "auth": "noauth",
+                "udp": true,
+                "allowTransparent": false
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "proxy",
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "1.2.3.4", // Server IPv4
+                        "port": 80,
+                        "users": [
+                            {
+                                "id": "drEwvgYhS15C",
+                                "alterId": 0,
+                                "email": "t@t.tt",
+                                "security": "auto",
+                                "encryption": "none",
+                                "flow": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "grpc",
+                "security": "reality",
+                "realitySettings": {
+                    "serverName": "www.yahoo.com",
+                    "fingerprint": "chrome",
+                    "show": false,
+                    "publicKey": "OBR2JYROQB8odK5glVW_KLnsWl3UZ-voyGq_9ihQgTI",
+                    "shortId": "d49d578f280fd83a",
+                    "spiderX": ""
+                },
+                "grpcSettings": {
+                    "serviceName": "",
+                    "multiMode": false,
+                    "idle_timeout": 60,
+                    "health_check_timeout": 20,
+                    "permit_without_stream": false,
+                    "initial_windows_size": 0
+                }
+            },
+            "mux": {
+                "enabled": false,
+                "concurrency": -1
+            }
+        },
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {}
+        },
+        {
+            "tag": "block",
+            "protocol": "blackhole",
+            "settings": {
+                "response": {
+                    "type": "http"
+                }
+            }
+        }
+    ],
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "inboundTag": ["api"],
+                "outboundTag": "api",
+                "enabled": true
+            },
+            {
+                "id": "5708766234462982042",
+                "type": "field",
+                "outboundTag": "direct",
+                "ip": ["127.0.0.1", "192.168.1.1"],
+                "enabled": true
+            },
+            {
+                "id": "4875564606963903266",
+                "type": "field",
+                "outboundTag": "proxy",
+                "domain": ["dns.digitalsize.net"],
+                "enabled": true
+            }
+        ]
+    }
+}
