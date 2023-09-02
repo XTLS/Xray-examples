@@ -1,0 +1,55 @@
+{
+    "log": {
+        "loglevel": "debug"
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1", 
+            "port": 10808, 
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "routeOnly": true
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "", 
+                        "port": 443, 
+                        "users": [
+                            {
+                                "id": "", // Needs to match server side
+                                "encryption": "none",
+                                "flow": "xtls-rprx-vision"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    "fingerprint": "chrome", 
+                    "serverName": "bluearchive.jp", // If your dest is `1.1.1.1:443`, then leave it empty
+                    "publicKey": "", // run `xray x25519` to generate. Public and private keys need to be corresponding.
+                    "spiderX": "" // If your dest is `1.1.1.1:443`, then you can fill it with `/dns-query/` or just leave it empty
+                }
+            },
+            "tag": "proxy"
+        }
+    ]
+}
