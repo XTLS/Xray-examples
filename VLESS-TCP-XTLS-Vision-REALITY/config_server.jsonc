@@ -23,7 +23,11 @@
                     "serverNames": [
                         "bluearchive.jp"    // If you use `1.1.1.1:443` as dest, then you can leave `serverNames` empty, it is a possible ways to bypass Iran's internet speed restrictions.
                     ],
-                    "privateKey": "" // run `xray x25519` to generate. Public and private keys need to be corresponding.
+                    "privateKey": "", // run `xray x25519` to generate. Public and private keys need to be corresponding.
+                    "shortIds": [// Required, list of shortIds available to clients, can be used to distinguish different clients
+                        "", // If this item exists, client shortId can be empty
+                        "0123456789abcdef" // 0 to f, length is a multiple of 2, maximum length is 16
+                    ]
                 }
             },
             "sniffing": {
