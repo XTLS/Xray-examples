@@ -46,7 +46,8 @@
                     "fingerprint": "chrome", 
                     "serverName": "bluearchive.jp", // If your dest is `1.1.1.1:443`, then leave it empty
                     "publicKey": "", // run `xray x25519` to generate. Public and private keys need to be corresponding.
-                    "spiderX": "" // If your dest is `1.1.1.1:443`, then you can fill it with `/dns-query/` or just leave it empty
+                    "spiderX": "", // If your dest is `1.1.1.1:443`, then you can fill it with `/dns-query/` or just leave it empty
+                    "shortId": "" // Required
                 }
             },
             "tag": "proxy"
