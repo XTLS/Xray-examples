@@ -7,6 +7,7 @@ At the same time, you can also choose to use Nginx. A sample configuration snipp
 ```conf
 server {
 listen 443 ssl http2 so_keepalive=on;
+listen [::]:443 ssl http2 so_keepalive=on;
 server_name example.com;
 
 index index.html;
