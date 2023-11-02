@@ -39,7 +39,8 @@
           "serviceName": "", //填写你的 ServiceName，不带任何斜杠
           "multiMode": false,
           //"idle_timeout": 60, //当这段时间内没有数据传输时，将会进行健康检查。可能会解决一些“断流”问题。
-          //"initial_windows_size": 35536 //通过 Cloudflare CDN 时，防止 Cloudflare CDN 发送意外的 h2 GOAWAY 帧以关闭现有连接。
+          //"initial_windows_size": 35536, //通过 Cloudflare CDN 时，防止 Cloudflare CDN 发送意外的 h2 GOAWAY 帧以关闭现有连接。
+          //"permit_without_stream": true //通过 Cloudflare CDN 且空闲（没有子连接）时，防止 Cloudflare CDN 关闭连接。
         }
       }
     },
