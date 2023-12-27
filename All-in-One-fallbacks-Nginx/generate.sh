@@ -132,7 +132,7 @@ Printqr()
             echo $line | sed -n -e 's/^.*#//p'
             curl qrcode.show -d $line
         fi 
-    done < result
+    done < result.txt
 }
 
 while getopts "mrqb" option; do
