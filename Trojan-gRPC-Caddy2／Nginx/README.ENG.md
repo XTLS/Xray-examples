@@ -18,7 +18,7 @@ ssl_protocols TLSv1.2 TLSv1.3;
 ssl_ciphers ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE -RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384;
 
 client_header_timeout 1w;
-         keepalive_timeout 5d;
+keepalive_timeout 30m;
 # Fill in /your ServiceName after location
 location /your ServiceName {
 if ($content_type !~ "application/grpc") {
