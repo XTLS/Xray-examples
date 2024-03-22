@@ -19,9 +19,9 @@
                 "network": "tcp",
                 "security": "reality",
                 "realitySettings": {
-                    "dest": "bluearchive.jp:443", // You can also use `1.1.1.1:443` as dest
+                    "dest": "", // A website that support TLS1.3 and h2. You can also use `1.1.1.1:443` as dest
                     "serverNames": [
-                        "bluearchive.jp"    // If you use `1.1.1.1:443` as dest, then you can leave `serverNames` empty, it is a possible ways to bypass Iran's internet speed restrictions.
+                        ""    // A server name in the cert of dest site. If you use `1.1.1.1:443` as dest, then you can leave `serverNames` empty, it is a possible ways to bypass Iran's internet speed restrictions.
                     ],
                     "privateKey": "", // run `xray x25519` to generate. Public and private keys need to be corresponding.
                     "shortIds": [// Required, list of shortIds available to clients, can be used to distinguish different clients

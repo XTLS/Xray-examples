@@ -44,7 +44,7 @@
                 "security": "reality",
                 "realitySettings": {
                     "fingerprint": "chrome", 
-                    "serverName": "bluearchive.jp", // If your dest is `1.1.1.1:443`, then leave it empty
+                    "serverName": "", // A website that support TLS1.3 and h2. If your dest is `1.1.1.1:443`, then leave it empty
                     "publicKey": "", // run `xray x25519` to generate. Public and private keys need to be corresponding.
                     "spiderX": "", // If your dest is `1.1.1.1:443`, then you can fill it with `/dns-query/` or just leave it empty
                     "shortId": "" // Required
