@@ -2,26 +2,14 @@
     "log": {
       "loglevel": "warning"
     },
-    "routing": {
-      "rules": [
-        {
-          "ip": [
-            "geoip:private"
-          ],
-          "outboundTag": "direct"
-        }
-      ]
-    },
     "inbounds": [
       {
         "listen": "127.0.0.1",
         "port": 10808,
-        "protocol": "socks"
-      },
-      {
-        "listen": "127.0.0.1",
-        "port": 10809,
-        "protocol": "http"
+        "protocol": "socks",
+        "settings": {
+            "udp": true
+        }
       }
     ],
     "outbounds": [
@@ -52,10 +40,6 @@
           }
         },
         "tag": "proxy"
-      },
-      {
-        "protocol": "freedom",
-        "tag": "direct"
       }
     ]
   }

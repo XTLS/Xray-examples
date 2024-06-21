@@ -2,15 +2,6 @@
     "log": {
       "loglevel": "warning"
     },
-    "routing": {
-      "rules": [
-        {
-          "port": "443",
-          "network": "udp",
-          "outboundTag": "block"
-        }
-      ]
-    },
     "inbounds": [
       {
         "listen": "127.0.0.1",
@@ -44,10 +35,6 @@
       {
         "protocol": "freedom",
         "tag": "direct"
-      },
-      {
-        "protocol": "blackhole",
-        "tag": "block"
       }
     ]
   }
