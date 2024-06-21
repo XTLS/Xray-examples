@@ -1,27 +1,12 @@
 {
     "log": {
-      "loglevel": "warning"
-    },
-    "routing": {
-      "rules": [
-        {
-          "ip": [
-            "geoip:private"
-          ],
-          "outboundTag": "direct"
-        }
-      ]
+      "loglevel": "debug"
     },
     "inbounds": [
       {
         "listen": "127.0.0.1",
         "port": 10808,
         "protocol": "socks"
-      },
-      {
-        "listen": "127.0.0.1",
-        "port": 10809,
-        "protocol": "http"
       }
     ],
     "outbounds": [
@@ -52,10 +37,6 @@
           }
         },
         "tag": "proxy"
-      },
-      {
-        "protocol": "freedom",
-        "tag": "direct"
       }
     ]
   }
