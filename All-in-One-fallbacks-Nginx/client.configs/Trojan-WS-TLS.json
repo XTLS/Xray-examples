@@ -27,7 +27,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/trojanws?ed=2048"
+          "path": "/trojanws?ed=2560"
         },
         "security": "tls",
         "tlsSettings": {

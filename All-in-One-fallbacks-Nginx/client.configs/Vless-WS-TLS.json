@@ -32,7 +32,7 @@
       "streamSettings": {
         "network": "ws",
         "wsSettings": {
-          "path": "/vlws?ed=2048"
+          "path": "/vlws?ed=2560"
         },
         "security": "tls",
         "tlsSettings": {
