@@ -36,14 +36,15 @@
         "network": "ws",
         "security": "tls",
         "wsSettings": {
-          "path": "/Path2WS?ed=2048" //?ed=2048 前面填写你的 path
+          "path": "/Path2WS?ed=2560" //?ed=2560 前面填写你的 path
         },
         "tlsSettings": {
           "allowInsecure": false,
-          "serverName": "xx.com",  //Equal to "SNI"
+          "serverName": "xx.com", //Equal to "SNI"
           "fingerprint": "chrome" //"chrome" or "firefox"
+        }
       }
-    }},
+    },
     {
       "tag": "direct",
       "protocol": "freedom",
@@ -60,9 +61,7 @@
     "rules": [
       {
         "type": "field",
-        "ip": [
-          "geoip:private"
-        ],
+        "ip": ["geoip:private"],
         "outboundTag": "direct"
       }
     ]
