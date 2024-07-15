@@ -1,0 +1,81 @@
+{
+  "inbounds": [
+// XTLS-RPRX-VISION
+    {
+      "listen": "::",
+      "port": 443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "flow": "xtls-rprx-vision",
+            "id": "e331a460-ac69-40fa-b54b-83242b4dfbad"
+          }
+        ],
+        "decryption": "none",
+        "fallbacks": [
+          {
+          // SplitHTTP
+            "name": "vlsh.yourdomain.com"
+            "alpn": "h2",
+            "dest": "1443"
+          }
+        ]
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "enabled": true
+      },
+      "streamSettings": {
+        "tlsSettings": {
+          "certificates": [
+            {
+              "ocspStapling": 3600,
+              "certificateFile": "/usr/local/etc/xray/fullchain.cer",
+              "keyFile": "/usr/local/etc/xray/private.key"
+            }
+          ],
+          "minVersion": "1.2",
+          "cipherSuites": "TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256:TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384:TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+          "alpn": [
+            "h2",
+            "http/1.1"
+          ]
+        },
+        "network": "tcp",
+        "security": "tls"
+      }
+    },
+// VLESS SplitHTTP
+    {
+      "listen": "127.0.0.1",
+      "port": "1443",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "email":"general@vless-sh",
+            "id": "e331a460-ac69-40fa-b54b-83242b4dfbad"
+          }
+        ],
+        "decryption": "none"
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "enabled": true
+      },
+      "streamSettings": {
+        "network": "splithttp",
+        "splithttpSettings": {
+          "path": "/vlsh"
+        }
+      }
+    }
+  ]
+}
