@@ -31,7 +31,7 @@
                     "rejectUnknownSni": true,
                     "minVersion": "1.3",
                     "alpn": [
-                        "h3"
+                        "h3" // If you want to use with CDN, you need to change alpn to ["h2", "http/1.1"].
                     ],
                     "certificates": [
                         {

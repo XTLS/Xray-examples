@@ -43,8 +43,6 @@
                 },
                 "tlsSettings": {
                     "serverName": "example.com", // Change to your domain.
-                    "fingerprint": "chrome",
-                    "minVersion": "1.3",
                     "alpn": [
                         "h3"
                     ]
