@@ -1,0 +1,54 @@
+{
+    "inbounds": [
+        {
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            },
+            "port": 10808,
+            "listen": "127.0.0.1",
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "example.com", // Change to your domain.
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "UUID", // Change to your UUID.
+                                "encryption": "none"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "splithttp",
+                "security": "tls",
+                "splithttpSettings": {
+                    "path": "/splithttp",
+                    "host": "example.com" // Change to your domain.
+                },
+                "tlsSettings": {
+                    "serverName": "example.com", // Change to your domain.
+                    "alpn": [
+                        "h3"
+                    ]
+                }
+            }
+        }
+    ]
+}
+

@@ -1,0 +1,54 @@
+{
+    "inbounds": [
+        {
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
+            },
+            "port": 443,
+            "listen": "0.0.0.0",
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "UUID" // Change to your UUID.
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "splithttp",
+                "security": "tls",
+                "splithttpSettings": {
+                    "path": "/splithttp",
+                    "host": "example.com" // Change to your domain.
+                },
+                "tlsSettings": {
+                    "rejectUnknownSni": true,
+                    "minVersion": "1.3",
+                    "alpn": [
+                        "h3" // If you want to use with CDN, you need to change alpn to ["h2", "http/1.1"].
+                    ],
+                    "certificates": [
+                        {
+                            "ocspStapling": 3600,
+                            "certificateFile": "/path/to/fullchain.pem", // Change to your fullchain file path.
+                            "keyFile": "/path/to/privkey.pem" // Change to your private key file path.
+                        }
+                    ]
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "tag": "direct",
+            "protocol": "freedom"
+        }
+    ]
+}
+
