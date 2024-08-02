@@ -23,7 +23,7 @@ server {
         keepalive_timeout 30m;
 	# 在 location 后填写 /你的 ServiceName
 	location /你的 ServiceName {
-		if ($content_type !~ "application/grpc") {
+		if ($content_type !~ "^application/grpc") {
 			return 404;
 		}
 		client_max_body_size 0;
