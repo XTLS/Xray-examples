@@ -4,6 +4,7 @@ xx.com {
 		path /ServiceName/* # 修改为你自己的 ServiceName，且仅能存在两个斜杠。（如：/MyService/ServiceName/*会导致错误）
 	}
 	reverse_proxy @grpc unix//dev/shm/Xray-VLESS-gRPC.socket {
+		flush_interval -1
 		transport http {
 			versions h2c
 		}
