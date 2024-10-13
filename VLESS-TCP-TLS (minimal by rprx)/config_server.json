@@ -9,7 +9,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "","//": "填写你的 UUID"
+                        "id": "","//": "填写你的 UUID",
                         "level": 0,
                         "email": "love@example.com"
                     }
@@ -30,7 +30,7 @@
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/path/to/fullchain.crt","//": "换成你的证书，绝对路径"
+                            "certificateFile": "/path/to/fullchain.crt","//": "换成你的证书，绝对路径",
                             "keyFile": "/path/to/private.key","//": "换成你的私钥，绝对路径"
                         }
                     ]
