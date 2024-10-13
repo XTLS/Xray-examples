@@ -9,7 +9,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password":"your_password","//": "password"
+                        "password":"your_password","//": "password",
                         "flow": "xtls-rprx-direct"
                     }
                 ],
