@@ -23,11 +23,11 @@
             "settings": {
                 "vnext": [
                     {
-                        "address": "example.com", // Change to your domain.
+                        "address": "example.com","//": "Change to your domain.",
                         "port": 443,
                         "users": [
                             {
-                                "id": "UUID", // Change to your UUID.
+                                "id": "UUID","//": "Change to your UUID.",
                                 "encryption": "none"
                             }
                         ]
@@ -39,10 +39,10 @@
                 "security": "tls",
                 "splithttpSettings": {
                     "path": "/splithttp",
-                    "host": "example.com" // Change to your domain.
+                    "host": "example.com","//": "Change to your domain."
                 },
                 "tlsSettings": {
-                    "serverName": "example.com", // Change to your domain.
+                    "serverName": "example.com","//": "Change to your domain.",
                     "alpn": [
                         "h3"
                     ]
