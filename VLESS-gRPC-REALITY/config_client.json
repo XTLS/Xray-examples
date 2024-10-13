@@ -45,7 +45,7 @@
             "settings": {
                 "vnext": [
                     {
-                        "address": "1.2.3.4", // Server IPv4
+                        "address": "1.2.3.4","//": "Server IPv4",
                         "port": 80,
                         "users": [
                             {
