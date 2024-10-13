@@ -5,7 +5,7 @@
     "inbounds": [
         {
             "protocol": "vless",
-            "port": {{ port }}, 
+            "port": "{{ port }}", 
             "settings": {
                 "decryption":"none",
                 "clients": [
