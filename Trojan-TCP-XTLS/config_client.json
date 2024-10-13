@@ -29,10 +29,10 @@
             "settings": {
                 "servers": [
                     {
-                        "address": "example.com",  // your domain name or server IP
-                        "flow": "xtls-rprx-direct",  // Linux or android can be changed to "xtls-rprx-splice"
+                        "address": "example.com","//": "your domain name or server IP",
+                        "flow": "xtls-rprx-direct","//": "Linux or android can be changed to ＂xtls-rprx-splice＂",
                         "port": 443,
-                        "password": "your_password"  // your password
+                        "password": "your_password","//": "your password"
                     }
                 ]
             },
@@ -40,7 +40,7 @@
                 "network": "tcp",
                 "security": "xtls",
                 "xtlsSettings": {
-                    "serverName": "example.com"  // your domain name
+                    "serverName": "example.com","//": "your domain name"
                 }
             }
         }

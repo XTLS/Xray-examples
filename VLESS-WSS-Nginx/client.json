@@ -25,7 +25,7 @@
             "port": 443,
             "users": [
               {
-                "id": "", //填写你的 UUID
+                "id": "","//": "填写你的 UUID",
                 "encryption": "none"
               }
             ]
@@ -36,12 +36,12 @@
         "network": "ws",
         "security": "tls",
         "wsSettings": {
-          "path": "/Path2WS?ed=2560" //?ed=2560 前面填写你的 path
+          "path": "/Path2WS?ed=2560","//": "?ed=2560 前面填写你的 path"
         },
         "tlsSettings": {
           "allowInsecure": false,
-          "serverName": "xx.com", //Equal to "SNI"
-          "fingerprint": "chrome" //"chrome" or "firefox"
+          "serverName": "xx.com","//": "Equal to ＂SNI＂",
+          "fingerprint": "chrome","//": "＂chrome＂ or ＂firefox＂"
         }
       }
     },

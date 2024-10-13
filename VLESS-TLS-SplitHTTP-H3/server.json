@@ -15,7 +15,7 @@
             "settings": {
                 "clients": [
                     {
-                        "id": "UUID" // Change to your UUID.
+                        "id": "UUID","//": "Change to your UUID."
                     }
                 ],
                 "decryption": "none"
@@ -25,19 +25,20 @@
                 "security": "tls",
                 "splithttpSettings": {
                     "path": "/splithttp",
-                    "host": "example.com" // Change to your domain.
+                    "host": "example.com","//": "Change to your domain."
                 },
                 "tlsSettings": {
                     "rejectUnknownSni": true,
                     "minVersion": "1.3",
                     "alpn": [
-                        "h3" // If you want to use with CDN, you need to change alpn to ["h2", "http/1.1"].
+                        "h3"
                     ],
+                    "//": "If you want to use with CDN, you need to change alpn to [＂h2＂, ＂http/1.1＂].",
                     "certificates": [
                         {
                             "ocspStapling": 3600,
-                            "certificateFile": "/path/to/fullchain.pem", // Change to your fullchain file path.
-                            "keyFile": "/path/to/privkey.pem" // Change to your private key file path.
+                            "certificateFile": "/path/to/fullchain.pem","//": "Change to your fullchain file path.",
+                            "keyFile": "/path/to/privkey.pem","//": "Change to your private key file path."
                         }
                     ]
                 }

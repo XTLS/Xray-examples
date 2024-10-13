@@ -52,7 +52,7 @@
                 "network": "ws",
                 "security": "tls",
                 "tlsSettings": {
-                    "fingerprint": "chrome" // uTLS fingerprint as traffic camouflage, can be either "chrome" or "firefox" or deleted entirely to disable uTLS
+                    "fingerprint": "chrome","//": "uTLS fingerprint as traffic camouflage, can be either ＂chrome＂ or ＂firefox＂ or deleted entirely to disable uTLS"
                 }
             },
             "tag": "proxy"
