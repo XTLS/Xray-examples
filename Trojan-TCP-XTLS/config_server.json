@@ -9,7 +9,7 @@
             "settings": {
                 "clients": [
                     {
-                        "password":"your_password",  // password
+                        "password":"your_password","//": "password"
                         "flow": "xtls-rprx-direct"
                     }
                 ],
@@ -35,12 +35,12 @@
                     ],
                     "certificates": [
                         {
-                            "certificateFile": "/path/to/cert",  // Certificate file absolute directory
-                            "keyFile": "/path/to/key",  // Key file absolute directory
-                            "ocspStapling": 3600  // Verification cycle 3600 Second
+                            "certificateFile": "/path/to/cert","//": "Certificate file absolute directory",
+                            "keyFile": "/path/to/key","//": "Key file absolute directory",
+                            "ocspStapling": 3600,"//": "Verification cycle 3600 Second"
                         }
                     ],
-                    "minVersion": "1.2"  // If it is an ecc certificate, use TLSv1.2 at least. If you don't know the certificate type or it is not an ecc certificate, delete this line
+                    "minVersion": "1.2","//": "If it is an ecc certificate, use TLSv1.2 at least. If you don't know the certificate type or it is not an ecc certificate, delete this line"
                 }
             }
         }
