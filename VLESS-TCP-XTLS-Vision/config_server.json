@@ -16,13 +16,13 @@
     },
     "inbounds": [
         {
-            "listen": "0.0.0.0", // "0.0.0.0" Indicates listening to both IPv4 and IPv6
-            "port": 443, // The port on which the server listens
+            "listen": "0.0.0.0","//": "＂0.0.0.0＂ Indicates listening to both IPv4 and IPv6",
+            "port": 443,"//": "The port on which the server listens",
             "protocol": "vless",
             "settings": {
                 "clients": [
                     {
-                        "id": "", // User ID, perform xray uuid generation, or a string of 1-30 bytes
+                        "id": "","//": "User ID, perform xray uuid generation, or a string of 1-30 bytes",
                         "flow": "xtls-rprx-vision"
                     }
                 ],
@@ -48,8 +48,8 @@
                     "certificates": [
                         {
                             "ocspStapling": 3600,
-                            "certificateFile": "/etc/ssl/private/fullchain.cer", // For the certificate file, it is recommended to use fullchain (full SSL certificate chain). If there is only a website certificate, v2rayN can be used but v2rayNG cannot be used. Usually, the extension is not distinguished
-                            "keyFile": "/etc/ssl/private/private.key" // private key file
+                            "certificateFile": "/etc/ssl/private/fullchain.cer","//": "For the certificate file, it is recommended to use fullchain (full SSL certificate chain). If there is only a website certificate, v2rayN can be used but v2rayNG cannot be used. Usually, the extension is not distinguished",
+                            "keyFile": "/etc/ssl/private/private.key","//": "private key file"
                         }
                     ]
                 }
@@ -76,8 +76,8 @@
     "policy": {
         "levels": {
             "0": {
-                "handshake": 2, // The handshake time limit when the connection is established, in seconds, the default value is 4, it is recommended to be different from the default value
-                "connIdle": 120 // Connection idle time limit in seconds, the default value is 300, it is recommended to be different from the default value
+                "handshake": 2,"//": "The handshake time limit when the connection is established, in seconds, the default value is 4, it is recommended to be different from the default value",
+                "connIdle": 120,"//": "Connection idle time limit in seconds, the default value is 300, it is recommended to be different from the default value"
             }
         }
     }
