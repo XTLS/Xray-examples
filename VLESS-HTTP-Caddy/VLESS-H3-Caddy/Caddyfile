@@ -8,7 +8,10 @@ xx.com {
     
     reverse_proxy /path 127.0.0.1:2001 {
         transport http {
-            versions h2c
+            tls
+            tls_client_auth CA.crt priv.key # 换成你的证书和私钥，绝对路径
+            tls_server_name xx.com
+            versions 3
         }
     }
 }
