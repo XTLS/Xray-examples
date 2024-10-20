@@ -1,0 +1,56 @@
+// 直接从其他示例里 copy 过来的，客户端不需要任何特殊修改，要填的东西也一致
+{
+    "log": {
+        "loglevel": "debug"
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1", 
+            "port": 10808, 
+            "protocol": "socks",
+            "settings": {
+                "udp": true
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "routeOnly": true
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "127.0.0.1", 
+                        "port": 443, 
+                        "users": [
+                            {
+                                "id": "", // Needs to match server side
+                                "encryption": "none"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    "fingerprint": "chrome", 
+                    "serverName": "speed.cloudflare.com",
+                    "publicKey": "",
+                    "spiderX": "",
+                    "shortId": ""
+                }
+            },
+            "tag": "proxy"
+        }
+    ]
+}
