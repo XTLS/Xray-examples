@@ -1,0 +1,66 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 2001,
+      "listen": "127.0.0.1",
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "",
+            "email": "love@example.com"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "security": "tls",
+        "network": "http",
+        "httpSettings": {
+          "path": "/path",
+          "host": [
+            "xx.com"
+          ]
+        },
+        "tlsSettings": {
+          // "rejectUnknownSni": true,
+          "minVersion": "1.3",
+          "alpn": ["h3"],
+          "certificates": [
+              {
+                  "certificateFile": "CA.crt", // 换成你的证书，绝对路径
+                  "keyFile": "priv.key" // 换成你的私钥，绝对路径
+              }
+          ]
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "blocked"
+      }
+    ]
+  }
+}

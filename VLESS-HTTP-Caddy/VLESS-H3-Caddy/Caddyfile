@@ -1,0 +1,17 @@
+xx.com {
+    log {
+        level DEBUG
+    }
+    root * /var/www
+    file_server
+    tls CA.crt priv.key # 换成你的证书和私钥，绝对路径
+    
+    reverse_proxy /path 127.0.0.1:2001 {
+        transport http {
+            tls
+            tls_client_auth CA.crt priv.key # 换成你的证书和私钥，绝对路径
+            tls_server_name xx.com
+            versions 3
+        }
+    }
+}
