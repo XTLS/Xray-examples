@@ -26,13 +26,13 @@
           ]
         },
         "tlsSettings": {
-          // "rejectUnknownSni": true,
+          "//rejectUnknownSni": true,
           "minVersion": "1.3",
           "alpn": ["h3"],
           "certificates": [
               {
-                  "certificateFile": "CA.crt", // 换成你的证书，绝对路径
-                  "keyFile": "priv.key" // 换成你的私钥，绝对路径
+                  "certificateFile": "CA.crt","//": "换成你的证书，绝对路径",
+                  "keyFile": "priv.key","//": "换成你的私钥，绝对路径"
               }
           ]
         }
