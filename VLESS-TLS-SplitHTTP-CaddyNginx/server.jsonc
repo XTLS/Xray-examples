@@ -16,10 +16,7 @@
           "decryption": "none"
         },
         "streamSettings": {
-          "network": "splithttp",
-          "splithttpSettings": {
-            "path": "/split"
-          }
+          "network": "splithttp"
         },
         "sniffing": {
           "enabled": true,
