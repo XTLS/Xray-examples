@@ -16,10 +16,7 @@
         "decryption": "none"
       },
       "streamSettings": {
-        "network": "ws",
-        "wsSettings": {
-          "path": "/Path2WS" // 填写你的 path
-        }
+        "network": "ws"
       },
 			"sniffing": {
 				"enabled": true,
