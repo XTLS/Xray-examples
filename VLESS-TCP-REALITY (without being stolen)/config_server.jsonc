@@ -67,7 +67,7 @@
         },
         {
             "protocol": "blackhole",
-            "tag": "blcok"
+            "tag": "block"
         }
     ],
     "routing": {
@@ -86,7 +86,7 @@
                 "inboundTag": [
                     "dokodemo-in"
                 ],
-                "outboundTag": "blcok"
+                "outboundTag": "block"
             }
         ]
     }
