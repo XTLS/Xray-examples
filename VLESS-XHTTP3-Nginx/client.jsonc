@@ -1,0 +1,71 @@
+{
+  "log": {},
+  "inbounds": [
+    {
+      "port": "1080",
+      "listen": "::1",
+      "protocol": "socks",
+      "settings": {
+        "udp": true
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "example.com",
+            "port": 443,
+            "users": [
+              {
+                  "id": "" //填写你的 UUID
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": {
+          "path": "", //填写你的 path
+          "mode": "stream-one",
+          "xmux": {
+            "maxConcurrency": 128, //Nginx 默认上限 128。https://nginx.org/en/docs/http/ngx_http_v3_module.html#http3_max_concurrent_streams
+            "cMaxReuseTimes": 1000, //Nginx 默认上限 1000。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
+            "cMaxLifetimeMs": 3600000 //Nginx 默认上限 3600000ms(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
+          }
+        }
+        "security": "tls",
+        "tlsSettings": {
+          "alpn": [
+            "h3"
+          ]
+        }
+      }
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "direct"
+      }
+    ]
+  }
+}
