@@ -33,7 +33,7 @@
           "mode": "stream-one",
           "xmux": {
             "maxConcurrency": 128, //Nginx 默认上限 128。https://nginx.org/en/docs/http/ngx_http_v3_module.html#http3_max_concurrent_streams
-            "cMaxReuseTimes": 1000, //Nginx 默认上限 1000。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
+            "hMaxRequestTimes": 1000, //Nginx 默认上限 1000。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
             "cMaxLifetimeMs": 3600000 //Nginx 默认上限 3600000ms(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
           }
         }
