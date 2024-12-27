@@ -36,7 +36,7 @@
             "hMaxRequestTimes": 1000, //Nginx 默认上限 1000。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
             "cMaxLifetimeMs": 3600000 //Nginx 默认上限 3600000ms(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
           },
-          "#downloadSettings": { //如需 H2 下行：移除前面的 #（井号）以使用 downloadSettings；上面的 mode 更改为 stream-up。
+          "#downloadSettings": { //如需 H2 下行：移除前面的 #（井号）以使用 downloadSettings；上面和 server.json 的 mode 更改为 stream-up。
             "address": "example.com",
             "port": 443,
             "network": "xhttp",
