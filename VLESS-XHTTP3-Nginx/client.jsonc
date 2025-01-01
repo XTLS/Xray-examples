@@ -31,10 +31,10 @@
         "xhttpSettings": {
           "path": "", //填写你的 path
           "mode": "stream-one", //如使用 downloadSettings（下行），不可用 stream-one；可用 stream-up。
-          "xmux": {
+          "#xmux": { //使用默认值。如需自定义：移除前面的 #（井号）。注意：不可超过 Nginx 的最高（上限）值。
             "maxConcurrency": 128, //Nginx 默认上限 128。https://nginx.org/en/docs/http/ngx_http_v3_module.html#http3_max_concurrent_streams
             "hMaxRequestTimes": 1000, //Nginx 默认上限 1000。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
-            "cMaxLifetimeMs": 3600000 //Nginx 默认上限 3600000ms(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
+            "hMaxReusableSecs": 3600 //Nginx 默认上限 3600s(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
           },
           "#downloadSettings": { //如需 H2 下行：移除前面的 #（井号）以使用 downloadSettings；上面和 server.json 的 mode 更改为 stream-up。
             "address": "example.com",
@@ -42,10 +42,10 @@
             "network": "xhttp",
             "xhttpSettings": {
               "path": "", //填写你的 path（同上）
-              "xmux": {
+              "#xmux": { //使用默认值。如需自定义：移除前面的 #（井号）。注意：不可超过 Nginx 的最高（上限）值。
                 "maxConcurrency": 128, //Nginx 默认上限 128。https://nginx.org/en/docs/http/ngx_http_v3_module.html#http3_max_concurrent_streams
                 "hMaxRequestTimes": 1000, //Nginx 默认上限 1000。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_requests
-                "cMaxLifetimeMs": 3600000 //Nginx 默认上限 3600000ms(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
+                "hMaxReusableSecs": 3600 //Nginx 默认上限 3600s(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
               }
             },
             "security": "tls"
