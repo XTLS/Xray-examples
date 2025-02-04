@@ -71,8 +71,8 @@
             "streamSettings": {
                 "security": "tls",
                 "tlsSettings": {
-                    // fromMitm 会在客户端发送仅有 alpn http/1.1(大多数时候是wss) 的情况下使用同样的alpn
-                    // 旧版本没这个选项别直接把这玩意发出去了，去从上面复制那个h2+http/1.1复制下来(当然更新版本最好)
+                    // fromMitm 会在客户端发送仅有 alpn http/1.1(大多数时候是wss) 的情况下使用同样的alpn, 需要 v25.2+
+                    // 旧版本没这个选项别直接把这玩意发出去了，从上面的alpn选项复制下来(当然更新版本最好)
                     "alpn": [
                         "fromMitm"
                     ],
