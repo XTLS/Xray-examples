@@ -11,6 +11,7 @@
             "protocol": "dokodemo-door",
             "settings": {
                 "network": "tcp",
+                // 从 TLS 的 SNI 中读出目标地址并应用至请求，用于后续路由
                 "followRedirect": true
             },
             "streamSettings": {
@@ -79,7 +80,8 @@
                     // 你要发送的假 SNI, 根据你的网站接受的 SNI 而定
                     // 当然你也可以留空或者我这样乱填个ip, 这样就不会有任何 SNI 扩展被发送，前提是你的网站接受无 SNI 请求
                     "serverName": "11.45.1.4",
-                    // 你期望服务端返回证书里的包含的域名，这是新版本选项且要求 utls 启用，如果你手动禁用了 utls 或者是旧版本只能考虑开允许不安全
+                    // 你期望服务端返回证书里的包含的域名，这是新版本选项且要求 utls 启用
+                    // 如果你手动禁用了 utls 或者是旧版本只能考虑开允许不安全，然后可以考虑文档中其他校验证书的方法进行验证
                     "serverNameToVerify": "e-hentai.org"
                 }
             }
@@ -96,6 +98,12 @@
             {
                 "inboundTag": [
                     "tls-decrypt"
+                ],
+                // tls-repark 中定义了一些参数(比如IP和SNI), 不同的网站可能需要不同的参数
+                // 要支持更多的网站，可以新建更多的此类 freedom 出站，然后在这里把不同的明文请求按需求路由到不同的出站重新打包回 HTTPS
+                // 这里的域名来源就是 tls-decrypt 入站的 followRedirect, 所以一个本地端口就可以接受任何网站的请求并在核心中这样区分开
+                "domain": [
+                    "e-hentai.org"
                 ],
                 "outboundTag": "tls-repack"
             },
