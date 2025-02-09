@@ -1,133 +1,150 @@
 {
-    "log": {
-        "loglevel": "debug"
+  "dns": {
+    "servers": ["h2c://8.8.8.8/dns-query"],
+    "tag": "dns-query"
+  },
+  
+  "inbounds": [
+    {
+      "port": 4431,
+      "listen": "127.0.0.1",
+      "tag": "mitim-h11",
+      "protocol": "dokodemo-door",
+      "settings": {
+        "network": "tcp",
+        "port": 443,
+        "followRedirect": true
+      },
+      "streamSettings": {
+        "security": "tls",
+        "tlsSettings": {
+          "alpn": ["http/1.1"],
+          "certificates": [
+            {
+              "usage": "issue",
+              "certificateFile": "mycert.crt",
+              "keyFile": "mycert.key"
+            }
+          ]
+        }
+      }
     },
-    "inbounds": [
-        // 请求在该入站中被解密
-        {
-            "port": 4431,
-            "listen": "127.0.0.1",
-            "tag": "tls-decrypt",
-            "protocol": "dokodemo-door",
-            "settings": {
-                "network": "tcp",
-                // 从 TLS 的 SNI 中读出目标地址并应用至请求，用于后续路由
-                "followRedirect": true
-            },
-            "streamSettings": {
-                "security": "tls",
-                "tlsSettings": {
-                    // 根据实际情况填写，这里适合绝大多数情况，如果你的网站仅支持 http/1.1, 就只保留 http/1.1
-                    // ps: 如果你选择了 http/1.1 那么你甚至可以用后续的路由模块屏蔽部分路径
-                    "alpn": [
-                        "h2",
-                        "http/1.1"
-                    ],
-                    "certificates": [
-                        {
-                            "usage": "issue",
-                            "buildChain": "true",
-                            // 下面的证书和私钥使用 xray tls cert -ca 命令生成，或者你的自签名证书也行
-                            // 这会生成一个 CA 证书，每个新的要被 MITM 网站请求都会单独用这个 CA 签发一张临时证书
-                            // 所以你只需要在系统信任这一张证书就可以了，或者你可以忍得了浏览器的红标无视风险继续访问也行
-                            "certificate": [],
-                            "key": []
-                        }
-                    ]
-                }
+    {
+      "port": 4432,
+      "listen": "127.0.0.1",
+      "tag": "mitim-h2",
+      "protocol": "dokodemo-door",
+      "settings": {
+        "network": "tcp",
+        "port": 443,
+        "followRedirect": true
+      },
+      "streamSettings": {
+        "security": "tls",
+        "tlsSettings": {
+          "alpn": ["h2","http/1.1"],
+          "certificates": [
+            {
+              "usage": "issue",
+              "certificateFile": "mycert.crt",
+              "keyFile": "mycert.key"
             }
-        },
-        // 真正用到的入站
-        {
-            "port": 10801,
-            "listen": "127.0.0.1",
-            "tag": "socks-in",
-            "protocol": "socks",
-            "sniffing": {
-                // 一般情况得开
-                "enabled": true,
-                "destOverride": [
-                    "http",
-                    "tls"
-                ]
-            }
+          ]
         }
-    ],
-    "outbounds": [
-        // 请求在该出站被强行重定向到 tls-decrypt 进行解密
-        {
-            "tag": "redirect-out",
-            "protocol": "freedom",
-            "settings": {
-                "redirect": "127.0.0.1:4431"
-            }
-        },
-        // 明文请求在这里被重新加密为正常 HTTPS 请求
-        {
-            "tag": "tls-repack",
-            "protocol": "freedom",
-            "settings": {
-                // 你要连接到的服务器的最终IP以及端口，大多数情况下需要手动寻找这样允许域前置的IP
-                "redirect": "104.20.19.168:443"
-            },
-            "streamSettings": {
-                "security": "tls",
-                "tlsSettings": {
-                    // fromMitm 会在客户端发送仅有 alpn http/1.1(大多数时候是wss) 的情况下使用同样的alpn, 需要 v25.2+
-                    // 旧版本没这个选项别直接把这玩意发出去了，从上面的alpn选项复制下来(当然更新版本最好)
-                    "alpn": [
-                        "fromMitm"
-                    ],
-                    // 你要发送的假 SNI, 根据你的网站接受的 SNI 而定
-                    // 当然你也可以留空或者我这样乱填个ip, 这样就不会有任何 SNI 扩展被发送，前提是你的网站接受无 SNI 请求
-                    "serverName": "11.45.1.4",
-                    // 你期望服务端返回证书里的包含的域名，需要 v25.2+
-                    // 如果是旧版本只能考虑开允许不安全，然后可以考虑文档中其他校验证书的方法进行验证
-                    "verifyPeerCertInNames": [
-                        "e-hentai.org",
-                        // 特殊选项，尝试按从 Freedom 入站进来的 SNI 对远端证书进行验证
-                        "fromMitm"
-                    ]
-                }
-            }
-        },
-        // 无辜流量直接放行
-        {
-            "tag": "direct",
-            "protocol": "freedom"
-        }
-    ],
-    "routing": {
-        "domainStrategy": "AsIs",
-        "rules": [
-            {
-                "inboundTag": [
-                    "tls-decrypt"
-                ],
-                // tls-repark 中定义了一些参数(比如IP和SNI), 不同的网站可能需要不同的参数
-                // 要支持更多的网站，可以新建更多的此类 freedom 出站，然后在这里把不同的明文请求按需求路由到不同的出站重新打包回 HTTPS
-                // 这里的域名来源就是 tls-decrypt 入站的 followRedirect, 所以一个本地端口就可以接受任何网站的请求并在核心中这样区分开
-                "domain": [
-                    "e-hentai.org"
-                ],
-                "outboundTag": "tls-repack"
-            },
-            {
-                "inboundTag": [
-                    "socks-in"
-                ],
-                // 你要 mitm 的网址
-                "domain": [
-                    "e-hentai.org"
-                ],
-                "outboundTag": "redirect-out"
-            },
-            {
-                "inboundTag": [
-                    "socks-in"
-                ],
-                "outboundTag": "direct"
-            }
-        ]
+      }
+    },
+   
+    {
+      "port": 10808,
+      "listen": "127.0.0.1",
+      "tag": "socks-in",
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http","tls"]
+      }
     }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP"
+      }
+    },
+    {
+      "tag": "dns-out",
+      "protocol": "dns"                  
+    },
+    {
+      "tag": "redirect-out-h11",
+      "protocol": "freedom",
+      "settings": {
+        "redirect": "127.0.0.1:4431"
+      }
+    },
+    {
+      "tag": "redirect-out-h2",
+      "protocol": "freedom",
+      "settings": {
+        "redirect": "127.0.0.1:4432"
+      }
+    },
+    {
+      "tag": "tls-repack",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP"
+      },                               
+      "streamSettings": {
+        "security": "tls",
+        "tlsSettings": {
+          "fingerprint": "chrome",
+          "serverName": "www.bing.com",
+          "verifyPeerCertInNames": ["fromMitM"],              
+          "alpn": ["fromMitM"]
+        }
+      }
+    }    
+  ],
+
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "outboundTag": "dns-out",
+        "inboundTag": ["socks-in"],
+        "port": 53
+      },                          
+      {
+        "outboundTag": "tls-repack",
+        "inboundTag": ["mitim-h11", "mitim-h2", "dns-query"]                          
+      },
+      {
+        "outboundTag": "redirect-out-h11",
+        "inboundTag": ["socks-in"],
+        "protocol": "tls",
+        "domain": ["domain:googlevideo.com"]
+      },
+      {
+        "outboundTag": "redirect-out-h2",
+        "inboundTag": ["socks-in"],
+        "protocol": "tls",
+        "domain": [
+          "geosite:google",
+          "geosite:twitter",
+          "geosite:reddit",
+          "geosite:facebook",
+          "geosite:instagram",
+          "geosite:whatsapp"
+        ]       
+      },
+      {
+        "outboundTag": "direct",
+        "inboundTag": ["socks-in"]
+      }
+    ]
+  }
 }
+ 
