@@ -2,7 +2,7 @@
 
 // Serverless for iran v1
 
-// Requirements -> Xray-core v25.2+, Default Loyalsoldier's geoip and geosite,
+// Requirements -> Xray-core, Default Loyalsoldier's geoip and geosite,
 // Iran Hosted Domains: https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran.dat
 
 
