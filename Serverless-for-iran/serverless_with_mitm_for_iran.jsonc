@@ -340,7 +340,7 @@
         "outboundTag": "redirect-out-h11",
         "inboundTag": ["socks-in"],
         "network": "tcp",
-        "protocol": "tls",
+        "protocol": ["tls"],
         "port": 443,
         "domain": ["domain:googlevideo.com"]
       },
@@ -348,7 +348,7 @@
         "outboundTag": "redirect-out-h211",
         "inboundTag": ["socks-in"],
         "network": "tcp",
-        "protocol": "tls",
+        "protocol": ["tls"],
         "port": 443,
         "domain": ["geosite:youtube", "geosite:x", "geosite:reddit", "geosite:meta"]       
       },
