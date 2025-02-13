@@ -139,7 +139,6 @@
       "tag": "super-fragment",
       "protocol": "freedom",
       "settings": {
-        "domainStrategy": "ForceIP",
         "fragment": {
           "packets": "tlshello",
           "length": "6",
@@ -156,7 +155,6 @@
       "tag": "chain1-fragment",
       "protocol": "freedom",
       "settings": {
-        "domainStrategy": "ForceIP",
         "fragment": {
           "packets": "1-3",
           "length": "942",
