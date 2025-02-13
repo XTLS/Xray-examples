@@ -1,0 +1,373 @@
+// Project XHTTP https://t.me/projectXhttp
+
+// Serverless with mitm for iran v1
+
+// Requirements -> Xray-core v25.2+, Default Loyalsoldier's geoip and geosite,
+// Iran Hosted Domains: https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran.dat,
+// a self-signed-certificate: you can create with "./xray tls cert -ca -file=mycert" command.
+// also, the certificate must be imported into "Trusted-Root-Certification-Authorities" of system/browser
+
+
+{
+  "log": {
+    "loglevel": "warning", "dnsLog": true
+  },
+
+  "dns":{
+    "hosts": {
+      "i.instagram.com": "i-fallback.instagram.com",
+      "graph.instagram.com": "graph-fallback.instagram.com",
+      "b.i.instagram.com": "b-fallback.i.instagram.com",
+      "instagram.com": "www-fallback.instagram.com",
+      "www.instagram.com": "www-fallback.instagram.com",
+      "m.instagram.com": "m-fallback.instagram.com",
+      "edge-chat.instagram.com": "edge-chat-fallback.instagram.com",
+      "web-chat-e2ee.instagram.com": "web-chat-e2ee-fallback.instagram.com",
+      "api.instagram.com": "api-fallback.instagram.com",
+      "lookaside.instagram.com": "lookaside-fallback.instagram.com",
+      "payments-graph.instagram.com": "payments-graph-fallback.instagram.com",
+      "iglite-z.instagram.com": "iglite-z-fallback.instagram.com",
+      "about.instagram.com": "about-fallback.instagram.com",
+      "reg-e2ee.instagram.com": "reg-e2ee-fallback.instagram.com",
+      "graphql.instagram.com": "graphql-fallback.instagram.com",
+      "gateway.instagram.com": "gateway-fallback.instagram.com",
+      "facebook.com": "www-fallback.facebook.com",
+      "www.facebook.com": "www-fallback.facebook.com",
+      "m.facebook.com": "m-fallback.facebook.com",
+      "portal.facebook.com": "portal-fallback.facebook.com",
+      "graph.facebook.com": "graph-fallback.facebook.com",
+      "connect.facebook.com": "connect-fallback.facebook.com",
+      "edge-mqtt.facebook.com": "edge-mqtt-fallback.facebook.com",
+      "mqtt-mini.facebook.com": "mqtt-mini-fallback.facebook.com",
+      "b-www.facebook.com": "b-www-fallback.facebook.com",
+      "lookaside.facebook.com": "lookaside-fallback.facebook.com",
+      "web.facebook.com": "web-fallback.facebook.com",
+      "payments-graph.facebook.com": "payments-graph-fallback.facebook.com",
+      "chat-e2ee-mini.facebook.com": "chat-e2ee-mini-fallback.facebook.com",
+      "edge-chat.facebook.com": "edge-chat-fallback.facebook.com",
+      "web-chat-e2ee.facebook.com": "web-chat-e2ee-fallback.facebook.com",
+      "iglite-z.facebook.com": "iglite-z-fallback.facebook.com",
+      "about.facebook.com": "about-fallback.facebook.com",
+      "reg-e2ee.facebook.com": "reg-e2ee-fallback.facebook.com",
+      "api.facebook.com": "api-fallback.facebook.com",
+      "b-api.facebook.com": "b-api-fallback.facebook.com",
+      "b-graph.facebook.com": "b-graph-fallback.facebook.com",
+      "gateway.facebook.com": "gateway-fallback.facebook.com",
+      "mobile.facebook.com": "mobile-fallback.facebook.com",
+      "z-p42-chat-e2ee-ig.facebook.com": "z-p42-chat-e2ee-ig-fallback.facebook.com",
+      "portal.fb.com": "portal-fallback.facebook.com",
+      "connect.facebook.net": "connect-fallback.facebook.net",
+      "messenger.com": "www-fallback.messenger.com",
+      "www.messenger.com": "www-fallback.messenger.com",
+      "m.me": "www-fallback.messenger.com",
+      "regexp:^scontent.*\\.cdninstagram\\.com$": "scontent-fallback.cdninstagram.com",
+      "regexp:^static.*\\.cdninstagram\\.com$": "static-fallback.cdninstagram.com",
+      "regexp:^external.*\\.cdninstagram\\.com$": "external-fallback.cdninstagram.com",
+      "regexp:^scontent.*\\.xx\\.fbcdn\\.net$": "scontent-fallback.xx.fbcdn.net",
+      "regexp:^static.*\\.xx\\.fbcdn\\.net$": "static-fallback.xx.fbcdn.net",
+      "regexp:^external.*\\.xx\\.fbcdn\\.net$": "external-fallback.xx.fbcdn.net",
+      "regexp:^z-m-scontent.*\\.xx\\.fbcdn\\.net$": "z-m-scontent-fallback.xx.fbcdn.net",
+      "regexp:^z-m-static.*\\.xx\\.fbcdn\\.net$": "z-m-static-fallback.xx.fbcdn.net",
+      "regexp:^z-m-external.*\\.xx\\.fbcdn\\.net$": "z-m-external-fallback.xx.fbcdn.net",
+      "geosite:category-ads-all": ["10.10.34.36", "2001:4188:2:600:10:10:34:36"]
+    },
+    "servers": [
+      "h2c://8.8.8.8/dns-query",
+      {"address": "localhost", "domains": ["geosite:private", "ext:iran.dat:all", "geosite:category-ir"]}
+    ],
+    "tag": "dns-query",
+    "disableFallback": true
+  },
+  
+  "inbounds": [
+    {
+      "tag": "dns-in",
+      "port": 10853,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "8.8.8.8",
+        "port": 53,
+        "network": "tcp,udp"        
+      }      
+    },
+    {
+      "tag": "socks-in",
+      "port": 10808,
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls", "quic"],
+        "routeOnly": false
+      },
+      "settings": {"udp": true}
+    },
+    {
+      "port": 4431,
+      "tag": "tls-decrypt-h11",
+      "protocol": "dokodemo-door",
+      "settings": {
+        "network": "tcp",
+        "port": 443,
+        "followRedirect": true
+      },
+      "streamSettings": {
+        "security": "tls",
+        "tlsSettings": {
+          "alpn": ["http/1.1"],
+          "certificates": [
+            {
+              "usage": "issue",
+              "certificateFile": "mycert.crt",  // certificate path
+              "keyFile": "mycert.key"  // private-key path
+            }
+          ]
+        }
+      }
+    },
+    {
+      "port": 4432,
+      "tag": "tls-decrypt-h211",
+      "protocol": "dokodemo-door",
+      "settings": {
+        "network": "tcp",
+        "port": 443,
+        "followRedirect": true
+      },
+      "streamSettings": {
+        "security": "tls",
+        "tlsSettings": {
+          "alpn": ["h2","http/1.1"],
+          "certificates": [
+            {
+              "usage": "issue",
+              "certificateFile": "mycert.crt",  // certificate path
+              "keyFile": "mycert.key"  // private-key path
+            }
+          ]
+        }
+      }
+    }
+  ],
+
+  "outbounds": [    
+    {
+      "tag": "block",
+      "protocol": "blackhole"      
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",      
+      "settings": {"domainStrategy": "ForceIP"}
+    },
+    {
+      "tag": "redirect-out-h11",
+      "protocol": "freedom",
+      "settings": {
+        "redirect": "127.0.0.1:4431"
+      }
+    },
+    {
+      "tag": "redirect-out-h211",
+      "protocol": "freedom",
+      "settings": {
+        "redirect": "127.0.0.1:4432"
+      }
+    },    
+    {
+      "tag": "tls-repack-google",
+      "protocol": "freedom",      
+      "settings": {"domainStrategy": "ForceIP"},
+      "streamSettings": {      
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "www.google.com",
+          "verifyPeerCertInNames": ["fromMitM", "www.google.com", "dns.google"],
+          "alpn": ["fromMitM"],
+          "fingerprint": "chrome"
+        }
+      }              
+    },
+    {
+      "tag": "tls-repack-meta",
+      "protocol": "freedom",      
+      "settings": {"domainStrategy": "ForceIP"},
+      "streamSettings": {      
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "www.whatsapp.com",
+          "verifyPeerCertInNames": ["fromMitM", "www.whatsapp.com", "www.facebook.com", "www.ar.meta.com", "www.fb.com", "www.whatsapp.net", "www.atlassolutions.com", "www.secure.facebook.com", "www.extern.facebook.com", "www.internet.org", "www.oculus.com", "www.wit.ai", "www.facebook-dns.com", "www.instagram.com", "www.meta.com", "www.external-disputes.meta.com", "www.fbe2e.com", "www.cloud.x2p.facebook.net", "www.secure.latest.facebook.com"],
+          "alpn": ["fromMitM"],
+          "fingerprint": "chrome"
+        }
+      }              
+    },
+    {
+      "tag": "tls-repack-fastly",
+      "protocol": "freedom",      
+      "settings": {"domainStrategy": "ForceIP"},
+      "streamSettings": {      
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "www.fastly.com",
+          "verifyPeerCertInNames": ["fromMitM", "www.fastly.com", "www.reddit.com", "x.com"],
+          "alpn": ["fromMitM"],
+          "fingerprint": "chrome"
+        }
+      }              
+    },    
+    {
+      "tag": "dns-out",
+      "protocol": "dns",      
+      "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "8.8.8.8", "port": 53},
+      "streamSettings": {
+        "sockopt": {
+          "dialerProxy": "super-fragment"
+        }
+      }
+    },
+    {
+      "tag": "super-fragment",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP",
+        "fragment": {
+          "packets": "tlshello",
+          "length": "6",
+          "interval": "0"
+        }
+      },
+      "streamSettings": {
+        "sockopt": {
+          "dialerProxy": "chain1-fragment"
+        }
+      }            
+    },
+    {
+      "tag": "chain1-fragment",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP",
+        "fragment": {
+          "packets": "1-3",
+          "length": "942",
+          "interval": "1"
+        }
+      },
+      "streamSettings": {
+        "sockopt": {
+          "dialerProxy": "chain2-fragment"
+        }
+      }            
+    },                          
+    {
+      "tag": "chain2-fragment",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP",
+        "fragment": {
+          "packets": "1-1",
+          "length": "1",
+          "interval": "1"
+        }
+      }            
+    },
+    {
+      "tag": "udp-noises",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP",
+        "noises": [
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "1"},
+          {"type": "rand", "packet": "1232", "delay": "1"}, {"type": "rand", "packet": "1232", "delay": "10"}
+        ]
+      }            
+    }          
+  ],
+
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [                  
+      {"outboundTag": "dns-out",
+       "inboundTag": ["dns-in"]
+      },
+      {"outboundTag": "dns-out",
+       "inboundTag": ["socks-in"], "port": 53
+      },
+      {"outboundTag": "tls-repack-google",
+       "inboundTag": ["dns-query"]
+      },      
+      {"outboundTag": "block",
+       "domain": ["geosite:category-ads-all"]
+      },
+      {"outboundTag": "block",
+       "ip": ["10.10.34.0/24", "2001:4188:2:600:10:10:34:36", "2001:4188:2:600:10:10:34:35"]
+      },           
+      {"outboundTag": "direct",
+       "domain": ["geosite:private", "ext:iran.dat:all", "geosite:category-ir"] 
+      },      
+      {"outboundTag": "direct",
+       "ip": ["geoip:private", "geoip:ir"]
+      },
+      {"outboundTag": "super-fragment",
+       "inboundTag": ["socks-in"],
+       "network": "tcp",
+       "ip": ["geoip:cloudflare", "geoip:cloudfront"]
+      },
+      {
+        "outboundTag": "redirect-out-h11",
+        "inboundTag": ["socks-in"],
+        "network": "tcp",
+        "protocol": "tls",
+        "port": 443,
+        "domain": ["domain:googlevideo.com"]
+      },
+      {
+        "outboundTag": "redirect-out-h211",
+        "inboundTag": ["socks-in"],
+        "network": "tcp",
+        "protocol": "tls",
+        "port": 443,
+        "domain": ["geosite:youtube", "geosite:x", "geosite:reddit", "geosite:meta"]       
+      },
+      {"outboundTag": "tls-repack-google",
+       "domain": ["geosite:youtube", "domain:googlevideo.com"],
+       "inboundTag": ["tls-decrypt-h11", "tls-decrypt-h211"]
+      },
+      {"outboundTag": "tls-repack-meta",
+       "domain": ["geosite:meta"],
+       "inboundTag": ["tls-decrypt-h11", "tls-decrypt-h211"]
+      },
+      {"outboundTag": "tls-repack-fastly",
+       "domain": ["geosite:x", "geosite:reddit"],
+       "inboundTag": ["tls-decrypt-h11", "tls-decrypt-h211"]
+      },                                                         	                                                        
+      {"outboundTag": "udp-noises",
+       "network": "udp"
+      },
+      {"outboundTag": "super-fragment",
+       "network": "tcp"
+      }
+    ]
+  },
+
+  "policy": {
+    "levels": {
+      "0": {
+        "connIdle": 29,
+        "uplinkOnly": 0,
+        "downlinkOnly": 0
+      }
+    }
+  }
+}
