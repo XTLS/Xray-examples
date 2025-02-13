@@ -112,7 +112,7 @@
       "settings": {"domainStrategy": "ForceIP"}
     },    
     {
-      "tag": "tls-repack",
+      "tag": "tls-repack-dns",
       "protocol": "freedom",      
       "settings": {"domainStrategy": "ForceIP"},
       "streamSettings": {      
@@ -212,7 +212,7 @@
       {"outboundTag": "dns-out",
        "inboundTag": ["socks-in"], "port": 53
       },
-      {"outboundTag": "tls-repack",
+      {"outboundTag": "tls-repack-dns",
        "inboundTag": ["dns-query"]
       },
       {"outboundTag": "block",
