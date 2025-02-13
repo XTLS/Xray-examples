@@ -67,11 +67,12 @@
       "regexp:^z-m-scontent.*\\.xx\\.fbcdn\\.net$": "z-m-scontent-fallback.xx.fbcdn.net",
       "regexp:^z-m-static.*\\.xx\\.fbcdn\\.net$": "z-m-static-fallback.xx.fbcdn.net",
       "regexp:^z-m-external.*\\.xx\\.fbcdn\\.net$": "z-m-external-fallback.xx.fbcdn.net",
-      "geosite:category-ads-all": ["10.10.34.36", "2001:4188:2:600:10:10:34:36"]
+      "geosite:category-ads-all": ["10.10.34.36", "2001:4188:2:600:10:10:34:36"],
+      "cloudflare-dns.com": "www.cloudflare.com"
     },
     "servers": [
-      "h2c://208.67.222.222/dns-query",
-      {"address": "localhost", "domains": ["geosite:private", "ext:iran.dat:all", "geosite:category-ir"]}
+      "https://cloudflare-dns.com/dns-query",
+      {"address": "localhost", "domains": ["geosite:private", "ext:iran.dat:all", "geosite:category-ir", "www.cloudflare.com"]}
     ],
     "tag": "dns-query",
     "disableFallback": true
@@ -83,7 +84,7 @@
       "port": 10853,
       "protocol": "dokodemo-door",
       "settings": {
-        "address": "208.67.222.222",
+        "address": "1.1.1.1",
         "port": 53,
         "network": "tcp,udp"        
       }      
@@ -112,23 +113,9 @@
       "settings": {"domainStrategy": "ForceIP"}
     },    
     {
-      "tag": "tls-repack-dns",
-      "protocol": "freedom",      
-      "settings": {"domainStrategy": "ForceIP"},
-      "streamSettings": {      
-        "security": "tls",
-        "tlsSettings": {
-          "serverName": "www.opendns.com",
-          "verifyPeerCertInNames": ["fromMitM", "www.opendns.com", "doh.opendns.com"],
-          "alpn": ["fromMitM"],
-          "fingerprint": "chrome"
-        }
-      }              
-    },
-    {
       "tag": "dns-out",
       "protocol": "dns",      
-      "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "208.67.222.222", "port": 53},
+      "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "1.1.1.1", "port": 53},
       "streamSettings": {
         "sockopt": {
           "dialerProxy": "super-fragment"
@@ -212,7 +199,7 @@
       {"outboundTag": "dns-out",
        "inboundTag": ["socks-in"], "port": 53
       },
-      {"outboundTag": "tls-repack-dns",
+      {"outboundTag": "super-fragment",
        "inboundTag": ["dns-query"]
       },
       {"outboundTag": "block",
