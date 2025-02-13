@@ -181,7 +181,7 @@
         "security": "tls",
         "tlsSettings": {
           "serverName": "www.google.com",
-          "verifyPeerCertInNames": ["fromMitM", "www.google.com", "dns.google"],
+          "verifyPeerCertInNames": ["fromMitM", "www.google.com", "dns.google", "www.googlevideo.com", "www.youtube.com"],
           "alpn": ["fromMitM"],
           "fingerprint": "chrome"
         }
