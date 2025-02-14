@@ -317,7 +317,7 @@
       },
       {"outboundTag": "tls-repack-dns",
        "inboundTag": ["dns-query"]
-      },      
+      },
       {"outboundTag": "block",
        "ip": ["10.10.34.0/24", "2001:4188:2:600:10:10:34:36", "2001:4188:2:600:10:10:34:35"]
       },           
@@ -327,7 +327,7 @@
       {"outboundTag": "direct",
        "ip": ["geoip:private", "geoip:ir"]
       },
-      {"outboundTag": "super-fragment",
+      {"outboundTag": "chain1-fragment",
        "inboundTag": ["socks-in"],
        "network": "tcp",
        "ip": ["geoip:cloudflare", "geoip:cloudfront"]
