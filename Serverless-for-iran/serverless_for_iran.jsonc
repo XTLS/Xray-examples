@@ -162,7 +162,7 @@
         "fragment": {
           "packets": "1-1",
           "length": "1",
-          "interval": "1"
+          "interval": "2"
         }
       }            
     },
