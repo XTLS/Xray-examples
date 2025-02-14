@@ -198,7 +198,7 @@
       {"outboundTag": "dns-out",
        "inboundTag": ["socks-in"], "port": 53
       },
-      {"outboundTag": "super-fragment",
+      {"outboundTag": "chain1-fragment",
        "inboundTag": ["dns-query"]
       },
       {"outboundTag": "block",
