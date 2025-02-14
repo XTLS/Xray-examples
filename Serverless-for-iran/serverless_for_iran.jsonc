@@ -118,7 +118,7 @@
       "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "1.1.1.1", "port": 53},
       "streamSettings": {
         "sockopt": {
-          "dialerProxy": "super-fragment"
+          "dialerProxy": "chain1-fragment"
         }
       }
     },
@@ -144,7 +144,7 @@
       "settings": {
         "fragment": {
           "packets": "1-3",
-          "length": "942",  // decreasing this value reduces latency but increases the chance of being detected by the GFW
+          "length": "517",
           "interval": "1"
         }
       },
@@ -217,7 +217,7 @@
       {"outboundTag": "udp-noises",
        "network": "udp"
       },
-      {"outboundTag": "super-fragment",
+      {"outboundTag": "chain1-fragment",
        "network": "tcp"
       }
     ]
