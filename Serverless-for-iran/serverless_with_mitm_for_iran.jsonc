@@ -261,7 +261,7 @@
       "settings": {
         "fragment": {
           "packets": "1-3",
-          "length": "517",  // decreasing this value reduces latency but increases the chance of being detected by the GFW
+          "length": "517",
           "interval": "1"
         }
       },
