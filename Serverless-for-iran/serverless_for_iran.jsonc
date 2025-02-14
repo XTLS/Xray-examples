@@ -8,7 +8,7 @@
 
 {
   "log": {
-    "loglevel": "warning", "dnsLog": true
+    "loglevel": "warning", "dnsLog": false
   },
 
   "dns":{
