@@ -11,7 +11,6 @@ Methods:
 
 Abilities:
 * bypass DPI
-* block ads
 * direct route for Iran websites
 
 currently(13/2/2025) all services except telegram are accessible in iran.
