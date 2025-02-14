@@ -1,9 +1,5 @@
 // Project XHTTP https://t.me/projectXhttp
-
 // Serverless for iran v1
-
-// Requirements -> Xray-core, Default Loyalsoldier's geoip and geosite,
-// Iran Hosted Domains: https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/iran.dat
 
 
 {
@@ -71,7 +67,7 @@
     },
     "servers": [
       "https://cloudflare-dns.com/dns-query",
-      {"address": "localhost", "domains": ["geosite:private", "ext:iran.dat:all", "geosite:category-ir", "www.cloudflare.com"]}
+      {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir", "www.cloudflare.com"]}
     ],
     "tag": "dns-query",
     "disableFallback": true
@@ -205,7 +201,7 @@
        "ip": ["10.10.34.0/24", "2001:4188:2:600:10:10:34:36", "2001:4188:2:600:10:10:34:35"]
       },           
       {"outboundTag": "direct",
-       "domain": ["geosite:private", "ext:iran.dat:all", "geosite:category-ir"] 
+       "domain": ["geosite:private", "geosite:category-ir"]
       },      
       {"outboundTag": "direct",
        "ip": ["geoip:private", "geoip:ir"]
