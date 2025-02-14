@@ -145,7 +145,7 @@
         "fragment": {
           "packets": "1-3",
           "length": "517",
-          "interval": "1"
+          "interval": "2"
         }
       },
       "streamSettings": {
