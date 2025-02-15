@@ -278,7 +278,12 @@
           "length": "1",
           "interval": "4"
         }
-      }            
+      },
+      "streamSettings": {
+        "sockopt": {
+          "tcpNoDelay": true
+        }
+      }
     },
     {
       "tag": "udp-noises",
