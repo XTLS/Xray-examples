@@ -213,15 +213,5 @@
        "network": "tcp"
       }
     ]
-  },
-
-  "policy": {
-    "levels": {
-      "0": {
-        "connIdle": 29,
-        "uplinkOnly": 0,
-        "downlinkOnly": 0
-      }
-    }
   }
 }
