@@ -4,8 +4,6 @@
 
 bypass censorship without using any server.
 
-currently(13/2/2025) all services except telegram are accessible in iran.
-
 it doesn't change the IP, so it is not suitable for anonymity and websites that have sanctioned Iran.
 
 # Serverless with MitM for Iran (Xray-core v25.2+)
