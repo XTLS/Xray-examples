@@ -15,7 +15,7 @@
       "geosite:category-ads-all": ["10.10.34.36", "2001:4188:2:600:10:10:34:36"]
     },
     "servers": [
-      "h2c://208.67.222.222/dns-query",
+      "h2c://1.1.1.1/dns-query",
       {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir"]}
     ],
     "tag": "dns-query",
@@ -28,7 +28,7 @@
       "port": 10853,
       "protocol": "dokodemo-door",
       "settings": {
-        "address": "208.67.222.222",
+        "address": "1.1.1.1",
         "port": 53,
         "network": "tcp,udp"        
       }      
@@ -123,8 +123,8 @@
       "streamSettings": {      
         "security": "tls",
         "tlsSettings": {
-          "serverName": "www.opendns.com",
-          "verifyPeerCertInNames": ["fromMitM", "www.opendns.com", "doh.opendns.com"],
+          "serverName": "www.bing.com",
+          "verifyPeerCertInNames": ["fromMitM", "www.bing.com"],
           "alpn": ["fromMitM"],
           "fingerprint": "chrome"
         }
@@ -175,7 +175,7 @@
     {
       "tag": "dns-out",
       "protocol": "dns",      
-      "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "208.67.222.222", "port": 53},
+      "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "1.1.1.1", "port": 53},
       "streamSettings": {
         "sockopt": {
           "dialerProxy": "chain1-fragment"
