@@ -119,19 +119,19 @@
       "settings": {
         "domainStrategy": "ForceIP",
         "noises": [
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "1"},
-          {"type": "rand", "packet": "257-487", "delay": "1"}, {"type": "rand", "packet": "257-487", "delay": "10"}
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "10"}
         ]
       }            
     }          
