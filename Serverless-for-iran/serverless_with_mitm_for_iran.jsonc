@@ -7,7 +7,7 @@
 
 {
   "log": {
-    "loglevel": "error", "dnsLog": false
+    "loglevel": "none", "dnsLog": false
   },
 
   "dns":{
