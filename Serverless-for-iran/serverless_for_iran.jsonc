@@ -10,11 +10,11 @@
   "dns":{
     "hosts": {
       "geosite:category-ads-all": ["10.10.34.36", "2001:4188:2:600:10:10:34:36"],
-      "cloudflare-dns.com": "www.cloudflare.com"
+      "dns.cloudflare.com": "cloudflare.com"
     },
     "servers": [
       "https://cloudflare-dns.com/dns-query",
-      {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir", "www.cloudflare.com"]}
+      {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir", "cloudflare.com"]}
     ],
     "tag": "dns-query",
     "disableFallback": true
