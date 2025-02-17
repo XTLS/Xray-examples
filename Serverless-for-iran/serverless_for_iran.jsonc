@@ -13,7 +13,7 @@
       "dns.cloudflare.com": "cloudflare.com"
     },
     "servers": [
-      "https://cloudflare-dns.com/dns-query",
+      "https://dns.cloudflare.com/dns-query",
       {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir", "cloudflare.com"]}
     ],
     "tag": "dns-query",
