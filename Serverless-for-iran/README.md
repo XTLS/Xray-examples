@@ -2,7 +2,7 @@
 
 # Serverless for Iran
 
-bypass censorship without using any server.
+bypass censorship using fragment and noise.
 
 it doesn't change the IP, so it is not suitable for anonymity and websites that have sanctioned Iran.
 
