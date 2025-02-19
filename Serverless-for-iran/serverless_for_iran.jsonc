@@ -165,7 +165,7 @@
       {"outboundTag": "udp-noises",
        "network": "udp"
       },
-      {"outboundTag": "chain1-fragment",  // // or "super-fragment"
+      {"outboundTag": "chain1-fragment",  // or "super-fragment"
        "network": "tcp"
       }
     ]
