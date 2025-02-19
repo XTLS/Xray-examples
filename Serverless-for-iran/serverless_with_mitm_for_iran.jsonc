@@ -279,7 +279,7 @@
       {"outboundTag": "direct",
        "ip": ["geoip:private", "geoip:ir"]
       },
-      {"outboundTag": "chain1-fragment",
+      {"outboundTag": "chain1-fragment",  // or "super-fragment"
        "inboundTag": ["socks-in"],
        "network": "tcp",
        "ip": ["geoip:cloudflare", "geoip:cloudfront"]
@@ -315,7 +315,7 @@
       {"outboundTag": "udp-noises",
        "network": "udp"
       },
-      {"outboundTag": "chain1-fragment",
+      {"outboundTag": "chain1-fragment",  // or "super-fragment"
        "network": "tcp"
       }
     ]
