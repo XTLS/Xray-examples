@@ -20,7 +20,8 @@
             "port": 443,
             "users": [
               {
-                  "id": "" //填写你的 UUID
+                  "id": "", //填写你的 UUID
+                  "encryption": "none"
               }
             ]
           }
