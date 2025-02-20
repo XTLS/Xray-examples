@@ -15,7 +15,7 @@
     },
     "servers": [
       "https://dns.cloudflare.com/dns-query",
-      {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir", "cloudflare.com"]}
+      {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir", "full:cloudflare.com"]}
     ],
     "tag": "dns-query",
     "disableFallback": true
