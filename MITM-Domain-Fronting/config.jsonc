@@ -73,7 +73,7 @@
             "streamSettings": {
                 "security": "tls",
                 "tlsSettings": {
-                    // fromMitm 会在客户端发送仅有 alpn http/1.1(大多数时候是wss) 的情况下使用同样的alpn, 需要 v25.2+
+                    // fromMitm 会在客户端发送仅有 alpn http/1.1(大多数时候是wss) 的情况下使用同样的alpn, 需要 v25.2.21+
                     // 旧版本没这个选项别直接把这玩意发出去了，从上面的alpn选项复制下来(当然更新版本最好)
                     "alpn": [
                         "fromMitm"
@@ -81,11 +81,11 @@
                     // 你要发送的假 SNI, 根据你的网站接受的 SNI 而定
                     // 当然你也可以留空或者我这样乱填个ip, 这样就不会有任何 SNI 扩展被发送，前提是你的网站接受无 SNI 请求
                     "serverName": "11.45.1.4",
-                    // 你期望服务端返回证书里的包含的域名，需要 v25.2+
+                    // 你期望服务端返回证书里的包含的域名，需要 v25.2.21+
                     // 如果是旧版本只能考虑开允许不安全，然后可以考虑文档中其他校验证书的方法进行验证
                     "verifyPeerCertInNames": [
                         "e-hentai.org",
-                        // 特殊选项，尝试按从 Freedom 入站进来的 SNI 对远端证书进行验证
+                        // 特殊选项，尝试按从 dokodemo-door 入站进来的 SNI 对远端证书进行验证（或取自内置 DNS 的 DoH h2c hostname）
                         "fromMitm"
                     ]
                 }
