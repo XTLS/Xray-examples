@@ -1,0 +1,175 @@
+// Configs here can not contain "bypassing sanctions" contents (inappropriate on US GitHub)
+// Please join the official Xray Iranian group https://t.me/projectXhttp to get the whole working configs
+
+// Serverless for Iran v1
+// Xray-core v25.2.21+
+
+
+{
+  "log": {
+    "loglevel": "warning", "dnsLog": false, "access": "none"
+  },
+
+  "dns":{
+    "hosts": {
+      "geosite:category-ads-all": ["10.10.34.36", "2001:4188:2:600:10:10:34:36"],
+      "dns.cloudflare.com": "cloudflare.com"
+    },
+    "servers": [
+      "https://dns.cloudflare.com/dns-query",
+      {"address": "localhost", "domains": ["geosite:private", "geosite:category-ir", "full:cloudflare.com"]}
+    ],
+    "tag": "dns-query",
+    "disableFallback": true
+  },
+  
+  "inbounds": [
+    {
+      "tag": "dns-in",
+      "port": 10853,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "1.1.1.1",
+        "port": 53,
+        "network": "tcp,udp"        
+      }      
+    },
+    {
+      "tag": "socks-in",
+      "port": 10808,
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls", "quic"],
+        "routeOnly": false
+      },
+      "settings": {"udp": true}
+    }   
+  ],
+
+  "outbounds": [    
+    {
+      "tag": "block",
+      "protocol": "blackhole"      
+    },
+    {
+      "tag": "direct",
+      "protocol": "freedom",      
+      "settings": {"domainStrategy": "ForceIP"}
+    },    
+    {
+      "tag": "dns-out",
+      "protocol": "dns",      
+      "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "1.1.1.1", "port": 53},
+      "streamSettings": {
+        "sockopt": {
+          "dialerProxy": "chain1-fragment"
+        }
+      }
+    },
+    {
+      "tag": "super-fragment",
+      "protocol": "freedom",
+      "settings": {
+        "fragment": {
+          "packets": "tlshello",
+          "length": "6",
+          "interval": "0"
+        }
+      },
+      "streamSettings": {
+        "sockopt": {
+          "dialerProxy": "chain1-fragment"
+        }
+      }            
+    },
+    {
+      "tag": "chain1-fragment",
+      "protocol": "freedom",
+      "settings": {
+        "fragment": {
+          "packets": "1-3",
+          "length": "517",
+          "interval": "1"
+        }
+      },
+      "streamSettings": {
+        "sockopt": {
+          "dialerProxy": "chain2-fragment"
+        }
+      }            
+    },                          
+    {
+      "tag": "chain2-fragment",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP",
+        "fragment": {
+          "packets": "1-1",
+          "length": "1",
+          "interval": "2"
+        }
+      },
+      "streamSettings": {
+        "sockopt": {
+          "tcpNoDelay": true
+        }
+      }
+    },
+    {
+      "tag": "udp-noises",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "ForceIP",
+        "noises": [
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "1"},
+          {"type": "rand", "packet": "257-507", "delay": "1"}, {"type": "rand", "packet": "257-507", "delay": "10"}
+        ]
+      }            
+    }          
+  ],
+
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [                  
+      {"outboundTag": "dns-out",
+       "inboundTag": ["dns-in"]
+      },
+      {"outboundTag": "dns-out",
+       "inboundTag": ["socks-in"], "port": 53
+      },
+      {"outboundTag": "chain1-fragment",  // or "super-fragment"
+       "inboundTag": ["dns-query"]
+      },
+      {"outboundTag": "block",
+       "domain": ["geosite:category-ads-all"]
+      },
+      {"outboundTag": "block",
+       "ip": ["10.10.34.0/24", "2001:4188:2:600:10:10:34:36", "2001:4188:2:600:10:10:34:35"]
+      },           
+      {"outboundTag": "direct",
+       "domain": ["geosite:private", "geosite:category-ir"]
+      },      
+      {"outboundTag": "direct",
+       "ip": ["geoip:private", "geoip:ir"]
+      },                                                         	                                                        
+      {"outboundTag": "udp-noises",
+       "network": "udp"
+      },
+      {"outboundTag": "chain1-fragment",  // or "super-fragment"
+       "network": "tcp"
+      }
+    ]
+  }
+}
