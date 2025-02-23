@@ -1,6 +1,8 @@
-### Configs here can not contain "bypassing sanctions" contents (not allowed on US GitHub)
+# Access almost all websites & services directly, for every person in Iran
 
-### Please join the official Xray Iranian group https://t.me/projectXhttp to get the whole working configs
+**Configs here can not contain "bypassing sanctions" contents (inappropriate on US GitHub)**
+
+**Please join the official Xray Iranian group https://t.me/projectXhttp to get the whole working configs**
 
 # Serverless for Iran
 
