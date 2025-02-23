@@ -1,3 +1,3 @@
 # Xray-examples
 
-Forked from [v2ray-examples](https://github.com/v2fly/v2ray-examples)
+Some examples of uses for [Xray-core](https://github.com/XTLS/Xray-core)
