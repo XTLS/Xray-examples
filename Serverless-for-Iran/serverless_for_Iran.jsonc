@@ -4,6 +4,8 @@
 // Serverless for Iran v1
 // Xray-core v25.2.21+
 
+// Bypass censorship using TCP/TLS fragment and UDP noises.
+// It doesn't change your local IP, so it is not suitable for anonymity.
 
 {
   "log": {

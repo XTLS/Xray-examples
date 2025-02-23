@@ -4,8 +4,8 @@
 // Serverless with MitM-Domain-Fronting for Iran v1
 // Xray-core v25.2.21+
 
-// Requires a self-signed-certificate: you can create it using "./xray tls cert -ca -file=mycert" command
-// also, the certificate must be imported into "Trusted-Root-Certification-Authorities" of system/browser
+// Requires a self-signed-certificate: You can create it using "./xray tls cert -ca -file=mycert" command.
+// Also, the certificate must be imported into "Trusted-Root-Certification-Authorities" of system/browser.
 
 
 {

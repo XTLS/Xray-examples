@@ -6,19 +6,20 @@
 
 # Serverless for Iran
 
-bypass censorship using fragment and noise.
+Bypass censorship using TCP/TLS fragment and UDP noises.
 
-it doesn't change the IP, so it is not suitable for anonymity.
+It doesn't change your local IP, so it is not suitable for anonymity.
 
 # Serverless with MitM-Domain-Fronting for Iran (Xray-core v25.2.21+)
 
-same as "serverless for Iran" but using h2c(doh domain fronting) for dns and MitM for these services that support domain fronting:
-* youtube
-* x
-* reddit
-* meta (facebook, instagram, ...)
+Same as "Serverless for Iran" but use "DoH h2c + domain fronting" for DNS and MitM for these services that support domain fronting:
+* YouTube
+* X
+* Reddit
+* Meta (Facebook, Instagram, ...)
 
 (This list will be updated)
 
-you need a self-signed-certificate: you can create with "./xray tls cert -ca -file=mycert" command.
-also, the certificate must be imported into "Trusted-Root-Certification-Authorities" of system/browser.
+**Requires a self-signed-certificate: You can create it using "./xray tls cert -ca -file=mycert" command.**
+
+**Also, the certificate must be imported into "Trusted-Root-Certification-Authorities" of system/browser.**
