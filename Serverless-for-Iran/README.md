@@ -8,7 +8,7 @@ it doesn't change the IP, so it is not suitable for anonymity and websites that 
 
 # Serverless with MitM for Iran (Xray-core v25.2+)
 
-same as "serverless for iran" but using h2c(doh domain fronting) for dns and MitM for these services that support domain fronting:
+same as "serverless for Iran" but using h2c(doh domain fronting) for dns and MitM for these services that support domain fronting:
 * youtube
 * x
 * reddit
