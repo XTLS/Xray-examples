@@ -1,7 +1,10 @@
-// Project XHTTP https://t.me/projectXhttp
-// Serverless with mitm for Iran v1
+// Configs here can not contain "bypassing sanctions" contents (not allowed on US GitHub)
+// Please join the official Xray Iranian group https://t.me/projectXhttp to get the whole working configs
 
-// Requirements -> Xray-core v25.2.18+, a self-signed-certificate: you can create with "./xray tls cert -ca -file=mycert" command.
+// Serverless with MitM-Domain-Fronting for Iran v1
+// Xray-core v25.2.21+
+
+// Requires a self-signed-certificate: you can create it using "./xray tls cert -ca -file=mycert" command
 // also, the certificate must be imported into "Trusted-Root-Certification-Authorities" of system/browser
 
 
