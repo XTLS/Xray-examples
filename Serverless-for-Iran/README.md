@@ -8,7 +8,7 @@
 
 bypass censorship using fragment and noise.
 
-it doesn't change the IP, so it is not suitable for anonymity and websites that have sanctioned Iran.
+it doesn't change the IP, so it is not suitable for anonymity.
 
 # Serverless with MitM-Domain-Fronting for Iran (Xray-core v25.2.21+)
 
