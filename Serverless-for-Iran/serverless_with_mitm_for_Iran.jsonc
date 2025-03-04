@@ -251,8 +251,7 @@
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
-          {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
-          {"type": "rand", "packet": "1250", "delay": "10"}
+          {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"}
         ]
       }            
     },
@@ -273,8 +272,7 @@
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
-          {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
-          {"type": "rand", "packet": "1230", "delay": "10"}
+          {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"}
         ]
       }            
     }          
