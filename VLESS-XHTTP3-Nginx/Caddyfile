@@ -1,4 +1,9 @@
 example.com {
+	tls {
+		dns cloudflare cf_api_token #根据情况自己修改，这里用的是cloudflare的API，需要github.com/caddy-dns/cloudflare插件
+		resolvers 1.1.1.1
+	}
+
 	file_server * {
 		root /var/www/html
 	}
