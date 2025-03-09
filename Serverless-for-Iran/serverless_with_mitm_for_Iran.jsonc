@@ -1,7 +1,7 @@
 // Configs here can not contain "bypassing sanctions" contents (inappropriate on US GitHub)
 // Please join the official Xray Iranian group https://t.me/projectXhttp to get the whole working configs
 
-// Serverless with MitM-Domain-Fronting for Iran v2
+// Serverless with MitM-Domain-Fronting for Iran v3
 // Xray-core v25.2.21+
 
 // Requires a self-signed-certificate: You can create it using "./xray tls cert -ca -file=mycert" command.
@@ -227,11 +227,6 @@
           "length": "1",
           "interval": "2"
         }
-      },
-      "streamSettings": {
-        "sockopt": {
-          "tcpNoDelay": true
-        }
       }
     },
     {
@@ -251,7 +246,7 @@
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
-          {"type": "rand", "packet": "1250", "delay": "10"}
+          {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"}
         ]
       }            
     },
@@ -272,7 +267,7 @@
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
-          {"type": "rand", "packet": "1230", "delay": "10"}
+          {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"}
         ]
       }            
     }          
