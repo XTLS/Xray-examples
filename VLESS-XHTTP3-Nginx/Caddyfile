@@ -1,0 +1,9 @@
+example.com {
+	file_server * {
+		root /var/www/html
+	}
+
+	reverse_proxy /path/* unix+h2c//dev/shm/xrxh.socket {
+		flush_interval -1
+	}
+}
