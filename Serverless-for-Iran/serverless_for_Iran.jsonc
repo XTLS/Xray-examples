@@ -1,7 +1,7 @@
 // Configs here can not contain "bypassing sanctions" contents (inappropriate on US GitHub)
 // Please join the official Xray Iranian group https://t.me/projectXhttp to get the whole working configs
 
-// Serverless for Iran v2
+// Serverless for Iran v3
 // Xray-core v25.2.21+
 
 // Bypass censorship using TCP/TLS fragment and UDP noises.
@@ -111,11 +111,6 @@
           "length": "1",
           "interval": "2"
         }
-      },
-      "streamSettings": {
-        "sockopt": {
-          "tcpNoDelay": true
-        }
       }
     },
     {
@@ -135,7 +130,7 @@
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
           {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"},
-          {"type": "rand", "packet": "1250", "delay": "10"}
+          {"type": "rand", "packet": "1250", "delay": "10"}, {"type": "rand", "packet": "1250", "delay": "10"}
         ]
       }            
     },
@@ -156,7 +151,7 @@
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
           {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"},
-          {"type": "rand", "packet": "1230", "delay": "10"}
+          {"type": "rand", "packet": "1230", "delay": "10"}, {"type": "rand", "packet": "1230", "delay": "10"}
         ]
       }            
     }          
