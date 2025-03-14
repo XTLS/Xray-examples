@@ -55,7 +55,7 @@
         "security": "tls",
         "tlsSettings": {
           "alpn": [
-            "h3"
+            "h3" //如遇到性能远不及预期并且 log 伴随“QUIC flood detected”，可参考：https://github.com/XTLS/Xray-core/discussions/4197
           ]
         }
       }
