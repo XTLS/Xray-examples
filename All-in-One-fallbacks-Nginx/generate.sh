@@ -45,15 +45,15 @@ Help()
     echo "Please read the contents of this file and change all the required fields."
     echo "*************************************************************************"
     echo "*************************************************************************"
-    echo 
-    echo 
+    echo
+    echo
     echo "Commands"
     echo
     echo "m     Make and store the configs in result.txt."
     echo "r     Revert all the changes."
     echo "q     Print the qr codes of configs in terminal. Run this after running with -m."
     echo "b     Print one base64 link for all configs in terminal.  Run this after running with -m."
-    echo 
+    echo
     echo
     echo "Usage: "
     echo
@@ -63,7 +63,7 @@ Help()
 
 Revert()
 {
-    git restore client.configs/* server.json nginx.conf
+    git restore client.configs/* server.jsonc nginx.conf
 }
 
 Make()
@@ -71,28 +71,28 @@ Make()
     #################################
     #         main domain           #
     #################################
-    sed -i "s/$fake_domain_crt_path/$main_domain_crt/g" server.json client.configs/* nginx.conf
-    sed -i "s/$fake_domain_key_path/$main_domain_key/g" server.json client.configs/* nginx.conf
-    sed -i "s/$fake_domain/$main_domain/g" server.json client.configs/* nginx.conf
-    
+    sed -i "s/$fake_domain_crt_path/$main_domain_crt/g" server.jsonc client.configs/* nginx.conf
+    sed -i "s/$fake_domain_key_path/$main_domain_key/g" server.jsonc client.configs/* nginx.conf
+    sed -i "s/$fake_domain/$main_domain/g" server.jsonc client.configs/* nginx.conf
+
     #################################
     #       behind cdn domain       #
     #################################
     if [ "$cdn_domain" == "" ]; then
         echo "No domain behind cdn set. Removing related fields."
-        sed -i "146 s/.$//" server.json
-        sed -i "147,152d" server.json
+        sed -i "146 s/.$//" server.jsonc
+        sed -i "147,152d" server.jsonc
     fi
-    
-    sed -i "s/$fake_cdn_domain_crt_path/$cdn_domain_crt/g" server.json client.configs/* nginx.conf
-    sed -i "s/$fake_cdn_domain_key_path/$cdn_domain_key/g" server.json client.configs/* nginx.conf
-    sed -i "s/$fake_cdn_domain/$cdn_domain/g" server.json client.configs/* nginx.conf
+
+    sed -i "s/$fake_cdn_domain_crt_path/$cdn_domain_crt/g" server.jsonc client.configs/* nginx.conf
+    sed -i "s/$fake_cdn_domain_key_path/$cdn_domain_key/g" server.jsonc client.configs/* nginx.conf
+    sed -i "s/$fake_cdn_domain/$cdn_domain/g" server.jsonc client.configs/* nginx.conf
 
     #################################
     #          uuid/pass            #
     #################################
-    sed -i "s/$fakeid/$myid/g" server.json client.configs/* nginx.conf
-    sed -i "s/$fakepass/$mypass/g" server.json client.configs/* nginx.conf
+    sed -i "s/$fakeid/$myid/g" server.jsonc client.configs/* nginx.conf
+    sed -i "s/$fakepass/$mypass/g" server.jsonc client.configs/* nginx.conf
 
     #################################
     #           configs             #
@@ -125,19 +125,19 @@ Printqr()
 {
     while read line; do
         export t=`echo $line | cut -c -2`
-        if [ "$t" == "vm" ]; then  
+        if [ "$t" == "vm" ]; then
             echo $line | cut -c 9- | base64 -d | grep "\"ps\":" | sed -n -e 's/"ps": "//p' | sed -n -e 's/",//p' | sed -n -e 's/ *//p'
             curl qrcode.show -d $line
         else
             echo $line | sed -n -e 's/^.*#//p'
             curl qrcode.show -d $line
-        fi 
+        fi
     done < result.txt
 }
 
 while getopts "mrqb" option; do
     case $option in
-        r) 
+        r)
             Revert
             exit;;
         m)
@@ -150,7 +150,7 @@ while getopts "mrqb" option; do
             Printqr
             exit;;
 
-        \?) 
+        \?)
             Help
             exit;;
     esac
