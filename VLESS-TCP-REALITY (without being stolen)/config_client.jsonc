@@ -5,7 +5,7 @@
     },
     "inbounds": [
         {
-            "listen": "127.0.0.1", 
+            "listen": "::1", 
             "port": 10808, 
             "protocol": "socks",
             "settings": {
@@ -28,7 +28,7 @@
             "settings": {
                 "vnext": [
                     {
-                        "address": "127.0.0.1", 
+                        "address": "::1", 
                         "port": 443, 
                         "users": [
                             {

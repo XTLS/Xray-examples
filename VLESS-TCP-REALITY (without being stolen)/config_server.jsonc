@@ -8,7 +8,7 @@
             "port": 443,
             "protocol": "dokodemo-door",
             "settings": {
-                "address": "127.0.0.1",
+                "address": "::1",
                 "port": 4431,  // 指向内网中的 reality 端口，示例是这个端口，如果要自己修改了记得这里和下面的 reality 入站都要修改
                 "network": "tcp"
             },
@@ -21,7 +21,7 @@
             }
         },
         {
-            "listen": "127.0.0.1",
+            "listen": "::1",
             "port": 4431, // 见上 如果和其他服务冲突了可以换
             "protocol": "vless",
             "settings": {

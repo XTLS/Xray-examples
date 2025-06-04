@@ -10,7 +10,7 @@
                 ]
             },
             "port": 10808,
-            "listen": "127.0.0.1",
+            "listen": "::1",
             "protocol": "socks",
             "settings": {
                 "udp": true

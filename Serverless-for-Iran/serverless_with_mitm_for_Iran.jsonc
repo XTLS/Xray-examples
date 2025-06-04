@@ -109,14 +109,14 @@
       "tag": "redirect-out-h11",
       "protocol": "freedom",
       "settings": {
-        "redirect": "127.0.0.1:4431"
+        "redirect": "[::1]:4431"
       }
     },
     {
       "tag": "redirect-out-h211",
       "protocol": "freedom",
       "settings": {
-        "redirect": "127.0.0.1:4432"
+        "redirect": "[::1]:4432"
       }
     },
     {
