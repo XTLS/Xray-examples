@@ -6,6 +6,6 @@ xx.com {
     file_server
     tls CA.crt priv.key # 换成你的证书和私钥，绝对路径
     
-    reverse_proxy /path h2c://127.0.0.1:2001 {
+    reverse_proxy /path h2c://[::1]:2001 {
     }
 }

@@ -1,5 +1,5 @@
 localhost:443 {
 	handle /split/* {
-		reverse_proxy http://127.0.0.1:1234
+		reverse_proxy http://[::1]:1234
 	}
 }

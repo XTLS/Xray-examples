@@ -6,7 +6,7 @@
         // 请求在该入站中被解密
         {
             "port": 4431,
-            "listen": "127.0.0.1",
+            "listen": "::1",
             "tag": "tls-decrypt",
             "protocol": "dokodemo-door",
             "settings": {
@@ -40,7 +40,7 @@
         // 真正用到的入站
         {
             "port": 10801,
-            "listen": "127.0.0.1",
+            "listen": "::1",
             "tag": "socks-in",
             "protocol": "socks",
             "sniffing": {
@@ -59,7 +59,7 @@
             "tag": "redirect-out",
             "protocol": "freedom",
             "settings": {
-                "redirect": "127.0.0.1:4431"
+                "redirect": "[::1]:4431"
             }
         },
         // 明文请求在这里被重新加密为正常 HTTPS 请求

@@ -27,11 +27,11 @@
   },
   "inbounds": [
     {
-      "listen": "127.0.0.1",
+      "listen": "::1",
       "port": 62789,
       "protocol": "dokodemo-door",
       "settings": {
-        "address": "127.0.0.1"
+        "address": "::1"
       },
       "tag": "api",
       "sniffing": null
@@ -257,7 +257,7 @@
     },
     {
       "tag": "shadowsocks-ws",
-      "listen": "127.0.0.1",
+      "listen": "::1",
       "port": 4001,
       "protocol": "shadowsocks",
       "settings": {
@@ -394,7 +394,7 @@
     },
     {
       "tag": "shadowsocks-tcp",
-      "listen": "127.0.0.1",
+      "listen": "::1",
       "port": 4002,
       "protocol": "shadowsocks",
       "settings": {
@@ -430,7 +430,7 @@
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     {
       "tag": "trojan-grpc",
-      "listen": "127.0.0.1", // listen on localhost
+      "listen": "::1", // listen on localhost
       "port": 3001,
       "protocol": "trojan",
       "settings": {
@@ -452,7 +452,7 @@
     },
     {
       "tag": "vless-grpc",
-      "listen": "127.0.0.1", // listen on localhost
+      "listen": "::1", // listen on localhost
       "port": 3002,
       "protocol": "vless",
       "settings": {
@@ -475,7 +475,7 @@
     },
     {
       "tag": "vmess-grpc",
-      "listen": "127.0.0.1", // listen on localhost
+      "listen": "::1", // listen on localhost
       "port": 3003,
       "protocol": "vmess",
       "settings": {
@@ -496,7 +496,7 @@
       }
     },
     {
-      "listen": "127.0.0.1", //Only listen on localhost
+      "listen": "::1", //Only listen on localhost
       "port": 3004,
       "protocol": "shadowsocks",
       "settings": {
@@ -599,7 +599,7 @@
     },
     {
       "tag": "shadowsocks-h2",
-      "listen": "127.0.0.1",
+      "listen": "::1",
       "port": 4003,
       "protocol": "shadowsocks",
       "settings": {
@@ -692,7 +692,7 @@
       "tag": "DNS-Internal",
       "protocol": "dns",
       "settings": {
-        "address": "127.0.0.53",
+        "address": "::1",
         "port": 53
       }
     }

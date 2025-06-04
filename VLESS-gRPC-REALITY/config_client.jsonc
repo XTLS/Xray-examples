@@ -8,7 +8,7 @@
         {
             "tag": "socks",
             "port": 800,
-            "listen": "127.0.0.1",
+            "listen": "::1",
             "protocol": "socks",
             "sniffing": {
                 "enabled": true,
@@ -24,7 +24,7 @@
         {
             "tag": "http",
             "port": 801,
-            "listen": "127.0.0.1",
+            "listen": "::1",
             "protocol": "http",
             "sniffing": {
                 "enabled": true,
@@ -113,7 +113,7 @@
                 "id": "5708766234462982042",
                 "type": "field",
                 "outboundTag": "direct",
-                "ip": ["127.0.0.1", "192.168.1.1"],
+                "ip": ["::1", "192.168.1.1"],
                 "enabled": true
             },
             {

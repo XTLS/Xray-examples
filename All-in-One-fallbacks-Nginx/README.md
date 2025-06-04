@@ -32,7 +32,7 @@ The Vless-TCP-XTLS is the HTTPS entrypoint. For every incoming request after doi
 * If **ALPN=HTTP2** and at the same time the **SNI=trh2o.example.com** then the request is passed to **@trojan-h2**.
 * In case of **ALPN=HTTP2**, it's first passed to **@trojan-tcp**. In trojan-tcp, if if it's not a valid request(for example the trojan password is wrong), another fallback is set, to once more pass the request to Nginx HTTP2 Unix Domain Socket and a decory website is served. When the request is using HTTP2, it could also be gRPC, so that is also checked in Nginx. This is how a VMESS-gRPC request is processed:
 
-VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallback to xray trojan-tcp ------> fallback to nginx /dev/shm/h2c.sock ---**path=/vmgrpc**---> grpc_pass to xray vmess-gRPC listener on 127.0.0.1:3003
+VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallback to xray trojan-tcp ------> fallback to nginx /dev/shm/h2c.sock ---**path=/vmgrpc**---> grpc_pass to xray vmess-gRPC listener on [::1]:3003
 
 ## What to change before use?
 * Xray server.json
@@ -61,7 +61,7 @@ VMESS-gRPC Request ------> Xray Vless-TCP-XTLS(443) ----**alpn=h2**----> fallbac
 
 ## Notes:
 * Tested with **Xray 1.7.2** (Xray, Penetrates Everything.) Custom (go1.19.4 linux/amd64)
-* For a little better performance, a DNS Cache could be setup (on 127.0.0.53 in this case) and used for resolving DNS queries. To enable xray to use it uncomment the corresponding rule from the `routing.settings.rules` in server.json.
+* For a little better performance, a DNS Cache could be setup (on ::1 in this case) and used for resolving DNS queries. To enable xray to use it uncomment the corresponding rule from the `routing.settings.rules` in server.json.
 * Multiple domains could be used at the same time, including domains behind cloudflare CDN. (For cloudflare, make sure websocket and gRPC are enabled in Network section). In this configuration these domains are **example.com** and **behindcdn.com**
 * HTTP2 inbounds (Trojan-H2, Vless-H2, VMESS-H2 and ShadowSocks-H2)
     * [HTTP2 Transport does not support fallback based on `path`](https://xtls.github.io/config/transports/h2.html#http-2). That's why SNI is used instead.
