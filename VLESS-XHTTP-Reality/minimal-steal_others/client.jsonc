@@ -1,0 +1,63 @@
+{
+    "routing": {
+        "rules": [
+            {
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "direct"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "127.0.0.1",
+            "port": 10808,
+            "protocol": "socks"
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "", // 服务端的域名或 IP
+                        "port": 443, // 填入配置服务器入站时设定的监听端口
+                        "users": [
+                            {
+                                "id": "", // 与服务端一致
+                                "encryption": "none",
+                                "flow": ""
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "xhttp",
+                "xhttpSettings": {
+                    "path": "/yourpath" // 与服务端一致
+                },
+                "security": "reality",
+                "realitySettings": {
+                    "serverName": "", // 在服务端所设serverNames列表中选择一个填入
+                    "publicKey": "", // 服务端执行 xray x25519 生成，私钥对应的公钥，填 "Public key" 的值
+                    "shortId": "", // 服务端 shortIds 之一
+                    "spiderX": "/somepath", // 爬虫初始路径与参数，建议每个客户端不同
+                    "fingerprint": "chrome" // 使用 uTLS 库模拟客户端 TLS 指纹。，为强调而保留。
+                }
+            },
+            "tag": "proxy"
+        },
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+
+    ]
+}

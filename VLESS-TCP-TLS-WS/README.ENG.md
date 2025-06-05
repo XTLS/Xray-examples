@@ -1,5 +1,11 @@
 # VLESS over TCP with TLS + fallback & split to WebSocket (advanced configuration)
 
+## Caution
+
+**This configuration was tagged as recommended, however https://github.com/XTLS/Xray-core/issues/1750#issuecomment-1459469821 had mentioned its vulnerabilities and it should be tagged as <u>deprecated</u>.**
+
+## Original Content
+
 This is a superset of [Minimal Configuration](<../VLESS-TCP-TLS%20(minimal%20by%20rprx)>), using the powerful fallback and distribution features of VLESS, it realizes port 443 VLESS over TCP with TLS and Perfect coexistence of any WSS
 
 This configuration is for reference. You can replace VLESS on WS with any other protocol such as VMess, and set more PATHs and protocol coexistence.
