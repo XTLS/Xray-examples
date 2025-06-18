@@ -25,7 +25,7 @@
     },
     "inbounds": [
         {
-            "listen": "127.0.0.1", // Fill in 0.0.0.0 to allow connections from LAN
+            "listen": "::1", // Fill in 0.0.0.0 to allow connections from LAN
             "port": 10808, // local socks listening port
             "protocol": "socks",
             "settings": {
@@ -40,7 +40,7 @@
             }
         },
         {
-            "listen": "127.0.0.1", // Fill in "0.0.0.0" to allow connections from LAN
+            "listen": "::1", // Fill in "0.0.0.0" to allow connections from LAN
             "port": 10809, // Local http listening port
             "protocol": "http",
             "sniffing": {

@@ -60,7 +60,7 @@
     {
       "tag": "externalws",
       "port": 65511,
-      "listen": "127.0.0.1",
+      "listen": "::1",
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -84,7 +84,7 @@
     {
       "tag": "interconn",
       "port": 65510,
-      "listen": "127.0.0.1",
+      "listen": "::1",
       "protocol": "vless",
       "settings": {
         "clients": [
