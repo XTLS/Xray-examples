@@ -41,7 +41,7 @@
             "users": [
               {
                 "id": "", // 填写你的 UUID
-                "flow": "xtls-rprx-direct",
+                "flow": "xtls-rprx-vision",
                 "encryption": "none",
                 "level": 0
               }
@@ -51,8 +51,8 @@
       },
       "streamSettings": {
         "network": "tcp",
-        "security": "xtls",
-        "xtlsSettings": {
+        "security": "tls",
+        "tlsSettings": {
           "serverName": "reverse.example" // 换成你的域名
         }
       }

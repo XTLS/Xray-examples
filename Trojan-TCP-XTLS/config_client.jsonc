@@ -30,7 +30,7 @@
                 "servers": [
                     {
                         "address": "example.com",  // your domain name or server IP
-                        "flow": "xtls-rprx-direct",  // Linux or android can be changed to "xtls-rprx-splice"
+                        "flow": "xtls-rprx-vision",  // Linux or android can be changed to "xtls-rprx-splice"
                         "port": 443,
                         "password": "your_password"  // your password
                     }
@@ -38,8 +38,8 @@
             },
             "streamSettings": {
                 "network": "tcp",
-                "security": "xtls",
-                "xtlsSettings": {
+                "security": "tls",
+                "tlsSettings": {
                     "serverName": "example.com"  // your domain name
                 }
             }

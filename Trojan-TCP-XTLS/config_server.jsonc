@@ -10,7 +10,7 @@
                 "clients": [
                     {
                         "password":"your_password",  // password
-                        "flow": "xtls-rprx-direct"
+                        "flow": "xtls-rprx-vison"
                     }
                 ],
                 "fallbacks": [
@@ -27,8 +27,8 @@
             },
             "streamSettings": {
                 "network": "tcp",
-                "security": "xtls",
-                "xtlsSettings": {
+                "security": "tls",
+                "tlsSettings": {
                     "alpn": [
                         "http/1.1",
                         "h2"
