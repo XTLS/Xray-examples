@@ -28,7 +28,7 @@
                     }
                 ],
                 "udp": true,
-                "ip": "::1"
+                "ip": "127.0.0.1"
             },
             "streamSettings": {
                 "network": "tcp",
