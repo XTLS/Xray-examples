@@ -1,0 +1,116 @@
+{
+    "log": {
+        "loglevel": "debug",
+        "access": "/var/log/xray/access.log",
+        "error": "/var/log/xray/error.log"
+    },
+    "inbounds": [
+        {
+            "tag": "dokodemo-in",
+            "port": 443,
+            "protocol": "dokodemo-door",
+            "settings": {
+                "address": "127.0.0.1",
+                "port": 4431,  // 指向内网中的 reality 端口，示例是这个端口，如果要自己修改了记得这里和下面的 reality 入站都要修改
+                "network": "tcp"
+            },
+            "sniffing": { // 这里的 sniffing 不是多余的，别乱动
+                "enabled": true,
+                "destOverride": [
+                    "tls"
+                ],
+                "routeOnly": true
+            }
+        },
+        {
+            "tag": "vless"
+            "listen": "127.0.0.1",
+            "port": 4431, // 见上 如果和其他服务冲突了可以换
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "flow": "xtls-rprx-vision",
+                        "id": "uuid-uuiduuiduuid-uuid" // uuid
+                    }
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    // 下方要求和普通 reality 一致，这里演示 dest 设置为 cloudflare 不被偷跑流量所以设置为 speed.cloudflare.com 了
+                    // 你可以设置为其他 CF 网站，如果你的 dest 不是这种网站你也不用点了进来不是吗
+                    "dest": "speed.cloudflare.com:443",
+                    "serverNames": [
+                        "speed.cloudflare.com"
+                    ],
+                    "privateKey": "", // 运行 `xray x25519` 生成
+                    "shortIds": [
+                        "",
+                        "0123456789abcdef"
+                    ]
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ],
+                "routeOnly": true
+            }
+        }
+    ],
+    "outbounds": [
+        {   "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "shadowsocks",
+            "settings": {
+                        "servers": [
+                         {
+                                 "address": "a.b.c.d",
+                                 "port": 12345,
+                                 "method": "",  //choose from "2022-blake3-aes-256-gcm", "2022-blake3-aes-128-gcm", etc.
+                                 "password": ""
+                         }
+                        ]
+             },
+            "tag": "ss-out"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ],
+    "routing": {
+        "rules": [
+            {
+                "inboundTag": [
+                    "dokodemo-in"
+                ],
+                // 重要，这个域名列表需要和 realitySettings 的 serverNames 保持一致
+                "domain": [
+                    "speed.cloudflare.com"
+                ],
+                "outboundTag": "direct"
+            },
+            {
+                "inboundTag": [
+                    "dokodemo-in"
+                ],
+                "outboundTag": "block"
+            } //,
+//            {
+//                "inboundTag": [
+//                    "vless"
+//                ],
+//                "outboundTag": "ss-out"
+//            }
+        ]
+    }
+}
