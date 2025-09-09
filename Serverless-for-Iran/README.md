@@ -10,7 +10,7 @@ Bypass censorship using TCP/TLS fragment and UDP noises.
 
 It doesn't change your local IP, so it is not suitable for anonymity.
 
-# Serverless with MitM-Domain-Fronting for Iran (Xray-core v25.2.21+)
+# Serverless with MitM-Domain-Fronting for Iran (Xray-core v25.9.5+)
 
 Same as "Serverless for Iran" but use "DoH h2c + domain fronting" for DNS and MitM for these services that support domain fronting:
 * YouTube
