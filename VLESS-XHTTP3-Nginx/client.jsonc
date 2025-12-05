@@ -20,8 +20,8 @@
             "port": 443,
             "users": [
               {
-                  "id": "", //填写你的 UUID
-                  "encryption": "none"
+                "id": "", //填写你的 UUID
+                "encryption": "none"
               }
             ]
           }
@@ -75,7 +75,6 @@
     "domainStrategy": "IPOnDemand",
     "rules": [
       {
-        "type": "field",
         "ip": [
           "geoip:private"
         ],

@@ -2,20 +2,18 @@
     "routing": {
         "domainStrategy": "IPIfNonMatch",
         "rules": [
-           {
-               "type": "field",
-               "ip": [
-                   "geoip:cn"
-               ],
-               "outboundTag": "block"
-           },
-           {
-               "type": "field",
-               "domain": [
-                   "geosite:cn"
-               ],
-               "outboundTag": "block"
-           }
+            {
+                "ip": [
+                    "geoip:cn"
+                ],
+                "outboundTag": "block"
+            },
+            {
+                "domain": [
+                    "geosite:cn"
+                ],
+                "outboundTag": "block"
+            }
         ]
     },
     "inbounds": [
@@ -43,8 +41,8 @@
                     // 目标网站最低标准：国外网站，支持 TLSv1.3 与 H2，域名非跳转用（主域名可能被用于跳转到 www）。详见 https://github.com/XTLS/REALITY
                     "target": "example.com:443",
                     "serverNames": [
-                    // 客户端可用的 serverName 列表，暂不支持 * 通配符
-                    // 执行 xray tls ping 目标网站网址，填 "Allowed domains" 的值
+                        // 客户端可用的 serverName 列表，暂不支持 * 通配符
+                        // 执行 xray tls ping 目标网站网址，填 "Allowed domains" 的值
                     ],
                     "privateKey": "", // 执行 xray x25519 生成，填 "Private key" 的值
                     "shortIds": [ // 客户端可用的 shortId 列表，可用于区分不同的客户端
@@ -74,6 +72,5 @@
             "protocol": "blackhole",
             "tag": "block"
         }
-
     ]
 }

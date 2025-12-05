@@ -6,7 +6,6 @@
     "domainStrategy": "IPIfNonMatch",
     "rules": [
       {
-        "type": "field",
         "port": "0-65535",
         "outboundTag": "proxy"
       }

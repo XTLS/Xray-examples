@@ -51,7 +51,6 @@
         "domainStrategy": "AsIs",
         "rules": [
             {
-                "type": "field",
                 "ip": [
                     "geoip:private"
                 ],

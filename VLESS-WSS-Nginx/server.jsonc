@@ -5,7 +5,7 @@
   "inbounds": [
     {
       "listen": "127.0.0.1",
-      "port": 1234 ,
+      "port": 1234,
       "protocol": "vless",
       "settings": {
         "clients": [
@@ -21,13 +21,13 @@
           "path": "/Path2WS" // 填写你的 path
         }
       },
-			"sniffing": {
-				"enabled": true,
-				"destOverride": [
-					"http",
-					"tls"
-				]
-			}
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      }
     }
   ],
   "outbounds": [
@@ -46,7 +46,6 @@
     "domainStrategy": "IPIfNonMatch",
     "rules": [
       {
-        "type": "field",
         "ip": [
           "geoip:cn",
           "geoip:private"

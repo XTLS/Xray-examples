@@ -6,14 +6,14 @@
         "domainStrategy": "IPIfNonMatch",
         "rules": [
             {
-                "type": "field",
                 "port": "80",
                 "network": "udp",
                 "outboundTag": "block"
             },
             {
-                "type": "field",
-                "ip": ["geoip:private"],
+                "ip": [
+                    "geoip:private"
+                ],
                 "outboundTag": "block"
             }
         ]
@@ -39,9 +39,14 @@
                     "show": false,
                     "dest": "www.yahoo.com:443",
                     "xver": 0,
-                    "serverNames": ["www.yahoo.com", "news.yahoo.com"],
+                    "serverNames": [
+                        "www.yahoo.com",
+                        "news.yahoo.com"
+                    ],
                     "privateKey": "kOsBHSgxhAfCeQIQyJvupiXTmQrMmsqi6y6Wc5OQZXc",
-                    "shortIds": ["d49d578f280fd83a"]
+                    "shortIds": [
+                        "d49d578f280fd83a"
+                    ]
                 },
                 "grpcSettings": {
                     "serviceName": ""
@@ -49,7 +54,11 @@
             },
             "sniffing": {
                 "enabled": true,
-                "destOverride": ["http", "tls", "quic"]
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic"
+                ]
             }
         }
     ],

@@ -1,72 +1,73 @@
 {
-  "log":{},
-  "inbounds":[
+  "log": {},
+  "inbounds": [
     {
-      "port":"1080",
-      "protocol":"socks",
-      "settings":{
-        "auth":"noauth",
-        "udp":true
+      "port": "1080",
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true
       }
     },
     {
-      "port":"1081",
-      "protocol":"http",
-      "settings":{}
+      "port": "1081",
+      "protocol": "http",
+      "settings": {}
     }
   ],
-  "outbounds":[
+  "outbounds": [
     {
-      "protocol":"vless",
-      "settings":{
-        "vnext":[
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
           {
-            "address":"xx.com",
-            "port":443,
-            "users":[
+            "address": "xx.com",
+            "port": 443,
+            "users": [
               {
-                "id":"",
-                "encryption":"none"
+                "id": "",
+                "encryption": "none"
               }
             ]
           }
         ]
       },
-      "streamSettings":{
-        "network":"http",
-        "security":"tls",
-        "httpSettings":{
-          "host":[
+      "streamSettings": {
+        "network": "http",
+        "security": "tls",
+        "httpSettings": {
+          "host": [
             "xx.com"
           ],
-          "path":"/path"
+          "path": "/path"
         }
       },
-      "tlsSettings":{
-        "alpn":["h3"],
-        "serverName":"xx.com"
+      "tlsSettings": {
+        "alpn": [
+          "h3"
+        ],
+        "serverName": "xx.com"
       }
     },
     {
-      "tag":"direct",
-      "protocol":"freedom",
-      "settings":{}
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
     },
     {
-      "tag":"blocked",
-      "protocol":"blackhole",
-      "settings":{}
+      "tag": "blocked",
+      "protocol": "blackhole",
+      "settings": {}
     }
   ],
-  "routing":{
-    "domainStrategy":"IPOnDemand",
-    "rules":[
+  "routing": {
+    "domainStrategy": "IPOnDemand",
+    "rules": [
       {
-        "type":"field",
-        "ip":[
+        "ip": [
           "geoip:private"
         ],
-        "outboundTag":"direct"
+        "outboundTag": "direct"
       }
     ]
   }

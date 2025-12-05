@@ -115,7 +115,6 @@
   "routing": {
     "rules": [
       {
-        "type": "field",
         "inboundTag": [
           "external",
           "externalws"
@@ -128,7 +127,6 @@
         "outboundTag": "portal"
       },
       {
-        "type": "field",
         "inboundTag": [
           "interconn"
         ],
@@ -137,7 +135,6 @@
       },
       // 以下路由只会在第一条路由没被匹配到的情况下使用，因此无需额外处理
       {
-        "type": "field",
         "port": "0-65535",
         "outboundTag": "direct"
       }

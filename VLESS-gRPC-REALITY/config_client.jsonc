@@ -12,7 +12,10 @@
             "protocol": "socks",
             "sniffing": {
                 "enabled": true,
-                "destOverride": ["http", "tls"],
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
                 "routeOnly": false
             },
             "settings": {
@@ -28,7 +31,10 @@
             "protocol": "http",
             "sniffing": {
                 "enabled": true,
-                "destOverride": ["http", "tls"],
+                "destOverride": [
+                    "http",
+                    "tls"
+                ],
                 "routeOnly": false
             },
             "settings": {
@@ -104,23 +110,27 @@
         "domainStrategy": "AsIs",
         "rules": [
             {
-                "type": "field",
-                "inboundTag": ["api"],
+                "inboundTag": [
+                    "api"
+                ],
                 "outboundTag": "api",
                 "enabled": true
             },
             {
                 "id": "5708766234462982042",
-                "type": "field",
                 "outboundTag": "direct",
-                "ip": ["127.0.0.1", "192.168.1.1"],
+                "ip": [
+                    "127.0.0.1",
+                    "192.168.1.1"
+                ],
                 "enabled": true
             },
             {
                 "id": "4875564606963903266",
-                "type": "field",
                 "outboundTag": "proxy",
-                "domain": ["dns.digitalsize.net"],
+                "domain": [
+                    "dns.digitalsize.net"
+                ],
                 "enabled": true
             }
         ]

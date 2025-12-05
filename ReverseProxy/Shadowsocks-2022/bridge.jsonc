@@ -37,7 +37,6 @@
   "routing": {
     "rules": [
       {
-        "type": "field",
         "inboundTag": [
           "bridge"
         ],
@@ -47,7 +46,6 @@
         "outboundTag": "interconn"
       },
       {
-        "type": "field",
         "inboundTag": [
           "bridge"
         ],
