@@ -42,7 +42,8 @@
       "protocol": "vless",
       "settings": {
         "clients": [
-          {  "email": "general@vless-tcp-xtls", //Change to your own email
+          {
+            "email": "general@vless-tcp-xtls", //Change to your own email
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own email
             "flow": "xtls-rprx-vision",
             "level": 0
@@ -175,10 +176,10 @@
       "protocol": "vless",
       "settings": {
         "clients": [
-          { "email":"general@vless-ws", //Change to your own email
+          {
+            "email": "general@vless-ws", //Change to your own email
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own UUID
             "level": 0
-
           }
         ],
         "decryption": "none"
@@ -205,7 +206,7 @@
       "settings": {
         "clients": [
           {
-            "email": "general@vmess-ws", 
+            "email": "general@vmess-ws",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
             "level": 0
           }
@@ -233,7 +234,7 @@
       "settings": {
         "clients": [
           {
-            "email":"general@trojan-ws",
+            "email": "general@trojan-ws",
             "password": "desdemona99",
             "level": 0
           }
@@ -261,7 +262,7 @@
       "port": 4001,
       "protocol": "shadowsocks",
       "settings": {
-        "email":"general@shadowsocks-ws",
+        "email": "general@shadowsocks-ws",
         "method": "chacha20-ietf-poly1305",
         "password": "desdemona99",
         "level": 0
@@ -290,7 +291,7 @@
       "settings": {
         "clients": [
           {
-            "email":"general@trojan-tcp",
+            "email": "general@trojan-tcp",
             "password": "desdemona99",
             "level": 0
           }
@@ -324,9 +325,9 @@
       "settings": {
         "clients": [
           {
-            "email":"general@vless-tcp",
+            "email": "general@vless-tcp",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
-            "level": 0 
+            "level": 0
           }
         ],
         "decryption": "none"
@@ -360,7 +361,7 @@
       "settings": {
         "clients": [
           {
-            "email":"general@vmess-tcp",
+            "email": "general@vmess-tcp",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
             "level": 0
           }
@@ -401,7 +402,7 @@
         "method": "chacha20-ietf-poly1305",
         "password": "desdemona99",
         "email": "general@shadowsocks-tcp",
-        "level":0
+        "level": 0
       },
       "streamSettings": {
         "network": "tcp",
@@ -435,10 +436,10 @@
       "protocol": "trojan",
       "settings": {
         "clients": [
-          {            
+          {
             "email": "general@trojan-grpc",
             "password": "desdemona99",
-            "level":0
+            "level": 0
           }
         ]
       },
@@ -458,7 +459,7 @@
       "settings": {
         "clients": [
           {
-            "email":"general@vless-grpc",
+            "email": "general@vless-grpc",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
             "level": 0
           }
@@ -481,7 +482,7 @@
       "settings": {
         "clients": [
           {
-            "email":"general@vmess-grpc",
+            "email": "general@vmess-grpc",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own UUID
             "level": 0
           }
@@ -527,8 +528,8 @@
       "protocol": "trojan",
       "settings": {
         "clients": [
-          {             
-            "email":"general@trojan-h2",
+          {
+            "email": "general@trojan-h2",
             "password": "desdemona99",
             "level": 0
           }
@@ -548,7 +549,7 @@
       "settings": {
         "clients": [
           {
-            "email":"general@vless-h2",  //Change to your own email
+            "email": "general@vless-h2", //Change to your own email
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797", //Change to your own UUID
             "level": 0
           }
@@ -575,8 +576,8 @@
       "protocol": "vmess",
       "settings": {
         "clients": [
-          { 
-            "email":"general@vmess-h2",
+          {
+            "email": "general@vmess-h2",
             "id": "90e4903e-66a4-45f7-abda-fd5d5ed7f797",
             "level": 0
           }
@@ -704,26 +705,22 @@
         "inboundTag": [
           "api"
         ],
-        "outboundTag": "api",
-        "type": "field"
+        "outboundTag": "api"
       },
       // {
       //   // DNS Cache rule
-      //   "type": "field",
       //   "port": 53,
       //   "network": "tcp,udp",
       //   "outboundTag": "DNS-Internal"
       // },
       {
-        "type": "field",
         "outboundTag": "blocked",
         "ip": [
           "geoip:private"
         ]
       },
       {
-        "type": "field", // Block BitTorrent protocol
-        "outboundTag": "blocked",
+        "outboundTag": "blocked", // Block BitTorrent protocol
         "protocol": [
           "bittorrent"
         ]

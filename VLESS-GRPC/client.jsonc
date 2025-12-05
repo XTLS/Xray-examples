@@ -59,7 +59,6 @@
     "domainStrategy": "IPOnDemand",
     "rules": [
       {
-        "type": "field",
         "ip": [
           "geoip:private"
         ],

@@ -45,14 +45,12 @@
   "routing": {
     "rules": [
       {
-        "type": "field",
         "inboundTag": [
           "external"
         ],
         "outboundTag": "portal"
       },
       {
-        "type": "field",
         "inboundTag": [
           "interconn"
         ],

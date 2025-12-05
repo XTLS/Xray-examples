@@ -8,14 +8,12 @@
                 "outboundTag": "direct"
             },
             {
-                "type": "field",
                 "ip": [
                     "geoip:cn"
                 ],
                 "outboundTag": "direct"
             },
             {
-                "type": "field",
                 "domain": [
                     "geosite:cn"
                 ],
@@ -72,6 +70,5 @@
             "protocol": "blackhole",
             "tag": "block"
         }
-
     ]
 }
