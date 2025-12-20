@@ -6,7 +6,7 @@
   "remarks": "Serverless",
 
   "version": {
-    "min": "25.9.5"
+    "min": "25.12.8"
   },
 
   "log": {
@@ -22,42 +22,53 @@
     }
   },
 
+  "fakedns": [
+    {
+      "ipPool": "198.19.0.0/16",
+      "poolSize": 65535
+    },
+    {
+      "ipPool": "fc00:2000::/19",
+      "poolSize": 65535
+    }
+  ],
+
   "dns":{
     "hosts": {
       "geosite:category-ads-all": "#3",
-      "one.one.one.one": ["1.1.1.1", "1.0.0.1", "2606:4700:4700::1111", "2606:4700:4700::1001"],
-      "cloudflare-dns.com": "www.cloudflare.com"
+      "cloudflare-dns.com": "challenges.cloudflare.com"
     },
     "servers": [
       {
         "address": "fakedns",
-        "domains": ["domain:ir", "geosite:private", "geosite:category-ir", "full:www.cloudflare.com"],
-        "finalQuery": true
+        "domains": ["domain:ir", "geosite:private", "geosite:category-ir", "full:challenges.cloudflare.com"]
       },
       {
         "tag": "no-filter-dns",
         "address": "https://cloudflare-dns.com/dns-query",
-        "timeoutMs": 5000,
+        "timeoutMs": 10000,
         "finalQuery": true
       },
       {
         "address": "localhost",
-        "domains": ["domain:ir", "geosite:private", "geosite:category-ir", "full:www.cloudflare.com"],
+        "domains": ["domain:ir", "geosite:private", "geosite:category-ir", "full:challenges.cloudflare.com"],
         "finalQuery": true
       }
     ],
     "queryStrategy": "UseSystem",
-    "useSystemHosts": true
+    "useSystemHosts": true,
+	"serveStale": true,
+    "serveExpiredTTL": 21600
   },
 
   "inbounds": [
     {
       "tag": "dns-in",
-      "listen": "127.0.0.1",
+      // "listen": "127.0.0.1",
       "port": 10853,
       "protocol": "tunnel",
       "settings": {
-        "address": "one.one.one.one",
+        "address": "127.0.0.1",
         "port": 53,
         "network": "tcp,udp"
       },
@@ -69,8 +80,8 @@
       }
     },
     {
-      "tag": "socks-in",
-      "listen": "127.0.0.1",
+      "tag": "mixed-in",
+      // "listen": "127.0.0.1",
       "port": 10808,
       "protocol": "mixed",
       "sniffing": {
@@ -97,27 +108,46 @@
       "protocol": "block"
     },
     {
-      "tag": "direct-out",
+      "tag": "tcp-direct-out",
       "protocol": "direct",
       "streamSettings": {
         "sockopt": {
           "domainStrategy": "ForceIP",
           "happyEyeballs": {
-            "tryDelayMs": 100,
+            "tryDelayMs": 300,
             "prioritizeIPv6": true,
             "interleave": 2,
-            "maxConcurrentTry": 16
+            "maxConcurrentTry": 20
           }
         }
       }
     },
+	{
+      "tag": "udp-direct-out",
+      "protocol": "direct",
+      "settings": {
+        "targetStrategy": "ForceIPv6v4"
+	  }
+	},
     {
       "tag": "dns-out",
       "protocol": "dns",
-      "settings": {"nonIPQuery": "skip", "network": "tcp", "address": "one.one.one.one", "port": 53},
+      "settings": {"nonIPQuery": "reject", "blockTypes": [0, 65]}
+    },
+	{
+      "tag": "tls-fragment",
+      "protocol": "direct",
+      "settings": {
+        "fragment": {
+          "packets": "tlshello",
+          "length": "6",
+          "interval": "0",
+          "maxSplit": "0"
+        }
+      },
       "streamSettings": {
         "sockopt": {
-          "dialerProxy": "full-fragment"
+          "dialerProxy": "full-fragment" // or "skip-fragment" (with different parameteres)
         }
       }
     },
@@ -128,7 +158,7 @@
         "fragment": {
           "packets": "1-1",
           "length": "130",
-          "interval": "190",
+          "interval": "560",
           "maxSplit": "4"
         }
       },
@@ -145,7 +175,7 @@
         "fragment": {
           "packets": "2-4",
           "length": "1",
-          "interval": "1",
+          "interval": "4",
           "maxSplit": "130"
         }
       },
@@ -156,7 +186,7 @@
             "tryDelayMs": 300,
             "prioritizeIPv6": true,
             "interleave": 2,
-            "maxConcurrentTry": 16
+            "maxConcurrentTry": 20
           }
         }
       }
@@ -168,7 +198,7 @@
         "fragment": {
           "packets": "1-1",
           "length": "1",
-          "interval": "1",
+          "interval": "4",
           "maxSplit": "517"
         }
       },
@@ -179,7 +209,7 @@
             "tryDelayMs": 300,
             "prioritizeIPv6": true,
             "interleave": 2,
-            "maxConcurrentTry": 16
+            "maxConcurrentTry": 20
           }
         }
       }
@@ -188,7 +218,7 @@
       "tag": "udp-noises",
       "protocol": "direct",
       "settings": {
-        "targetStrategy": "ForceIP", // or "ForceIPv6v4" to prefer IPv6
+        "targetStrategy": "ForceIPv6v4",
         "noises": [
           {"type": "rand", "packet": "1250", "delay": "10", "applyTo": "ipv4"}, {"type": "rand", "packet": "1250", "delay": "10", "applyTo": "ipv4"},
           {"type": "rand", "packet": "1250", "delay": "10", "applyTo": "ipv4"}, {"type": "rand", "packet": "1250", "delay": "10", "applyTo": "ipv4"},
@@ -223,49 +253,55 @@
     "domainStrategy": "IPOnDemand",
     "rules": [
       {"outboundTag": "block-out",
-        "domain": ["geosite:category-ads-all"]
-      },
-      {"outboundTag": "dns-out",
-        "inboundTag": ["dns-in"]
-      },
-      {"outboundTag": "dns-out",
-        "inboundTag": ["socks-in"], "port": 53
-      },
-      {"outboundTag": "full-fragment", // or "skip-fragment"
-        "inboundTag": ["no-filter-dns"]
+       "port": 0
       },
       {"outboundTag": "block-out",
-        "ip": ["0.0.0.0", "::"]
+       "domain": ["geosite:category-ads-all"]
       },
-      {"outboundTag": "direct-out",
-        "domain": ["domain:ir", "geosite:private", "geosite:category-ir"]
+      {"outboundTag": "dns-out",
+       "inboundTag": ["dns-in"]
       },
-      {"outboundTag": "direct-out",
-        "ip": ["geoip:private", "geoip:ir"]
+      {"outboundTag": "dns-out",
+       "inboundTag": ["mixed-in"], "port": 53
+      },
+      {"outboundTag": "full-fragment", // or "skip-fragment" or "tls-fragment"
+       "inboundTag": ["no-filter-dns"]
+      },
+      {"outboundTag": "block-out",
+       "ip": ["10.10.34.0/24", "2001:4188:2:600::/64", "0.0.0.0", "::", "198.19.0.0/16", "fc00:2000::/19"]
+      },
+      {"outboundTag": "tcp-direct-out",
+       "network": "tcp", "domain": ["domain:ir", "geosite:private", "geosite:category-ir"], "ip": ["0.0.0.0/0", "::/0"]
+      },
+	  {"outboundTag": "udp-direct-out",
+       "network": "udp", "domain": ["domain:ir", "geosite:private", "geosite:category-ir"], "ip": ["0.0.0.0/0", "::/0"]
+      },
+      {"outboundTag": "tcp-direct-out",
+       "network": "tcp", "ip": ["geoip:private", "geoip:ir"]
+      },
+	  {"outboundTag": "udp-direct-out",
+       "network": "udp", "ip": ["geoip:private", "geoip:ir"]
       },
       {"outboundTag": "udp-noises",
-        "network": "udp", "protocol": ["quic"]
+       "network": "udp", "protocol": ["quic"], "ip": ["0.0.0.0/0", "::/0"]
       },
       {"outboundTag": "udp-noises",
-        "network": "udp", "port": "443,2053,2083,2087,2096,8443"
+       "network": "udp", "port": "443", "ip": ["0.0.0.0/0", "::/0"]
       },
-      {"outboundTag": "direct-out",
-        "network": "udp"
+      {"outboundTag": "udp-direct-out",
+       "network": "udp", "ip": ["0.0.0.0/0", "::/0"]
       },
-      {"outboundTag": "full-fragment", // or "skip-fragment"
-        "network": "tcp", "protocol": ["tls"]
+      {"outboundTag": "full-fragment", // or "skip-fragment" or "tls-fragment"
+       "network": "tcp", "protocol": ["tls"], "ip": ["0.0.0.0/0", "::/0"]
       },
-      {"outboundTag": "full-fragment", // or "skip-fragment"
-        "network": "tcp", "port": "443,2053,2083,2087,2096,8443"
-      },
-      {"outboundTag": "full-fragment",
-        "network": "tcp", "protocol": ["http"]
+      {"outboundTag": "full-fragment", // or "skip-fragment" or "tls-fragment"
+       "network": "tcp", "port": "443", "ip": ["0.0.0.0/0", "::/0"]
       },
       {"outboundTag": "full-fragment",
-        "network": "tcp", "port": "80,8080,8880,2052,2082,2086,2095"
+       "network": "tcp", "ip": ["0.0.0.0/0", "::/0"]
       },
-      {"outboundTag": "full-fragment",
-        "network": "tcp"
+      {"outboundTag": "block-out",
+       "port": "0-65535"
       }
     ]
   }
