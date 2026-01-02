@@ -5,11 +5,13 @@
     "inbounds": [
         {
             "tag": "dokodemo-in",
-            "port": 443,
+            "port": 4431, // 任意空闲端口，如果要自己修改记得这里和下面的 reality 入站 dest 要同步修改
             "protocol": "dokodemo-door",
             "settings": {
-                "address": "127.0.0.1",
-                "port": 4431,  // 指向内网中的 reality 端口，示例是这个端口，如果要自己修改了记得这里和下面的 reality 入站都要修改
+                // reality dest 的实际设置位置 和普通 reality 要求相同
+                // 这里演示 dest 设置为 cloudflare 不被偷跑流量所以设置为 speed.cloudflare.com 了
+                "address": "speed.cloudflare.com",
+                "port": 443,
                 "network": "tcp"
             },
             "sniffing": { // 这里的 sniffing 不是多余的，别乱动
@@ -22,7 +24,7 @@
         },
         {
             "listen": "127.0.0.1",
-            "port": 4431, // 见上 如果和其他服务冲突了可以换
+            "port": 443,
             "protocol": "vless",
             "settings": {
                 "clients": [
@@ -36,9 +38,9 @@
                 "network": "tcp",
                 "security": "reality",
                 "realitySettings": {
-                    // 下方要求和普通 reality 一致，这里演示 dest 设置为 cloudflare 不被偷跑流量所以设置为 speed.cloudflare.com 了
-                    // 你可以设置为其他 CF 网站，如果你的 dest 不是这种网站你也不用点了进来不是吗
-                    "dest": "speed.cloudflare.com:443",
+                    // 指向前面设置的 dokodemo-door 入站
+                    "dest": "127.0.0.1:4431",
+                    // serverNames 仍然需要在这里正常填写
                     "serverNames": [
                         "speed.cloudflare.com"
                     ],
