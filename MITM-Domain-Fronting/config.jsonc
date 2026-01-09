@@ -26,7 +26,7 @@
                     "certificates": [
                         {
                             "usage": "issue",
-                            "buildChain": "true",
+                            "buildChain": true,
                             // 下面的证书和私钥使用 xray tls cert -ca 命令生成，或者你的自签名证书也行
                             // 这会生成一个 CA 证书，每个新的要被 MITM 网站请求都会单独用这个 CA 签发一张临时证书
                             // 所以你只需要在系统信任这一张证书就可以了，或者你可以忍得了浏览器的红标无视风险继续访问也行
