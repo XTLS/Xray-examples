@@ -4,6 +4,7 @@
     },
     "inbounds": [
         {
+            "listen": "127.0.0.1",
             "tag": "dokodemo-in",
             "port": 4431, // 任意空闲端口，如果要自己修改记得这里和下面的 reality 入站 dest 要同步修改
             "protocol": "dokodemo-door",
@@ -23,7 +24,7 @@
             }
         },
         {
-            "listen": "127.0.0.1",
+            "listen": "0.0.0.0",
             "port": 443,
             "protocol": "vless",
             "settings": {
