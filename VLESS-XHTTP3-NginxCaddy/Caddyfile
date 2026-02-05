@@ -1,6 +1,3 @@
-# VLESS-XHTTP3-NginxCaddy 配置示例
-# VLESS-XHTTP3-NginxCaddy Configuration Example
-
 example.com {
     # 1. TLS 证书配置 | TLS Certificate Configuration
     # 手动指定 TLS 证书路径。如果希望使用 Caddy 自动申请的 Let's Encrypt 证书，请注释掉下面这行。
