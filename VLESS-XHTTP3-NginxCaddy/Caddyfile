@@ -1,0 +1,38 @@
+example.com {
+    # 1. TLS 证书配置 | TLS Certificate Configuration
+    # 手动指定 TLS 证书路径。如果希望使用 Caddy 自动申请的 Let's Encrypt 证书，请注释掉下面这行。
+    # Manually specify TLS certificate paths. Comment out the following line to use Caddy's automatic Let's Encrypt certificate.
+    tls /path/to/example.cer /path/to/example.key
+
+    # 2. HTTP 协议配置 | HTTP Protocol Configuration
+    # Caddy 默认启用 h1, h2, h3。如果只启用 HTTP/3，请使用以下配置：
+    # Caddy enables h1, h2, h3 by default. To enable only HTTP/3, use the following:
+    protocols h3
+
+    # 3. Xray 反向代理 | Xray Reverse Proxy
+    # 反向代理至 Xray Unix Socket（通过 HTTP/2 Cleartext）
+    # Reverse proxy to Xray via Unix Socket (using HTTP/2 Cleartext)
+    # 注意：路径需要与 server.jsonc 中的 xhttpSettings.path 一致
+    # Note: The path must match xhttpSettings.path in server.jsonc
+    reverse_proxy /your-path/* unix+h2c//dev/shm/xrxh.socket {
+        # disable caddy reverse proxy buffer (see #195)
+        flush_interval -1
+    }
+
+    # 4. 回退服务 | Fallback Service
+    # 方案一：静态文件服务（默认）
+    # Option 1: Static file server (default)
+    # 当请求路径不匹配 /your-path/ 时，提供静态文件服务以伪装成正常网站
+    # Serve static files when the request path doesn't match /your-path/ to disguise as a normal website
+    file_server * {
+        root /var/www/html
+    }
+
+    # 方案二：反向代理到本地 HTTP 服务
+    # Option 2: Reverse proxy to local HTTP service
+    # 如果本机运行了其他 HTTP 服务（如博客、应用等），可以反向代理到对应端口
+    # If you have another HTTP service running locally (e.g., blog, application), proxy to it instead
+    # 使用方法：注释掉上面的 file_server 块，并取消注释下面这行
+    # Usage: Comment out the file_server block above and uncomment the following line
+    # reverse_proxy localhost:80
+}
