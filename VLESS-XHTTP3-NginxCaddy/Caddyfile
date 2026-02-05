@@ -15,6 +15,7 @@ example.com {
     # 注意：路径需要与 server.jsonc 中的 xhttpSettings.path 一致
     # Note: The path must match xhttpSettings.path in server.jsonc
     reverse_proxy /your-path/* unix+h2c//dev/shm/xrxh.socket {
+        # disable caddy reverse proxy buffer (see #195)
         flush_interval -1
     }
 
