@@ -15,19 +15,11 @@
       "tag": "interconn",
       "protocol": "vless",
       "settings": {
-        "vnext": [
-          {
-            "address": "reverse.example", // 换成你的域名或 IP
-            "port": 443,
-            "users": [
-              {
-                "id": "", // 填写你的 UUID
-                "encryption": "none",
-                "level": 0
-              }
-            ]
-          }
-        ]
+        "address": "reverse.example", // 换成你的域名或 IP
+        "port": 443,
+        "id": "", // 填写你的 UUID
+        "encryption": "none",
+        "level": 0
       },
       "streamSettings": {
         "network": "ws",

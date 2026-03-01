@@ -26,18 +26,10 @@
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "127.0.0.1", 
-                        "port": 443, 
-                        "users": [
-                            {
-                                "id": "", // Needs to match server side
-                                "encryption": "none"
-                            }
-                        ]
-                    }
-                ]
+                "address": "127.0.0.1",
+                "port": 443,
+                "id": "", // Needs to match server side
+                "encryption": "none"
             },
             "streamSettings": {
                 "network": "tcp",

@@ -16,18 +16,10 @@
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "{{ host }}",
-                        "port": {{ port }},
-                        "users": [
-                            {
-                                "id": "{{ uuid }}",
-                                "encryption": "none"
-                            }
-                        ]
-                    }
-                ]
+                "address": "{{ host }}",
+                "port": {{ port }},
+                "id": "{{ uuid }}",
+                "encryption": "none"
             },
             "streamSettings": {
                 "network": "kcp",

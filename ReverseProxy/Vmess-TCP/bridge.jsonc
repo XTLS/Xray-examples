@@ -15,17 +15,9 @@
       "tag": "interconn",
       "protocol": "vmess",
       "settings": {
-        "vnext": [
-          {
-            "address": "{{ protal.address }}",
-            "port": 65510,
-            "users": [
-              {
-                "id": "{{ uuid }}"
-              }
-            ]
-          }
-        ]
+        "address": "{{ protal.address }}",
+        "port": 65510,
+        "id": "{{ uuid }}"
       },
       "streamSettings": {
         "network": "tcp"

@@ -59,19 +59,11 @@ Typical use cases for proxying involve minimum requirements for target websites:
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "", // Server's domain or IP
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "", // Matching the server-side
-                                "flow": "xtls-rprx-vision", // Matching the server-side
-                                "encryption": "none"
-                            }
-                        ]
-                    }
-                ]
+                "address": "", // Server's domain or IP
+                "port": 443,
+                "id": "", // Matching the server-side
+                "flow": "xtls-rprx-vision", // Matching the server-side
+                "encryption": "none"
             },
             "streamSettings": {
                 "network": "tcp",

@@ -14,18 +14,10 @@
     {
       "protocol": "vless",
       "settings": {
-        "vnext": [
-          {
-            "address": "example.com",
-            "port": 443,
-            "users": [
-              {
-                "id": "", //填写你的 UUID
-                "encryption": "none"
-              }
-            ]
-          }
-        ]
+        "address": "example.com",
+        "port": 443,
+        "id": "", //填写你的 UUID
+        "encryption": "none"
       },
       "streamSettings": {
         "network": "xhttp",
