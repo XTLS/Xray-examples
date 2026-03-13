@@ -127,7 +127,7 @@
         "security": "tls",
         "tlsSettings": {
           "serverName": "www.microsoft.com",
-          "verifyPeerCertInNames": ["fromMitM", "www.microsoft.com"],
+          "verifyPeerCertByName": "fromMitM,www.microsoft.com",
           "alpn": ["fromMitM"],
           "fingerprint": "chrome"
         }
@@ -141,7 +141,7 @@
         "security": "tls",
         "tlsSettings": {
           "serverName": "www.google.com",
-          "verifyPeerCertInNames": ["fromMitM", "www.google.com", "dns.google", "www.googlevideo.com", "www.youtube.com"],
+          "verifyPeerCertByName": "fromMitM,www.google.com,dns.google,www.googlevideo.com,www.youtube.com",
           "alpn": ["fromMitM"],
           "fingerprint": "chrome"
         }
@@ -155,7 +155,7 @@
         "security": "tls",
         "tlsSettings": {
           "serverName": "www.whatsapp.com",
-          "verifyPeerCertInNames": ["fromMitM", "www.whatsapp.com", "www.facebook.com", "www.ar.meta.com", "www.fb.com", "www.whatsapp.net", "www.atlassolutions.com", "www.secure.facebook.com", "www.extern.facebook.com", "www.internet.org", "www.oculus.com", "www.wit.ai", "www.facebook-dns.com", "www.instagram.com", "www.meta.com", "www.external-disputes.meta.com", "www.fbe2e.com", "www.cloud.x2p.facebook.net", "www.secure.latest.facebook.com"],
+          "verifyPeerCertByName": "fromMitM,www.whatsapp.com,www.facebook.com,www.ar.meta.com,www.fb.com,www.whatsapp.net,www.atlassolutions.com,www.secure.facebook.com,www.extern.facebook.com,www.internet.org,www.oculus.com,www.wit.ai,www.facebook-dns.com,www.instagram.com,www.meta.com,www.external-disputes.meta.com,www.fbe2e.com,www.cloud.x2p.facebook.net,www.secure.latest.facebook.com",
           "alpn": ["fromMitM"],
           "fingerprint": "chrome"
         }
@@ -169,7 +169,7 @@
         "security": "tls",
         "tlsSettings": {
           "serverName": "www.fastly.com",
-          "verifyPeerCertInNames": ["fromMitM", "www.fastly.com", "www.reddit.com", "x.com"],
+          "verifyPeerCertByName": "fromMitM,www.fastly.com,www.reddit.com,x.com",
           "alpn": ["fromMitM"],
           "fingerprint": "chrome"
         }
