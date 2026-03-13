@@ -20,19 +20,11 @@
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "", // 服务端的域名或 IP
-                        "port": 443, // 填入配置服务器入站时设定的监听端口
-                        "users": [
-                            {
-                                "id": "", // 与服务端一致
-                                "encryption": "none",
-                                "flow": ""
-                            }
-                        ]
-                    }
-                ]
+                "address": "", // 服务端的域名或 IP
+                "port": 443, // 填入配置服务器入站时设定的监听端口
+                "id": "", // 与服务端一致
+                "encryption": "none",
+                "flow": ""
             },
             "streamSettings": {
                 "network": "xhttp",

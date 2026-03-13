@@ -25,19 +25,11 @@
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "", 
-                        "port": 443, 
-                        "users": [
-                            {
-                                "id": "", // Needs to match server side
-                                "encryption": "none",
-                                "flow": "xtls-rprx-vision"
-                            }
-                        ]
-                    }
-                ]
+                "address": "",
+                "port": 443,
+                "id": "", // Needs to match server side
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
             },
             "streamSettings": {
                 "network": "tcp",

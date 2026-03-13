@@ -34,17 +34,9 @@
         {
             "protocol": "vmess",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "",
-                        "port": 1234,
-                        "users": [
-                            {
-                                "id": ""
-                            }
-                        ]
-                    }
-                ]
+                "address": "",
+                "port": 1234,
+                "id": ""
             },
             "streamSettings": {
                 "network": "tcp"

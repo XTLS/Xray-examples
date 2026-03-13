@@ -49,22 +49,13 @@
             "tag": "proxy",
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "1.2.3.4", // Server IPv4
-                        "port": 80,
-                        "users": [
-                            {
-                                "id": "drEwvgYhS15C",
-                                "alterId": 0,
-                                "email": "t@t.tt",
-                                "security": "auto",
-                                "encryption": "none",
-                                "flow": ""
-                            }
-                        ]
-                    }
-                ]
+                "address": "1.2.3.4", // Server IPv4
+                "port": 80,
+                "id": "drEwvgYhS15C",
+                "email": "t@t.tt",
+                "security": "auto",
+                "encryption": "none",
+                "flow": ""
             },
             "streamSettings": {
                 "network": "grpc",

@@ -23,19 +23,11 @@
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "1.2.3.4",
-                        "port": 1234,
-                        "users": [
-                            {
-                                "id": "",
-                                "encryption": "none",
-                                "level": 0
-                            }
-                        ]
-                    }
-                ]
+                "address": "1.2.3.4",
+                "port": 1234,
+                "id": "",
+                "encryption": "none",
+                "level": 0
             },
             "streamSettings": {
                 "network": "tcp"

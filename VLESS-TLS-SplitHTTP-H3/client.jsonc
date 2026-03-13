@@ -21,18 +21,10 @@
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "example.com", // Change to your domain.
-                        "port": 443,
-                        "users": [
-                            {
-                                "id": "UUID", // Change to your UUID.
-                                "encryption": "none"
-                            }
-                        ]
-                    }
-                ]
+                "address": "example.com", // Change to your domain.
+                "port": 443,
+                "id": "UUID", // Change to your UUID.
+                "encryption": "none"
             },
             "streamSettings": {
                 "network": "splithttp",

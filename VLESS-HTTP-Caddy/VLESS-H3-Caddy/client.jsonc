@@ -19,18 +19,10 @@
     {
       "protocol": "vless",
       "settings": {
-        "vnext": [
-          {
-            "address": "xx.com",
-            "port": 443,
-            "users": [
-              {
-                "id": "",
-                "encryption": "none"
-              }
-            ]
-          }
-        ]
+        "address": "xx.com",
+        "port": 443,
+        "id": "",
+        "encryption": "none"
       },
       "streamSettings": {
         "network": "http",

@@ -16,18 +16,10 @@
       {
         "protocol": "vless",
         "settings": {
-          "vnext": [
-            {
-              "address": "",
-              "port": 443,
-              "users": [
-                {
-                  "id": "",
-                  "encryption": "none"
-                }
-              ]
-            }
-          ]
+          "address": "",
+          "port": 443,
+          "id": "",
+          "encryption": "none"
         },
         "streamSettings": {
           "network": "splithttp",

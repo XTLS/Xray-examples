@@ -16,17 +16,9 @@
         {
             "protocol": "vmess",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "{{ host }}",
-                        "port": "{{ port }}",
-                        "users": [
-                            {
-                                "id": "{{ uuid }}"
-                            }
-                        ]
-                    }
-                ]
+                "address": "{{ host }}",
+                "port": "{{ port }}",
+                "id": "{{ uuid }}"
             },
             "streamSettings": {
                 "network": "kcp",

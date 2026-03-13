@@ -34,18 +34,10 @@
         {
             "protocol": "vmess",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "",
-                        "port": 1234,
-                        "users": [
-                            {
-                                "id": "",
-                                "security": "none"
-                            }
-                        ]
-                    }
-                ]
+                "address": "",
+                "port": 1234,
+                "id": "",
+                "security": "none"
             },
             "streamSettings": {
                 "network": "ws",

@@ -54,19 +54,11 @@
         {
             "protocol": "vless",
             "settings": {
-                "vnext": [
-                    {
-                        "address": "", // Address, domain name or IP of the server
-                        "port": 443, // Port, consistent with the server
-                        "users": [
-                            {
-                                "id": "", // User ID, consistent with the server
-                                "encryption": "none",
-                                "flow": "xtls-rprx-vision"
-                            }
-                        ]
-                    }
-                ]
+                "address": "", // Address, domain name or IP of the server
+                "port": 443, // Port, consistent with the server
+                "id": "", // User ID, consistent with the server
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
             },
             "streamSettings": {
                 "network": "tcp",

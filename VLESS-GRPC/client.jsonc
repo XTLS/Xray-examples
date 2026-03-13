@@ -19,18 +19,10 @@
     {
       "protocol": "vless",
       "settings": {
-        "vnext": [
-          {
-            "address": "xx.com",
-            "port": 443,
-            "users": [
-              {
-                "id": "", //填写你的 UUID
-                "encryption": "none"
-              }
-            ]
-          }
-        ]
+        "address": "xx.com",
+        "port": 443,
+        "id": "", //填写你的 UUID
+        "encryption": "none"
       },
       "streamSettings": {
         "network": "grpc",
