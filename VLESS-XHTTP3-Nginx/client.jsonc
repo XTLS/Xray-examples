@@ -41,11 +41,17 @@
                 "hMaxReusableSecs": 3600 //Nginx 默认上限 3600s(1h)。https://nginx.org/en/docs/http/ngx_http_core_module.html#keepalive_time
               }
             },
-            "security": "tls"
+            "security": "tls",
+            "tlsSettings": {
+              "serverName": "example.com",
+              "fingerprint": "chrome"
+            }
           }
         },
         "security": "tls",
         "tlsSettings": {
+          "serverName": "example.com",
+          "fingerprint": "chrome",
           "alpn": [
             "h3" //如遇到性能远不及预期并且 log 伴随“QUIC flood detected”，可参考：https://github.com/XTLS/Xray-core/discussions/4197
           ]
