@@ -22,7 +22,8 @@
                 "network": "hysteria",
                 "security": "tls",
                 "tlsSettings": {
-                    "serverName": "114514" // SNI
+                    "serverName": "114514", // SNI
+                    "pinnedPeerCertSha256": "e8e2d387fdbffeb38e9c9065cf30a97ee23c0e3d32ee6f78ffae40966befccc9"
                 },
                 "hysteriaSettings": {
                     "version": 2,
