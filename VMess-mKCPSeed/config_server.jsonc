@@ -5,16 +5,25 @@
     "inbounds": [
         {
             "protocol": "vmess",
-            "port": "{{ port }}",
+            "port": 1234,
             "settings": {
                 "clients": [
-                    {"id": "{{  }}"}
+                    {
+                        "id": "" //填写你的 UUID
+                    }
                 ]
             },
             "streamSettings": {
                 "network": "kcp",
-                "kcpSettings": {
-                    "seed": "{{ seed }}"
+                "finalmask": {
+                    "udp": [
+                        {
+                            "type": "mkcp-legacy",
+                            "settings": {
+                                "value": "my-seed" // 任意字符串，服务端客户端需要一致
+                            }
+                        }
+                    ]
                 }
             }
         }
